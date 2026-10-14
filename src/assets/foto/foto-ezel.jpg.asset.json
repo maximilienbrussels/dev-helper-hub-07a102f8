@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "asset_id": "2e3bc0af-d5b5-489f-b204-90b93ed52dad",
+  "project_id": "a6382fd3-5cca-4763-a231-86cf33e66cf2",
+  "url": "/imported-assets/foto-ezel.jpg",
+  "original_filename": "foto-ezel.jpg",
+  "size": 257703,
+  "content_type": "image/jpeg",
+  "created_at": "2026-09-03T22:19:39Z",
+  "storage": "scaleway-s3"
+}

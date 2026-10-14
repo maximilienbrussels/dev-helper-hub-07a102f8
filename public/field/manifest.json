@@ -1,0 +1,24 @@
+{
+  "name": "Maximilien Veld",
+  "short_name": "Veld",
+  "description": "Veld-app voor het team van de stadsboerderij Maximiliaan, Schipperijkaai 2, 1000 Brussel",
+  "id": "/veld/",
+  "start_url": "/veld/",
+  "scope": "/veld/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#1E4D3B",
+  "theme_color": "#1E4D3B",
+  "lang": "nl",
+  "categories": ["productivity", "business"],
+  "shortcuts": [
+    { "name": "Scanner", "url": "/veld/scanner" },
+    { "name": "Vandaag", "url": "/veld/" },
+    { "name": "Aanvragen", "url": "/veld/aanvragen" }
+  ],
+  "icons": [
+    { "src": "/icons/field-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/field-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/field-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

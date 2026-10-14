@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "asset_id": "f26b367c-b05c-4b90-9078-c512e5f15c81",
+  "project_id": "a6382fd3-5cca-4763-a231-86cf33e66cf2",
+  "url": "/imported-assets/foto-pony-boom.jpg",
+  "original_filename": "foto-pony-boom.jpg",
+  "size": 199681,
+  "content_type": "image/jpeg",
+  "created_at": "2026-09-03T22:19:53Z",
+  "storage": "scaleway-s3"
+}

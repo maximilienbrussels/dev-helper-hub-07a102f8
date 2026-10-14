@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "asset_id": "115b9c20-5b25-4589-be7e-fa81325f40f1",
+  "project_id": "a6382fd3-5cca-4763-a231-86cf33e66cf2",
+  "url": "/imported-assets/foto-pony-herfst.jpg",
+  "original_filename": "foto-pony-herfst.jpg",
+  "size": 246514,
+  "content_type": "image/jpeg",
+  "created_at": "2026-09-03T22:19:57Z",
+  "storage": "scaleway-s3"
+}

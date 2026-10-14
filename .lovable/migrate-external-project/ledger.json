@@ -1,0 +1,14 @@
+{
+  "source": "github:maximilienbrussels/dev-helper-hub-42",
+  "capabilities": [
+    { "capability": "application code (React 19 / TanStack Start, ~100 routes, 3 app modes)", "source": "repo src/", "outcome": "migrated", "status": "verified", "next_action": null },
+    { "capability": "public site rendering", "source": "repo", "outcome": "migrated", "status": "verified", "next_action": null },
+    { "capability": "database (Neon Postgres, 47 migrations)", "source": "neon/neon/migrations", "outcome": "preserve-neon", "status": "pending", "next_action": "User must provide NEON_DATABASE_URL / DATABASE_URL via the secure secret form; app currently runs in fallback mode (empty queries)" },
+    { "capability": "auth (Neon Auth + local app_users, MFA, WebAuthn)", "source": "migrations 0021/0043/0044, src/lib/webauthn.server.ts", "outcome": "preserve-neon-auth", "status": "pending", "next_action": "Depends on database connection; verify login after DB secret is set" },
+    { "capability": "Stripe payments", "source": "src/lib/payments.server.ts", "outcome": "preserve", "status": "pending", "next_action": "Request Stripe keys via secure secret form before verification" },
+    { "capability": "email (SMTP / Brevo)", "source": "env SMTP_*, BREVO_*", "outcome": "preserve", "status": "pending", "next_action": "Request SMTP/Brevo credentials via secure secret form" },
+    { "capability": "Bluesky social posting", "source": "env BSKY_*", "outcome": "preserve", "status": "pending", "next_action": "Request BSKY_IDENTIFIER / BSKY_APP_PASSWORD via secure secret form" },
+    { "capability": "S3 object storage", "source": "@aws-sdk/client-s3", "outcome": "preserve", "status": "pending", "next_action": "Request S3 credentials if media library is used" },
+    { "capability": "record exports / existing data", "source": "none attached", "outcome": "pending", "status": "pending", "next_action": "Existing data lives in the Neon database; connecting DATABASE_URL restores it — no CSV import needed" }
+  ]
+}

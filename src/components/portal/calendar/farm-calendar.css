@@ -1,0 +1,99 @@
+/* Merkstijl van Maximilien op de FullCalendar-engine. */
+.farm-calendar {
+  --fc-border-color: color-mix(in srgb, #1d3528 18%, transparent);
+  --fc-page-bg-color: #fbf8f1;
+  --fc-neutral-bg-color: #f3efe4;
+  --fc-today-bg-color: color-mix(in srgb, #1d3528 8%, transparent);
+  --fc-non-business-color: color-mix(in srgb, #1d3528 7%, transparent);
+  --fc-small-font-size: 0.75rem;
+  background: #fbf8f1;
+  border: 1px solid var(--fc-border-color);
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  color: #1d3528;
+}
+
+.farm-calendar .fc .fc-toolbar-title {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.farm-calendar .fc .fc-button {
+  background: #ffffff;
+  border: 1px solid var(--fc-border-color);
+  color: #1d3528;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  box-shadow: none;
+}
+
+.farm-calendar .fc .fc-button:hover,
+.farm-calendar .fc .fc-button-active,
+.farm-calendar .fc .fc-button:disabled {
+  background: #1d3528;
+  border-color: #1d3528;
+  color: #fbf8f1;
+  opacity: 1;
+}
+
+.farm-calendar .fc .fc-daygrid-day-number,
+.farm-calendar .fc .fc-col-header-cell-cushion {
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: #1d3528;
+}
+
+.farm-calendar .fc-event {
+  border: none;
+  border-left: 3px solid rgba(0, 0, 0, 0.25);
+  border-radius: 0.25rem;
+  padding: 1px 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.farm-calendar .fc-list-event:hover td {
+  background: var(--fc-today-bg-color);
+}
+
+/* Afdrukken: enkel titel, agendaraster en afspraken op een nette A4. */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 12mm;
+  }
+
+  body {
+    background: #ffffff;
+  }
+
+  header,
+  nav,
+  aside,
+  footer,
+  [data-print-hide],
+  [role="tablist"] {
+    display: none !important;
+  }
+
+  .farm-calendar {
+    background: #ffffff;
+    border: none;
+    padding: 0;
+    break-inside: avoid;
+  }
+
+  .farm-calendar .fc .fc-toolbar .fc-button-group,
+  .farm-calendar .fc .fc-toolbar .fc-today-button {
+    display: none !important;
+  }
+
+  .farm-calendar .fc-event {
+    box-shadow: none;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
