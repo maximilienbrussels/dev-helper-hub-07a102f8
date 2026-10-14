@@ -138,11 +138,20 @@ export const SOCIAL_CHANNELS: { id: string; name: string; href: string }[] = [
 ];
 
 /** Basis-URL voor links en afbeeldingen; altijd absoluut. */
+const FALLBACK_SITE_URL = "https://maximilien.brussels";
+
+/** Veilige site-URL: nooit undefined, ook als de chunkvolgorde in productie afwijkt. */
+function safeSiteUrl(): string {
+  return typeof PUBLIC_SITE_URL === "string" && PUBLIC_SITE_URL.trim()
+    ? PUBLIC_SITE_URL.trim().replace(/\/+$/, "")
+    : FALLBACK_SITE_URL;
+}
+
 export function mailOrigin(override?: string): string {
-  const raw = (override || PUBLIC_SITE_URL).replace(/\/+$/, "");
+  const raw = (override || safeSiteUrl()).replace(/\/+$/, "");
   // Publieke mails linken uitsluitend naar het klantendomein; het .site-domein
   // (beheerportaal) en onbekende hosts worden altijd vervangen.
-  return isCanonicalHost(raw) ? raw : PUBLIC_SITE_URL;
+  return isCanonicalHost(raw) ? raw : safeSiteUrl();
 }
 
 /** Absolute publieke link naar een pagina, in de juiste taal. */
@@ -165,8 +174,9 @@ function resolveAssetBase(): string {
       ? process.env?.["EMAIL_ASSET_BASE_URL"] ??
         process.env?.["VITE_EMAIL_ASSET_BASE_URL"]
       : undefined);
-  const base = (fromEnv || PUBLIC_SITE_URL).trim().replace(/\/+$/, "");
-  return /^https?:\/\//i.test(base) ? base : PUBLIC_SITE_URL;
+  const fallback = safeSiteUrl();
+  const base = (fromEnv || fallback).trim().replace(/\/+$/, "");
+  return /^https?:\/\//i.test(base) ? base : fallback;
 }
 
 export const MAIL_ASSETS = {
@@ -181,7 +191,7 @@ export const MAIL_ASSETS = {
 /** Altijd absolute URL, ook wanneer er nog een relatief pad wordt doorgegeven. */
 export function assetUrl(src: string): string {
   if (/^https?:\/\//i.test(src) || src.startsWith("cid:") || src.startsWith("data:")) return src;
-  return `${EMAIL_ASSET_BASE_URL}/${src.replace(/^\/+/, "")}`;
+  return `${EMAIL_ASSET_BASE_URL || safeSiteUrl()}/${src.replace(/^\/+/, "")}`;
 }
 
 /**
