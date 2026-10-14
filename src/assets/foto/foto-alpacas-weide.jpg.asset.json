@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "asset_id": "ed4b3c44-40ae-4a30-8eed-ad184a6291fc",
+  "project_id": "a6382fd3-5cca-4763-a231-86cf33e66cf2",
+  "url": "/imported-assets/foto-alpacas-weide.jpg",
+  "original_filename": "foto-alpacas-weide.jpg",
+  "size": 378836,
+  "content_type": "image/jpeg",
+  "created_at": "2026-09-03T22:19:28Z",
+  "storage": "scaleway-s3"
+}

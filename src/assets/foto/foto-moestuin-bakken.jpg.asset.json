@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "asset_id": "70eca5fb-f525-4479-b166-12abbc47c3d2",
+  "project_id": "a6382fd3-5cca-4763-a231-86cf33e66cf2",
+  "url": "/imported-assets/foto-moestuin-bakken.jpg",
+  "original_filename": "foto-moestuin-bakken.jpg",
+  "size": 194423,
+  "content_type": "image/jpeg",
+  "created_at": "2026-09-03T22:19:48Z",
+  "storage": "scaleway-s3"
+}

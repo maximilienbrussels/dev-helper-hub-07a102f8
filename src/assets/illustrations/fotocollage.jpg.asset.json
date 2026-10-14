@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "asset_id": "71dec538-24de-40bb-a623-507b174c4791",
+  "project_id": "a6382fd3-5cca-4763-a231-86cf33e66cf2",
+  "url": "/imported-assets/fotocollage.jpg",
+  "original_filename": "fotocollage.jpg",
+  "size": 390450,
+  "content_type": "image/jpeg",
+  "created_at": "2026-09-03T22:10:50Z",
+  "storage": "scaleway-s3"
+}

@@ -1,0 +1,293 @@
+-- Academie "kip": volledig herschreven, drietalige vragenpoel.
+--
+-- Opzet:
+--   * doelgroep "kids"  -> korte, concrete vragen (één ronde);
+--   * doelgroep "16plus"-> drie rondes die oplopen in diepgang
+--                          (module 1 = basis, 2 = dagelijkse zorg, 3 = plicht,
+--                           gezondheid en wetgeving);
+--   * variant_groep     -> vragen over hetzelfde thema, ook anders verwoord,
+--                          kunnen nooit samen in één test terechtkomen;
+--   * verplicht         -> essentieel voor dierenwelzijn; komt bij iedereen;
+--   * vraag_type getal  -> antwoord is een getal, met een redelijke marge.
+--
+-- De volgorde van de antwoorden wordt per sessie door elkaar geschud, dus de
+-- opgeslagen index zegt niets over wat de deelnemer bovenaan ziet.
+
+delete from academy_vragen
+ where academy_id = (select id from academies where slug = 'kip');
+
+insert into academy_vragen (
+  academy_id, doelgroep, module, variant_groep, verplicht, moeilijkheid, vraag_type,
+  vraag_tekst, vraag_tekst_fr, vraag_tekst_en,
+  opties, opties_fr, opties_en, correcte_optie_index,
+  correct_getal, getal_marge, getal_eenheid, getal_eenheid_fr, getal_eenheid_en,
+  wist_je_dat, wist_je_dat_fr, wist_je_dat_en
+)
+select
+  (select id from academies where slug = 'kip'),
+  x.doelgroep, x.module, x.variant_groep, x.verplicht, x.moeilijkheid, x.vraag_type,
+  x.nl, x.fr, x.en,
+  x.opties_nl, x.opties_fr, x.opties_en, x.correct,
+  x.getal, coalesce(x.marge, 0), x.eenheid_nl, x.eenheid_fr, x.eenheid_en,
+  x.weetje_nl, x.weetje_fr, x.weetje_en
+from jsonb_to_recordset($json$
+[
+  {"doelgroep":"kids","module":1,"variant_groep":"gezelschap","verplicht":true,"moeilijkheid":1,"vraag_type":"tekst",
+   "nl":"Mag je één kip alleen houden?","fr":"Peut-on garder une poule toute seule ?","en":"Can you keep a single hen on its own?",
+   "opties_nl":["Ja, als ze veel eten krijgt","Nee, kippen hebben soortgenoten nodig","Ja, als er een hond in de tuin loopt","Alleen in de winter"],
+   "opties_fr":["Oui, si elle mange beaucoup","Non, les poules ont besoin de congénères","Oui, s'il y a un chien dans le jardin","Seulement en hiver"],
+   "opties_en":["Yes, if she gets plenty of food","No, hens need other hens","Yes, if a dog lives in the garden","Only in winter"],
+   "correct":1,
+   "weetje_nl":"Kippen leven in een groep met een vaste rangorde. Alleen wonen maakt een kip gestrest en angstig.",
+   "weetje_fr":"Les poules vivent en groupe avec une hiérarchie stable. Seule, une poule devient stressée et craintive.",
+   "weetje_en":"Hens live in a group with a stable pecking order. On her own, a hen becomes stressed and fearful."},
+
+  {"doelgroep":"kids","module":1,"variant_groep":"water","verplicht":true,"moeilijkheid":1,"vraag_type":"tekst",
+   "nl":"Hoe vaak moeten kippen vers water kunnen drinken?","fr":"À quelle fréquence les poules doivent-elles avoir de l'eau fraîche ?","en":"How often must hens have fresh water?",
+   "opties_nl":["Eén keer per week","Alleen als het warm is","Elke dag, de hele dag","Alleen 's ochtends"],
+   "opties_fr":["Une fois par semaine","Seulement quand il fait chaud","Chaque jour, toute la journée","Seulement le matin"],
+   "opties_en":["Once a week","Only when it is hot","Every day, all day","Only in the morning"],
+   "correct":2,
+   "weetje_nl":"Een kip drinkt ongeveer een kwart liter per dag, en nog meer als het warm is. Een lege drinkbak is meteen een probleem.",
+   "weetje_fr":"Une poule boit environ un quart de litre par jour, davantage par forte chaleur. Un abreuvoir vide est un problème immédiat.",
+   "weetje_en":"A hen drinks about a quarter of a litre a day, more in hot weather. An empty drinker is a problem straight away."},
+
+  {"doelgroep":"kids","module":1,"variant_groep":"nachtrust","verplicht":true,"moeilijkheid":1,"vraag_type":"tekst",
+   "nl":"Waarom gaan kippen 's avonds in het hok?","fr":"Pourquoi les poules rentrent-elles au poulailler le soir ?","en":"Why do hens go into the coop at night?",
+   "opties_nl":["Omdat ze het donker mooi vinden","Om veilig te slapen, beschut tegen vossen en kou","Omdat ze dan pas eten","Om eieren te verstoppen"],
+   "opties_fr":["Parce qu'elles aiment l'obscurité","Pour dormir en sécurité, à l'abri des renards et du froid","Parce qu'elles ne mangent que la nuit","Pour cacher leurs œufs"],
+   "opties_en":["Because they like the dark","To sleep safely, sheltered from foxes and cold","Because they only eat at night","To hide their eggs"],
+   "correct":1,
+   "weetje_nl":"Kippen zien 's nachts bijna niets en zoeken daarom vanzelf een hoge, veilige slaapstok op.",
+   "weetje_fr":"Les poules ne voient presque rien la nuit : elles cherchent d'elles-mêmes un perchoir haut et sûr.",
+   "weetje_en":"Hens can barely see at night, so they naturally seek a high, safe perch."},
+
+  {"doelgroep":"kids","module":1,"variant_groep":"voeding-verboden","verplicht":false,"moeilijkheid":2,"vraag_type":"tekst",
+   "nl":"Welk restje geef je beter niet aan kippen?","fr":"Quel reste vaut-il mieux ne pas donner aux poules ?","en":"Which leftover is better not given to hens?",
+   "opties_nl":["Stukjes appel","Gekookte rijst","Beschimmeld brood","Slablaadjes"],
+   "opties_fr":["Des morceaux de pomme","Du riz cuit","Du pain moisi","Des feuilles de salade"],
+   "opties_en":["Pieces of apple","Cooked rice","Mouldy bread","Lettuce leaves"],
+   "correct":2,
+   "weetje_nl":"Schimmel maakt kippen echt ziek. Groente- en fruitresten mogen, zolang ze vers zijn.",
+   "weetje_fr":"Les moisissures rendent les poules réellement malades. Les restes de fruits et légumes frais, eux, sont bienvenus.",
+   "weetje_en":"Mould genuinely makes hens ill. Fresh fruit and vegetable scraps are fine."},
+
+  {"doelgroep":"kids","module":1,"variant_groep":"zandbad","verplicht":false,"moeilijkheid":2,"vraag_type":"tekst",
+   "nl":"Waarom rollen kippen zich in droog zand?","fr":"Pourquoi les poules se roulent-elles dans le sable sec ?","en":"Why do hens roll in dry sand?",
+   "opties_nl":["Om zich te wassen en ongedierte kwijt te raken","Omdat ze het koud hebben","Om eten te zoeken","Om te slapen"],
+   "opties_fr":["Pour se nettoyer et se débarrasser des parasites","Parce qu'elles ont froid","Pour chercher de la nourriture","Pour dormir"],
+   "opties_en":["To clean themselves and get rid of parasites","Because they are cold","To look for food","To fall asleep"],
+   "correct":0,
+   "weetje_nl":"Een zandbad is de douche van een kip. Zonder droge zandplek krijgen kippen sneller bloedluis.",
+   "weetje_fr":"Le bain de sable est la douche de la poule. Sans coin sec, les poux rouges arrivent plus vite.",
+   "weetje_en":"A dust bath is a hen's shower. Without a dry spot, red mites appear much faster."},
+
+  {"doelgroep":"kids","module":1,"variant_groep":"ei-verzamelen","verplicht":false,"moeilijkheid":1,"vraag_type":"tekst",
+   "nl":"Wanneer haal je de eieren het best uit het nest?","fr":"Quand vaut-il mieux ramasser les œufs ?","en":"When is it best to collect the eggs?",
+   "opties_nl":["Eén keer per maand","Elke dag","Alleen in de zomer","Pas als er tien liggen"],
+   "opties_fr":["Une fois par mois","Chaque jour","Seulement en été","Seulement quand il y en a dix"],
+   "opties_en":["Once a month","Every day","Only in summer","Only once there are ten"],
+   "correct":1,
+   "weetje_nl":"Dagelijks rapen houdt de eieren proper en voorkomt dat kippen ze zelf stukpikken.",
+   "weetje_fr":"Un ramassage quotidien garde les œufs propres et évite que les poules ne les picorent.",
+   "weetje_en":"Daily collecting keeps eggs clean and stops hens pecking them open."},
+
+  {"doelgroep":"kids","module":1,"variant_groep":"benadering","verplicht":false,"moeilijkheid":2,"vraag_type":"tekst",
+   "nl":"Een kip loopt weg als je haar wil oppakken. Wat doe je?","fr":"Une poule s'enfuit quand tu veux la prendre. Que fais-tu ?","en":"A hen runs away when you try to pick her up. What do you do?",
+   "opties_nl":["Achter haar aan rennen","Rustig hurken en wachten tot ze zelf komt","Haar aan de vleugel vastpakken","Met een stok wegjagen"],
+   "opties_fr":["Lui courir après","S'accroupir calmement et attendre qu'elle vienne","L'attraper par l'aile","La chasser avec un bâton"],
+   "opties_en":["Chase after her","Crouch down calmly and wait until she comes","Grab her by the wing","Chase her off with a stick"],
+   "correct":1,
+   "weetje_nl":"Achtervolgen maakt een kip bang voor jou. Geduld en wat eten in je hand werken veel beter.",
+   "weetje_fr":"La poursuivre la rend craintive. La patience et un peu de grain dans la main marchent bien mieux.",
+   "weetje_en":"Chasing makes a hen afraid of you. Patience and some feed in your hand work far better."},
+
+  {"doelgroep":"kids","module":1,"variant_groep":"ziek-herkennen","verplicht":true,"moeilijkheid":2,"vraag_type":"tekst",
+   "nl":"Een kip zit stil in een hoek, eet niet en heeft doffe veren. Wat betekent dat?","fr":"Une poule reste immobile dans un coin, ne mange pas et a les plumes ternes. Qu'est-ce que cela signifie ?","en":"A hen sits still in a corner, will not eat and has dull feathers. What does that mean?",
+   "opties_nl":["Ze is waarschijnlijk ziek en moet naar de dierenarts","Ze is gewoon moe","Ze legt straks een ei","Ze heeft het te warm"],
+   "opties_fr":["Elle est probablement malade et doit voir un vétérinaire","Elle est simplement fatiguée","Elle va bientôt pondre","Elle a trop chaud"],
+   "opties_en":["She is probably ill and needs a vet","She is just tired","She is about to lay an egg","She is too warm"],
+   "correct":0,
+   "weetje_nl":"Kippen verbergen ziekte lang. Wie apart zit en niet eet, is meestal al een tijdje ziek.",
+   "weetje_fr":"Les poules cachent longtemps la maladie. Une poule isolée qui ne mange pas est souvent malade depuis un moment.",
+   "weetje_en":"Hens hide illness for a long time. One sitting apart and not eating is usually already quite unwell."},
+
+  {"doelgroep":"16plus","module":1,"variant_groep":"gezelschap","verplicht":true,"moeilijkheid":1,"vraag_type":"getal",
+   "nl":"Hoeveel kippen hou je minimaal samen om aan hun sociale behoefte te voldoen?","fr":"Combien de poules faut-il garder au minimum pour répondre à leur besoin social ?","en":"What is the minimum number of hens to keep together to meet their social needs?",
+   "opties_nl":[],"opties_fr":[],"opties_en":[],"correct":0,
+   "getal":3,"marge":1,"eenheid_nl":"kippen","eenheid_fr":"poules","eenheid_en":"hens",
+   "weetje_nl":"Twee is het absolute minimum, drie is veiliger: valt er één weg, dan blijft de overblijver niet alleen achter.",
+   "weetje_fr":"Deux est le minimum absolu, trois est plus sûr : si l'une meurt, la survivante ne reste pas seule.",
+   "weetje_en":"Two is the absolute minimum; three is safer, because if one dies the survivor is not left alone."},
+
+  {"doelgroep":"16plus","module":1,"variant_groep":"ruimte","verplicht":true,"moeilijkheid":2,"vraag_type":"tekst",
+   "nl":"Hoeveel buitenruimte voorzie je als richtlijn per kip in een tuinren?","fr":"Quel espace extérieur prévoir par poule dans un enclos de jardin ?","en":"How much outdoor space should you allow per hen in a garden run?",
+   "opties_nl":["Ongeveer 0,2 m²","Minstens 2 à 4 m²","Precies 1 m², niet meer","Ruimte speelt geen rol als er voer is"],
+   "opties_fr":["Environ 0,2 m²","Au moins 2 à 4 m²","Exactement 1 m², pas plus","L'espace importe peu s'il y a de la nourriture"],
+   "opties_en":["About 0.2 m²","At least 2 to 4 m²","Exactly 1 m², no more","Space does not matter if there is feed"],
+   "correct":1,
+   "weetje_nl":"Te weinig ruimte leidt tot verveling, pikkerij en kaalgepikte ruggen. Een kale, uitgeschraapte ren is een alarmsignaal.",
+   "weetje_fr":"Trop peu d'espace mène à l'ennui et au picage. Un enclos pelé et gratté jusqu'à la terre est un signal d'alerte.",
+   "weetje_en":"Too little space causes boredom and feather pecking. A bare, scratched-out run is a warning sign."},
+
+  {"doelgroep":"16plus","module":1,"variant_groep":"zandbad","verplicht":false,"moeilijkheid":2,"vraag_type":"tekst",
+   "nl":"Wat hoort er in elk geval in een kippenren, naast voer en water?","fr":"Que doit contenir tout enclos à poules, en plus de la nourriture et de l'eau ?","en":"What must every hen run contain besides feed and water?",
+   "opties_nl":["Een spiegel","Een droge zandbadplek en schaduw","Een verwarmingslamp","Een betonnen vloer"],
+   "opties_fr":["Un miroir","Un bain de sable sec et de l'ombre","Une lampe chauffante","Un sol en béton"],
+   "opties_en":["A mirror","A dry dust-bathing spot and shade","A heat lamp","A concrete floor"],
+   "correct":1,
+   "weetje_nl":"Stofbaden en schaduw zijn geen luxe: zonder allebei stijgt het risico op parasieten en hittestress.",
+   "weetje_fr":"Bain de poussière et ombre ne sont pas du luxe : sans eux, parasites et coups de chaleur guettent.",
+   "weetje_en":"Dust bathing and shade are not luxuries: without them, parasites and heat stress follow."},
+
+  {"doelgroep":"16plus","module":1,"variant_groep":"voeding-verboden","verplicht":true,"moeilijkheid":2,"vraag_type":"tekst",
+   "nl":"Welke voeding is schadelijk voor kippen?","fr":"Quel aliment est nocif pour les poules ?","en":"Which food is harmful to hens?",
+   "opties_nl":["Legkorrel","Beschimmeld brood en gezouten restjes","Graan","Verse groenteresten"],
+   "opties_fr":["Granulés de ponte","Pain moisi et restes salés","Céréales","Restes de légumes frais"],
+   "opties_en":["Layer pellets","Mouldy bread and salty leftovers","Grain","Fresh vegetable scraps"],
+   "correct":1,
+   "weetje_nl":"Zout en schimmeltoxines zijn giftig voor pluimvee. In België is het bovendien verboden keukenafval van dierlijke oorsprong te voederen.",
+   "weetje_fr":"Le sel et les mycotoxines sont toxiques pour la volaille. En Belgique, il est en outre interdit de donner des déchets de cuisine d'origine animale.",
+   "weetje_en":"Salt and mould toxins are toxic to poultry. In Belgium, feeding kitchen waste of animal origin is also prohibited."},
+
+  {"doelgroep":"16plus","module":1,"variant_groep":"nachtrust","verplicht":false,"moeilijkheid":2,"vraag_type":"tekst",
+   "nl":"Waarom sluit je het hok elke avond en open je het 's ochtends?","fr":"Pourquoi fermer le poulailler chaque soir et l'ouvrir le matin ?","en":"Why close the coop every evening and open it in the morning?",
+   "opties_nl":["Om roofdieren buiten te houden en de kippen 's ochtends niet opgesloten te laten","Om te vermijden dat ze eieren leggen","Omdat kippen anders te veel eten","Om het hok warm te houden"],
+   "opties_fr":["Pour tenir les prédateurs dehors et ne pas les laisser enfermées le matin","Pour éviter qu'elles pondent","Parce qu'elles mangeraient trop","Pour garder le poulailler chaud"],
+   "opties_en":["To keep predators out and not leave them shut in come morning","To stop them laying eggs","Because they would eat too much","To keep the coop warm"],
+   "correct":0,
+   "weetje_nl":"Een vos komt vooral bij dageraad en schemering. Een automatisch deurtje helpt, maar vervangt de dagelijkse controle niet.",
+   "weetje_fr":"Le renard rôde surtout à l'aube et au crépuscule. Une porte automatique aide, mais ne remplace pas le contrôle quotidien.",
+   "weetje_en":"Foxes hunt mainly at dawn and dusk. An automatic door helps but does not replace the daily check."},
+
+  {"doelgroep":"16plus","module":2,"variant_groep":"dagelijkse-zorg","verplicht":true,"moeilijkheid":2,"vraag_type":"getal",
+   "nl":"Hoeveel keer per dag controleer je minimaal je kippen, hun water en het hok?","fr":"Combien de fois par jour faut-il au minimum contrôler les poules, leur eau et le poulailler ?","en":"How many times a day must you check your hens, their water and the coop?",
+   "opties_nl":[],"opties_fr":[],"opties_en":[],"correct":0,
+   "getal":2,"marge":0,"eenheid_nl":"keer per dag","eenheid_fr":"fois par jour","eenheid_en":"times a day",
+   "weetje_nl":"Twee keer: 's ochtends openen en controleren, 's avonds sluiten, eieren rapen en tellen of iedereen binnen is.",
+   "weetje_fr":"Deux fois : ouvrir et contrôler le matin, fermer le soir, ramasser les œufs et compter les poules.",
+   "weetje_en":"Twice: open and check in the morning; close at night, collect eggs and count that everyone is in."},
+
+  {"doelgroep":"16plus","module":2,"variant_groep":"hok-hygiene","verplicht":false,"moeilijkheid":3,"vraag_type":"tekst",
+   "nl":"Je vindt kleine, snel bewegende rode beestjes in de naden van de zitstok. Wat is dit en wat doe je?","fr":"Vous trouvez de petites bêtes rouges et rapides dans les fentes du perchoir. Qu'est-ce et que faire ?","en":"You find small, fast-moving red mites in the cracks of the perch. What is it and what do you do?",
+   "opties_nl":["Bloedluis: hok grondig reinigen en behandelen, ook de naden","Onschuldig stof: niets doen","Mieren: gewoon wegvegen","Eierschaalresten: opruimen volstaat"],
+   "opties_fr":["Poux rouges : nettoyer et traiter le poulailler à fond, y compris les fentes","Poussière inoffensive : ne rien faire","Des fourmis : un coup de balai suffit","Des restes de coquilles : ramasser suffit"],
+   "opties_en":["Red mite: clean and treat the coop thoroughly, cracks included","Harmless dust: do nothing","Ants: just sweep them away","Eggshell debris: tidying up is enough"],
+   "correct":0,
+   "weetje_nl":"Bloedluis zuigt 's nachts bloed en kan kippen bloedarm maken. De mijt zit overdag verscholen in kieren, niet op het dier.",
+   "weetje_fr":"Le pou rouge suce le sang la nuit et peut anémier les poules. Le jour, il se cache dans les fentes, pas sur l'animal.",
+   "weetje_en":"Red mite feeds on blood at night and can make hens anaemic. By day it hides in cracks, not on the bird."},
+
+  {"doelgroep":"16plus","module":2,"variant_groep":"rui","verplicht":false,"moeilijkheid":3,"vraag_type":"tekst",
+   "nl":"In het najaar verliest je kip veel veren en legt ze geen eieren meer. Wat is de juiste reactie?","fr":"En automne, votre poule perd beaucoup de plumes et ne pond plus. Quelle est la bonne réaction ?","en":"In autumn your hen loses many feathers and stops laying. What is the right response?",
+   "opties_nl":["Dit is de rui: extra eiwitrijk voer en rust geven","Meteen antibiotica geven","De kip afzonderen in het donker","Meer licht in het hok hangen zodat ze doorlegt"],
+   "opties_fr":["C'est la mue : donner une alimentation plus riche en protéines et du repos","Donner immédiatement des antibiotiques","Isoler la poule dans le noir","Ajouter de la lumière pour qu'elle continue à pondre"],
+   "opties_en":["This is the moult: give protein-rich feed and rest","Give antibiotics immediately","Isolate the hen in the dark","Add light so she keeps laying"],
+   "correct":0,
+   "weetje_nl":"De rui duurt enkele weken en kost veel energie. Kunstlicht om door te laten leggen gaat ten koste van de gezondheid van de kip.",
+   "weetje_fr":"La mue dure quelques semaines et coûte beaucoup d'énergie. Forcer la ponte par la lumière se paie sur la santé.",
+   "weetje_en":"The moult lasts weeks and costs a lot of energy. Forcing laying with light comes at the hen's expense."},
+
+  {"doelgroep":"16plus","module":2,"variant_groep":"hitte","verplicht":true,"moeilijkheid":2,"vraag_type":"tekst",
+   "nl":"Het is 33 °C. Je kippen hijgen met open snavel en hangende vleugels. Wat doe je eerst?","fr":"Il fait 33 °C. Vos poules halètent, bec ouvert et ailes écartées. Que faites-vous d'abord ?","en":"It is 33 °C. Your hens are panting with open beaks and drooping wings. What do you do first?",
+   "opties_nl":["Schaduw, extra koel water en ventilatie voorzien","Ze in het gesloten hok zetten","Ze nat spuiten met ijswater","Extra graan geven voor energie"],
+   "opties_fr":["Offrir de l'ombre, de l'eau fraîche en plus et de la ventilation","Les enfermer dans le poulailler","Les asperger d'eau glacée","Donner plus de grain pour l'énergie"],
+   "opties_en":["Provide shade, extra cool water and ventilation","Shut them inside the closed coop","Spray them with ice water","Give extra grain for energy"],
+   "correct":0,
+   "weetje_nl":"Kippen zweten niet. Boven 30 °C is hittestress levensgevaarlijk; graan verteren produceert juist extra lichaamswarmte.",
+   "weetje_fr":"Les poules ne transpirent pas. Au-delà de 30 °C, le coup de chaleur est mortel ; digérer du grain produit encore de la chaleur.",
+   "weetje_en":"Hens do not sweat. Above 30 °C heat stress is life-threatening, and digesting grain produces even more body heat."},
+
+  {"doelgroep":"16plus","module":2,"variant_groep":"ei-verzamelen","verplicht":false,"moeilijkheid":2,"vraag_type":"tekst",
+   "nl":"Hoe ga je om met verse eieren uit eigen hok?","fr":"Comment gérer les œufs frais de son propre poulailler ?","en":"How should you handle fresh eggs from your own coop?",
+   "opties_nl":["Dagelijks rapen, niet wassen, koel en droog bewaren","Meteen schrobben onder de warme kraan","Weken laten liggen in het nest","In de vriezer leggen"],
+   "opties_fr":["Ramasser chaque jour, ne pas laver, conserver au frais et au sec","Les frotter aussitôt à l'eau chaude","Les laisser des semaines au nid","Les mettre au congélateur"],
+   "opties_en":["Collect daily, do not wash, store cool and dry","Scrub them under hot water straight away","Leave them in the nest for weeks","Put them in the freezer"],
+   "correct":0,
+   "weetje_nl":"Een ei heeft een natuurlijk beschermlaagje. Wassen verwijdert dat en laat bacteriën juist binnen.",
+   "weetje_fr":"L'œuf possède une cuticule protectrice. La laver l'élimine et laisse entrer les bactéries.",
+   "weetje_en":"An egg has a natural protective cuticle. Washing removes it and lets bacteria in."},
+
+  {"doelgroep":"16plus","module":2,"variant_groep":"introductie","verplicht":false,"moeilijkheid":3,"vraag_type":"tekst",
+   "nl":"Je voegt twee nieuwe kippen toe aan je bestaande groepje. Wat is de beste aanpak?","fr":"Vous ajoutez deux nouvelles poules à votre groupe. Quelle est la meilleure approche ?","en":"You are adding two new hens to your existing group. What is the best approach?",
+   "opties_nl":["Eerst apart zetten en geleidelijk laten wennen met zicht op elkaar","Meteen 's middags samen in de ren zetten","Alle kippen een dag laten vasten","De oude kippen tijdelijk wegdoen"],
+   "opties_fr":["Les séparer d'abord et les habituer progressivement, à vue","Les mettre ensemble dans l'enclos en pleine journée","Faire jeûner toutes les poules un jour","Retirer temporairement les anciennes poules"],
+   "opties_en":["Keep them apart first and let them get used to each other in sight","Put them together in the run at midday","Fast all the hens for a day","Temporarily remove the older hens"],
+   "correct":0,
+   "weetje_nl":"De rangorde wordt opnieuw uitgevochten. Quarantaine van twee weken beschermt bovendien tegen binnengebrachte ziektes.",
+   "weetje_fr":"La hiérarchie se rejoue. Une quarantaine de deux semaines protège en plus des maladies importées.",
+   "weetje_en":"The pecking order gets renegotiated. A two-week quarantine also protects against imported disease."},
+
+  {"doelgroep":"16plus","module":3,"variant_groep":"levensduur","verplicht":true,"moeilijkheid":3,"vraag_type":"getal",
+   "nl":"Hoe oud kan een goed verzorgde kip worden? Geef het aantal jaren.","fr":"Quel âge peut atteindre une poule bien soignée ? Indiquez le nombre d'années.","en":"How old can a well-cared-for hen become? Give the number of years.",
+   "opties_nl":[],"opties_fr":[],"opties_en":[],"correct":0,
+   "getal":7,"marge":2,"eenheid_nl":"jaar","eenheid_fr":"ans","eenheid_en":"years",
+   "weetje_nl":"Kippen leggen na twee tot drie jaar veel minder eieren, maar leven nog jaren door. Je neemt ze voor hun hele leven, niet voor hun productie.",
+   "weetje_fr":"Après deux à trois ans, la ponte chute fortement, mais la poule vit encore des années. On l'adopte pour sa vie, pas pour sa production.",
+   "weetje_en":"Hens lay far fewer eggs after two or three years but live on for years. You take them on for life, not for production."},
+
+  {"doelgroep":"16plus","module":3,"variant_groep":"wetgeving","verplicht":true,"moeilijkheid":3,"vraag_type":"tekst",
+   "nl":"Wat geldt in België voor wie thuis kippen houdt?","fr":"Qu'est-ce qui s'applique en Belgique à qui élève des poules chez soi ?","en":"What applies in Belgium to keeping hens at home?",
+   "opties_nl":["Je volgt de gemeentelijke regels en bij vogelgriep de opgelegde ophokplicht","Er gelden geen regels voor particulieren","Je moet altijd een haan houden","Je mag eieren vrij in winkels verkopen"],
+   "opties_fr":["On suit le règlement communal et, en cas de grippe aviaire, l'obligation de confinement","Aucune règle ne s'applique aux particuliers","Il faut toujours garder un coq","On peut vendre librement ses œufs en magasin"],
+   "opties_en":["You follow local council rules and any bird-flu confinement order","No rules apply to private keepers","You must always keep a rooster","You may freely sell eggs in shops"],
+   "correct":0,
+   "weetje_nl":"Bij een uitbraak van vogelgriep kan de overheid ophokplicht en afscherming van voer en water opleggen — ook voor twee kippen in een stadstuin.",
+   "weetje_fr":"En cas de grippe aviaire, les autorités peuvent imposer le confinement et la protection de l'eau et des aliments — même pour deux poules en ville.",
+   "weetje_en":"During a bird-flu outbreak the authorities can order confinement and covered feed and water — even for two hens in a city garden."},
+
+  {"doelgroep":"16plus","module":3,"variant_groep":"haan","verplicht":false,"moeilijkheid":3,"vraag_type":"tekst",
+   "nl":"Je woont in de stad. Wat is het verstandigst rond een haan?","fr":"Vous vivez en ville. Quelle est la décision la plus sage concernant un coq ?","en":"You live in the city. What is the wisest choice about a rooster?",
+   "opties_nl":["Geen haan houden: hij is niet nodig voor eieren en geeft geluidsoverlast","Een haan is verplicht voor de rangorde","Een haan houden en hem 's nachts opsluiten in een kist","Twee hanen houden zodat ze elkaar gezelschap houden"],
+   "opties_fr":["Ne pas prendre de coq : inutile pour les œufs et source de nuisances sonores","Un coq est obligatoire pour la hiérarchie","Prendre un coq et l'enfermer la nuit dans une caisse","Prendre deux coqs pour qu'ils se tiennent compagnie"],
+   "opties_en":["Keep no rooster: he is not needed for eggs and causes noise complaints","A rooster is required for the pecking order","Keep one and shut him in a box at night","Keep two so they keep each other company"],
+   "correct":0,
+   "weetje_nl":"Kippen leggen eieren zonder haan. In dichtbebouwde buurten leidt kraaien geregeld tot klachten en tot afstand doen van het dier.",
+   "weetje_fr":"Les poules pondent sans coq. En quartier dense, le chant provoque souvent des plaintes et l'abandon de l'animal.",
+   "weetje_en":"Hens lay without a rooster. In dense neighbourhoods, crowing regularly leads to complaints and to rehoming."},
+
+  {"doelgroep":"16plus","module":3,"variant_groep":"afwezigheid","verplicht":true,"moeilijkheid":3,"vraag_type":"tekst",
+   "nl":"Je gaat twee weken op reis. Wat is de juiste voorbereiding?","fr":"Vous partez deux semaines. Quelle est la bonne préparation ?","en":"You are going away for two weeks. What is the right preparation?",
+   "opties_nl":["Iemand regelen die elke dag komt controleren, voeren en sluiten","Een grote voorraad voer en water achterlaten","Het hok open laten zodat ze zelf eten zoeken","De buren vragen om één keer te kijken"],
+   "opties_fr":["Trouver quelqu'un qui passe chaque jour pour nourrir, contrôler et fermer","Laisser une grosse réserve de nourriture et d'eau","Laisser le poulailler ouvert pour qu'elles se débrouillent","Demander aux voisins de passer une seule fois"],
+   "opties_en":["Arrange someone to come daily to feed, check and close up","Leave a large stock of feed and water","Leave the coop open so they forage for themselves","Ask the neighbours to look in once"],
+   "correct":0,
+   "weetje_nl":"Water kan omvallen, een deurtje kan blokkeren en een vos wacht niet. Dagelijks toezicht is geen overdrijving maar de minimumnorm.",
+   "weetje_fr":"L'eau se renverse, une porte se bloque, le renard n'attend pas. Une visite quotidienne est la norme minimale.",
+   "weetje_en":"Water tips over, a door jams, and a fox does not wait. Daily supervision is the minimum standard, not overkill."},
+
+  {"doelgroep":"16plus","module":3,"variant_groep":"kosten","verplicht":false,"moeilijkheid":3,"vraag_type":"tekst",
+   "nl":"Waarmee moet je financieel rekening houden bij kippen?","fr":"Quels coûts faut-il prévoir pour des poules ?","en":"Which costs should you plan for with hens?",
+   "opties_nl":["Voer, hokonderhoud, ontworming en dierenartskosten","Enkel de aankoop van het hok","Niets, ze eten keukenafval","Enkel voer in de winter"],
+   "opties_fr":["Alimentation, entretien du poulailler, vermifuge et frais vétérinaires","Seulement l'achat du poulailler","Rien, elles mangent les restes","Seulement la nourriture en hiver"],
+   "opties_en":["Feed, coop upkeep, worming and vet care","Only buying the coop","Nothing, they eat kitchen scraps","Only feed in winter"],
+   "correct":0,
+   "weetje_nl":"Een consultatie bij een dierenarts met pluimvee-ervaring kost al snel meer dan de kip zelf. Dat hoort bij de verantwoordelijkheid.",
+   "weetje_fr":"Une consultation chez un vétérinaire aviaire coûte vite plus que la poule elle-même. Cela fait partie de la responsabilité.",
+   "weetje_en":"A consultation with a poultry-experienced vet quickly costs more than the hen did. That is part of the responsibility."},
+
+  {"doelgroep":"16plus","module":3,"variant_groep":"ziek-herkennen","verplicht":true,"moeilijkheid":3,"vraag_type":"tekst",
+   "nl":"Welke situatie vraagt dezelfde dag een dierenarts?","fr":"Quelle situation exige un vétérinaire le jour même ?","en":"Which situation calls for a vet the same day?",
+   "opties_nl":["Een kip ademt moeizaam met open snavel en is suf","Een kip neemt een zandbad","Een kip legt een ei met een lichte kalkstip","Een kip verliest wat veren in oktober"],
+   "opties_fr":["Une poule respire difficilement, bec ouvert, et est apathique","Une poule prend un bain de sable","Une poule pond un œuf légèrement calcifié","Une poule perd quelques plumes en octobre"],
+   "opties_en":["A hen breathes with difficulty, beak open, and is listless","A hen takes a dust bath","A hen lays an egg with a small calcium spot","A hen loses some feathers in October"],
+   "correct":0,
+   "weetje_nl":"Ademnood bij pluimvee gaat snel achteruit. Wachten tot morgen is hier vaak te laat.",
+   "weetje_fr":"La détresse respiratoire évolue vite chez la volaille. Attendre le lendemain est souvent trop tard.",
+   "weetje_en":"Breathing trouble in poultry deteriorates fast. Waiting until tomorrow is often too late."}
+]
+$json$::jsonb) as x(
+  doelgroep text, module smallint, variant_groep text, verplicht boolean, moeilijkheid smallint,
+  vraag_type text, nl text, fr text, en text,
+  opties_nl jsonb, opties_fr jsonb, opties_en jsonb, correct int,
+  getal numeric, marge numeric, eenheid_nl text, eenheid_fr text, eenheid_en text,
+  weetje_nl text, weetje_fr text, weetje_en text
+);
+
+-- Testlengtes en slaaggrenzen afstemmen op de nieuwe poel.
+update academies
+   set vragen_per_test_kids = 6,
+       slaag_grens_kids = 5,
+       vragen_per_test_16plus = 12,
+       slaag_grens_16plus = 10
+ where slug = 'kip';

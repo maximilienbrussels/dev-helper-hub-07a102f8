@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="250" viewBox="0 0 300 250" role="img" aria-label="Maxilien — stadsboerderij in hartje Brussel">
+  <rect width="300" height="250" fill="#1D3528"/>
+  <image href="https://maximilien.brussels/pers/logo-maximilien-wit-1000px.png" x="55" y="34" width="190"/>
+  <text x="150" y="196" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="21" fill="#F7F3EB">Stadsboerderij Brussel</text>
+  <text x="150" y="222" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#9CB29B">maximilien.brussels</text>
+</svg>

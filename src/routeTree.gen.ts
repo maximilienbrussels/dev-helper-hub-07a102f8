@@ -10,33 +10,1990 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LangRouteImport } from './routes/$lang'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AccountRouteImport } from './routes/account'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AdoptieRouteImport } from './routes/adoptie'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as BeveiligingRouteImport } from './routes/beveiliging'
+import { Route as BevestigenRouteImport } from './routes/bevestigen'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CookiesRouteImport } from './routes/cookies'
+import { Route as EMailadresBevestigenRouteImport } from './routes/e-mailadres-bevestigen'
+import { Route as FairtechRouteImport } from './routes/fairtech'
+import { Route as FieldRouteImport } from './routes/field'
+import { Route as ImpressumRouteImport } from './routes/impressum'
+import { Route as InloglinkRouteImport } from './routes/inloglink'
+import { Route as KlantenkaartRouteImport } from './routes/klantenkaart'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as MijnHoefjesRouteImport } from './routes/mijn-hoefjes'
+import { Route as PartnersRouteImport } from './routes/partners'
+import { Route as PersRouteImport } from './routes/pers'
+import { Route as PressRouteImport } from './routes/press'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SocialRouteImport } from './routes/social'
+import { Route as StatusRouteImport } from './routes/status'
+import { Route as StempelVariantenRouteImport } from './routes/stempel-varianten'
+import { Route as SteunRouteImport } from './routes/steun'
+import { Route as VakantiestagesRouteImport } from './routes/vakantiestages'
+import { Route as VeldRouteImport } from './routes/veld'
+import { Route as VerhuurRouteImport } from './routes/verhuur'
+import { Route as VoorwaardenRouteImport } from './routes/voorwaarden'
+import { Route as WachtwoordHerstellenRouteImport } from './routes/wachtwoord-herstellen'
+import { Route as WachtwoordVergetenRouteImport } from './routes/wachtwoord-vergeten'
+import { Route as WieZijnWeRouteImport } from './routes/wie-zijn-we'
+import { Route as LangIndexRouteImport } from './routes/$lang.index'
+import { Route as LangSplatRouteImport } from './routes/$lang.$'
+import { Route as AuthenticatedAanvragenRouteImport } from './routes/_authenticated/aanvragen'
+import { Route as AuthenticatedDienstenRouteImport } from './routes/_authenticated/diensten'
+import { Route as AuthenticatedFoutmeldingenRouteImport } from './routes/_authenticated/foutmeldingen'
+import { Route as AuthenticatedKalenderRouteImport } from './routes/_authenticated/kalender'
+import { Route as AuthenticatedTeamRouteImport } from './routes/_authenticated/team'
+import { Route as AuthenticatedVandaagRouteImport } from './routes/_authenticated/vandaag'
+import { Route as AcademyIndexRouteImport } from './routes/academy.index'
+import { Route as AcademySlugRouteImport } from './routes/academy.$slug'
+import { Route as AcademyVerifyRouteImport } from './routes/academy.verify'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as ApiContactRouteImport } from './routes/api/contact'
+import { Route as ApiCreatePaymentIntentRouteImport } from './routes/api/create-payment-intent'
+import { Route as ApiGenerateGoogleWalletPassRouteImport } from './routes/api/generate-google-wallet-pass'
+import { Route as ApiRouteMapRouteImport } from './routes/api/route-map'
+import { Route as ApiSpeakRouteImport } from './routes/api/speak'
+import { Route as ApiStripeConfigRouteImport } from './routes/api/stripe-config'
+import { Route as ApiTranscribeRouteImport } from './routes/api/transcribe'
+import { Route as ApiTransitRouteImport } from './routes/api/transit'
+import { Route as ApiVilloRouteImport } from './routes/api/villo'
+import { Route as ApiWeatherRouteImport } from './routes/api/weather'
+import { Route as AuthIndexRouteImport } from './routes/auth.index'
+import { Route as AuthResetPasswordRouteImport } from './routes/auth.reset-password'
+import { Route as BetrokkenheidOnderwerpRouteImport } from './routes/betrokkenheid.$onderwerp'
+import { Route as BezoekersDoelgroepRouteImport } from './routes/bezoekers.$doelgroep'
+import { Route as BoekingIndexRouteImport } from './routes/boeking.index'
+import { Route as BoekingBevestigingRouteImport } from './routes/boeking.bevestiging'
+import { Route as CertificaatIdRouteImport } from './routes/certificaat.$id'
+import { Route as InformatieOnderwerpRouteImport } from './routes/informatie.$onderwerp'
+import { Route as ProductSlugRouteImport } from './routes/product.$slug'
+import { Route as QrAnimalIdRouteImport } from './routes/qr.$animalId'
+import { Route as VeldIndexRouteImport } from './routes/veld.index'
+import { Route as VeldAanvragenRouteImport } from './routes/veld.aanvragen'
+import { Route as VeldDienstenRouteImport } from './routes/veld.diensten'
+import { Route as VeldMeerRouteImport } from './routes/veld.meer'
+import { Route as VeldScannerRouteImport } from './routes/veld.scanner'
+import { Route as VeldTakenRouteImport } from './routes/veld.taken'
+import { Route as VerifieerIndexRouteImport } from './routes/verifieer.index'
+import { Route as VerifieerCodeRouteImport } from './routes/verifieer.$code'
+import { Route as VerifyCodeRouteImport } from './routes/verify.$code'
+import { Route as WebshopIndexRouteImport } from './routes/webshop.index'
+import { Route as WebshopBedanktRouteImport } from './routes/webshop.bedankt'
+import { Route as WebshopWinkelmandRouteImport } from './routes/webshop.winkelmand'
+import { Route as WordPartnerIndexRouteImport } from './routes/word-partner.index'
+import { Route as WordPartnerContactRouteImport } from './routes/word-partner.contact'
+import { Route as LangUIdRouteImport } from './routes/$lang.u.$id'
+import { Route as AuthenticatedAdminBerichtenRouteImport } from './routes/_authenticated/admin.berichten'
+import { Route as AuthenticatedAdminProfielRouteImport } from './routes/_authenticated/admin.profiel'
+import { Route as AuthenticatedAdminScanRouteImport } from './routes/_authenticated/admin.scan'
+import { Route as AuthenticatedAdminScannerRouteImport } from './routes/_authenticated/admin.scanner'
+import { Route as AcademieSlugCertificaatRouteImport } from './routes/academie.$slug.certificaat'
+import { Route as AcademieCertificaatIdRouteImport } from './routes/academie.certificaat.$id'
+import { Route as ApiAdminCoPilotRouteImport } from './routes/api/admin/co-pilot'
+import { Route as ApiAdminInitS3CorsRouteImport } from './routes/api/admin/init-s3-cors'
+import { Route as ApiAdminPresignedUploadRouteImport } from './routes/api/admin/presigned-upload'
+import { Route as ApiAdminUploadS3RouteImport } from './routes/api/admin/upload-s3'
+import { Route as ApiAuthBlueskyRouteImport } from './routes/api/auth/bluesky'
+import { Route as ApiAuthConfigCheckRouteImport } from './routes/api/auth/config-check'
+import { Route as ApiAuthGithubRouteImport } from './routes/api/auth/github'
+import { Route as ApiAuthGoogleRouteImport } from './routes/api/auth/google'
+import { Route as ApiAuthMagicLinkRouteImport } from './routes/api/auth/magic-link'
+import { Route as ApiAuthMastodonRouteImport } from './routes/api/auth/mastodon'
+import { Route as ApiAuthProvidersRouteImport } from './routes/api/auth/providers'
+import { Route as ApiAuthRoutRouteImport } from './routes/api/auth/rout'
+import { Route as ApiChatEmailRouteImport } from './routes/api/chat/email'
+import { Route as ApiCheckoutCreateSessionRouteImport } from './routes/api/checkout/create-session'
+import { Route as ApiDevHealthRouteImport } from './routes/api/dev/health'
+import { Route as ApiDevRunMigrationsRouteImport } from './routes/api/dev/run-migrations'
+import { Route as ApiEmailSendTransactionalRouteImport } from './routes/api/email/send-transactional'
+import { Route as ApiEmailTestTemplatesRouteImport } from './routes/api/email/test-templates'
+import { Route as ApiGoogleStatusRouteImport } from './routes/api/google/status'
+import { Route as ApiGoogleSyncRouteImport } from './routes/api/google/sync'
+import { Route as ApiInfomaniakStatusRouteImport } from './routes/api/infomaniak/status'
+import { Route as ApiInfomaniakSyncRouteImport } from './routes/api/infomaniak/sync'
+import { Route as ApiPaymentsCreateSessionRouteImport } from './routes/api/payments/create-session'
+import { Route as ApiPaymentsOrderSessionRouteImport } from './routes/api/payments/order-session'
+import { Route as ApiPublicHealthRouteImport } from './routes/api/public/health'
+import { Route as ApiPublicOpeningStatusRouteImport } from './routes/api/public/opening-status'
+import { Route as ApiPublicVerifyCertificateRouteImport } from './routes/api/public/verify-certificate'
+import { Route as ApiSponsorshipCreateSessionRouteImport } from './routes/api/sponsorship/create-session'
+import { Route as ApiSponsorshipStatusRouteImport } from './routes/api/sponsorship/status'
+import { Route as ApiStorageDeleteRouteImport } from './routes/api/storage/delete'
+import { Route as ApiStorageUploadUrlRouteImport } from './routes/api/storage/upload-url'
+import { Route as ApiStripeCreatePaymentIntentRouteImport } from './routes/api/stripe/create-payment-intent'
+import { Route as ApiV1AnimalsRouteImport } from './routes/api/v1/animals'
+import { Route as ApiV1BookingsRouteImport } from './routes/api/v1/bookings'
+import { Route as ApiV1ProductsRouteImport } from './routes/api/v1/products'
+import { Route as ApiWebhooksRoutRouteImport } from './routes/api/webhooks/rout'
+import { Route as ApiWebhooksStripeRouteImport } from './routes/api/webhooks/stripe'
+import { Route as AuthCallbackRoutRouteImport } from './routes/auth_.callback.rout'
+import { Route as AuthenticatedPortaalLangSlugRouteImport } from './routes/_authenticated/portaal.$lang.$slug'
+import { Route as ApiAdminCoPilotUndoRouteImport } from './routes/api/admin/co-pilot.undo'
+import { Route as ApiAuthCallbackBlueskyRouteImport } from './routes/api/auth/callback/bluesky'
+import { Route as ApiAuthCallbackGithubRouteImport } from './routes/api/auth/callback/github'
+import { Route as ApiAuthCallbackGoogleRouteImport } from './routes/api/auth/callback/google'
+import { Route as ApiAuthCallbackMastodonRouteImport } from './routes/api/auth/callback/mastodon'
+import { Route as ApiAuthLoginProviderRouteImport } from './routes/api/auth/login/$provider'
+import { Route as ApiAuthRoutLogoutRouteImport } from './routes/api/auth/rout.logout'
+import { Route as ApiMediaScalewayDeleteRouteImport } from './routes/api/media/scaleway/delete'
+import { Route as ApiMediaScalewayListRouteImport } from './routes/api/media/scaleway/list'
+import { Route as ApiMediaScalewaySimilarRouteImport } from './routes/api/media/scaleway/similar'
+import { Route as ApiMediaScalewayUploadRouteImport } from './routes/api/media/scaleway/upload'
+import { Route as ApiPublicAtprotoClientMetadataDotjsonRouteImport } from './routes/api/public/atproto/client-metadata[.]json'
+import { Route as ApiPublicCalendarFeedRouteImport } from './routes/api/public/calendar/feed'
+import { Route as ApiPublicMediaIdRouteImport } from './routes/api/public/media/$id'
+import { Route as ApiPublicPickupPassRouteImport } from './routes/api/public/pickup/pass'
+import { Route as ApiPublicPickupQrRouteImport } from './routes/api/public/pickup/qr'
+import { Route as ApiPublicStripeWebhookRouteImport } from './routes/api/public/stripe/webhook'
+import { Route as ApiPublicTelegramWebhookRouteImport } from './routes/api/public/telegram/webhook'
+import { Route as ApiPublicWebhooksStripeRouteImport } from './routes/api/public/webhooks/stripe'
+import { Route as ApiSponsorshipCertificateCertificateIdRouteImport } from './routes/api/sponsorship/certificate/$certificateId'
+import { Route as ApiV1MaximAnnouncementsRouteImport } from './routes/api/v1/maxim/announcements'
+import { Route as ApiV1ProductsIdRouteImport } from './routes/api/v1/products/$id'
+import { Route as ApiWalletGooglePassRouteImport } from './routes/api/wallet/google/pass'
+import { Route as ApiV1BookingsIdCheckinRouteImport } from './routes/api/v1/bookings/$id/checkin'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LangRoute = LangRouteImport.update({
+  id: '/$lang',
+  path: '/$lang',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountRoute = AccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdoptieRoute = AdoptieRouteImport.update({
+  id: '/adoptie',
+  path: '/adoptie',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BeveiligingRoute = BeveiligingRouteImport.update({
+  id: '/beveiliging',
+  path: '/beveiliging',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BevestigenRoute = BevestigenRouteImport.update({
+  id: '/bevestigen',
+  path: '/bevestigen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CookiesRoute = CookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EMailadresBevestigenRoute = EMailadresBevestigenRouteImport.update({
+  id: '/e-mailadres-bevestigen',
+  path: '/e-mailadres-bevestigen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FairtechRoute = FairtechRouteImport.update({
+  id: '/fairtech',
+  path: '/fairtech',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FieldRoute = FieldRouteImport.update({
+  id: '/field',
+  path: '/field',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImpressumRoute = ImpressumRouteImport.update({
+  id: '/impressum',
+  path: '/impressum',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InloglinkRoute = InloglinkRouteImport.update({
+  id: '/inloglink',
+  path: '/inloglink',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KlantenkaartRoute = KlantenkaartRouteImport.update({
+  id: '/klantenkaart',
+  path: '/klantenkaart',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MijnHoefjesRoute = MijnHoefjesRouteImport.update({
+  id: '/mijn-hoefjes',
+  path: '/mijn-hoefjes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnersRoute = PartnersRouteImport.update({
+  id: '/partners',
+  path: '/partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PersRoute = PersRouteImport.update({
+  id: '/pers',
+  path: '/pers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PressRoute = PressRouteImport.update({
+  id: '/press',
+  path: '/press',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SocialRoute = SocialRouteImport.update({
+  id: '/social',
+  path: '/social',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StatusRoute = StatusRouteImport.update({
+  id: '/status',
+  path: '/status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StempelVariantenRoute = StempelVariantenRouteImport.update({
+  id: '/stempel-varianten',
+  path: '/stempel-varianten',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SteunRoute = SteunRouteImport.update({
+  id: '/steun',
+  path: '/steun',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VakantiestagesRoute = VakantiestagesRouteImport.update({
+  id: '/vakantiestages',
+  path: '/vakantiestages',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VeldRoute = VeldRouteImport.update({
+  id: '/veld',
+  path: '/veld',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerhuurRoute = VerhuurRouteImport.update({
+  id: '/verhuur',
+  path: '/verhuur',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VoorwaardenRoute = VoorwaardenRouteImport.update({
+  id: '/voorwaarden',
+  path: '/voorwaarden',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WachtwoordHerstellenRoute = WachtwoordHerstellenRouteImport.update({
+  id: '/wachtwoord-herstellen',
+  path: '/wachtwoord-herstellen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WachtwoordVergetenRoute = WachtwoordVergetenRouteImport.update({
+  id: '/wachtwoord-vergeten',
+  path: '/wachtwoord-vergeten',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WieZijnWeRoute = WieZijnWeRouteImport.update({
+  id: '/wie-zijn-we',
+  path: '/wie-zijn-we',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LangIndexRoute = LangIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LangRoute,
+} as any)
+const LangSplatRoute = LangSplatRouteImport.update({
+  id: '/$',
+  path: '/$',
+  getParentRoute: () => LangRoute,
+} as any)
+const AuthenticatedAanvragenRoute = AuthenticatedAanvragenRouteImport.update({
+  id: '/aanvragen',
+  path: '/aanvragen',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDienstenRoute = AuthenticatedDienstenRouteImport.update({
+  id: '/diensten',
+  path: '/diensten',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedFoutmeldingenRoute =
+  AuthenticatedFoutmeldingenRouteImport.update({
+    id: '/foutmeldingen',
+    path: '/foutmeldingen',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedKalenderRoute = AuthenticatedKalenderRouteImport.update({
+  id: '/kalender',
+  path: '/kalender',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTeamRoute = AuthenticatedTeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedVandaagRoute = AuthenticatedVandaagRouteImport.update({
+  id: '/vandaag',
+  path: '/vandaag',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AcademyIndexRoute = AcademyIndexRouteImport.update({
+  id: '/academy/',
+  path: '/academy/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademySlugRoute = AcademySlugRouteImport.update({
+  id: '/academy/$slug',
+  path: '/academy/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademyVerifyRoute = AcademyVerifyRouteImport.update({
+  id: '/academy/verify',
+  path: '/academy/verify',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiContactRoute = ApiContactRouteImport.update({
+  id: '/api/contact',
+  path: '/api/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiCreatePaymentIntentRoute = ApiCreatePaymentIntentRouteImport.update({
+  id: '/api/create-payment-intent',
+  path: '/api/create-payment-intent',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGenerateGoogleWalletPassRoute =
+  ApiGenerateGoogleWalletPassRouteImport.update({
+    id: '/api/generate-google-wallet-pass',
+    path: '/api/generate-google-wallet-pass',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiRouteMapRoute = ApiRouteMapRouteImport.update({
+  id: '/api/route-map',
+  path: '/api/route-map',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSpeakRoute = ApiSpeakRouteImport.update({
+  id: '/api/speak',
+  path: '/api/speak',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiStripeConfigRoute = ApiStripeConfigRouteImport.update({
+  id: '/api/stripe-config',
+  path: '/api/stripe-config',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiTranscribeRoute = ApiTranscribeRouteImport.update({
+  id: '/api/transcribe',
+  path: '/api/transcribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiTransitRoute = ApiTransitRouteImport.update({
+  id: '/api/transit',
+  path: '/api/transit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiVilloRoute = ApiVilloRouteImport.update({
+  id: '/api/villo',
+  path: '/api/villo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiWeatherRoute = ApiWeatherRouteImport.update({
+  id: '/api/weather',
+  path: '/api/weather',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthIndexRoute = AuthIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthResetPasswordRoute = AuthResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => AuthRoute,
+} as any)
+const BetrokkenheidOnderwerpRoute = BetrokkenheidOnderwerpRouteImport.update({
+  id: '/betrokkenheid/$onderwerp',
+  path: '/betrokkenheid/$onderwerp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BezoekersDoelgroepRoute = BezoekersDoelgroepRouteImport.update({
+  id: '/bezoekers/$doelgroep',
+  path: '/bezoekers/$doelgroep',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BoekingIndexRoute = BoekingIndexRouteImport.update({
+  id: '/boeking/',
+  path: '/boeking/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BoekingBevestigingRoute = BoekingBevestigingRouteImport.update({
+  id: '/boeking/bevestiging',
+  path: '/boeking/bevestiging',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CertificaatIdRoute = CertificaatIdRouteImport.update({
+  id: '/certificaat/$id',
+  path: '/certificaat/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InformatieOnderwerpRoute = InformatieOnderwerpRouteImport.update({
+  id: '/informatie/$onderwerp',
+  path: '/informatie/$onderwerp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductSlugRoute = ProductSlugRouteImport.update({
+  id: '/product/$slug',
+  path: '/product/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QrAnimalIdRoute = QrAnimalIdRouteImport.update({
+  id: '/qr/$animalId',
+  path: '/qr/$animalId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VeldIndexRoute = VeldIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => VeldRoute,
+} as any)
+const VeldAanvragenRoute = VeldAanvragenRouteImport.update({
+  id: '/aanvragen',
+  path: '/aanvragen',
+  getParentRoute: () => VeldRoute,
+} as any)
+const VeldDienstenRoute = VeldDienstenRouteImport.update({
+  id: '/diensten',
+  path: '/diensten',
+  getParentRoute: () => VeldRoute,
+} as any)
+const VeldMeerRoute = VeldMeerRouteImport.update({
+  id: '/meer',
+  path: '/meer',
+  getParentRoute: () => VeldRoute,
+} as any)
+const VeldScannerRoute = VeldScannerRouteImport.update({
+  id: '/scanner',
+  path: '/scanner',
+  getParentRoute: () => VeldRoute,
+} as any)
+const VeldTakenRoute = VeldTakenRouteImport.update({
+  id: '/taken',
+  path: '/taken',
+  getParentRoute: () => VeldRoute,
+} as any)
+const VerifieerIndexRoute = VerifieerIndexRouteImport.update({
+  id: '/verifieer/',
+  path: '/verifieer/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerifieerCodeRoute = VerifieerCodeRouteImport.update({
+  id: '/verifieer/$code',
+  path: '/verifieer/$code',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerifyCodeRoute = VerifyCodeRouteImport.update({
+  id: '/verify/$code',
+  path: '/verify/$code',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WebshopIndexRoute = WebshopIndexRouteImport.update({
+  id: '/webshop/',
+  path: '/webshop/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WebshopBedanktRoute = WebshopBedanktRouteImport.update({
+  id: '/webshop/bedankt',
+  path: '/webshop/bedankt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WebshopWinkelmandRoute = WebshopWinkelmandRouteImport.update({
+  id: '/webshop/winkelmand',
+  path: '/webshop/winkelmand',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WordPartnerIndexRoute = WordPartnerIndexRouteImport.update({
+  id: '/word-partner/',
+  path: '/word-partner/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WordPartnerContactRoute = WordPartnerContactRouteImport.update({
+  id: '/word-partner/contact',
+  path: '/word-partner/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LangUIdRoute = LangUIdRouteImport.update({
+  id: '/u/$id',
+  path: '/u/$id',
+  getParentRoute: () => LangRoute,
+} as any)
+const AuthenticatedAdminBerichtenRoute =
+  AuthenticatedAdminBerichtenRouteImport.update({
+    id: '/admin/berichten',
+    path: '/admin/berichten',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminProfielRoute =
+  AuthenticatedAdminProfielRouteImport.update({
+    id: '/admin/profiel',
+    path: '/admin/profiel',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminScanRoute = AuthenticatedAdminScanRouteImport.update({
+  id: '/admin/scan',
+  path: '/admin/scan',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminScannerRoute =
+  AuthenticatedAdminScannerRouteImport.update({
+    id: '/admin/scanner',
+    path: '/admin/scanner',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AcademieSlugCertificaatRoute = AcademieSlugCertificaatRouteImport.update({
+  id: '/academie/$slug/certificaat',
+  path: '/academie/$slug/certificaat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademieCertificaatIdRoute = AcademieCertificaatIdRouteImport.update({
+  id: '/academie/certificaat/$id',
+  path: '/academie/certificaat/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminCoPilotRoute = ApiAdminCoPilotRouteImport.update({
+  id: '/api/admin/co-pilot',
+  path: '/api/admin/co-pilot',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminInitS3CorsRoute = ApiAdminInitS3CorsRouteImport.update({
+  id: '/api/admin/init-s3-cors',
+  path: '/api/admin/init-s3-cors',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminPresignedUploadRoute = ApiAdminPresignedUploadRouteImport.update({
+  id: '/api/admin/presigned-upload',
+  path: '/api/admin/presigned-upload',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminUploadS3Route = ApiAdminUploadS3RouteImport.update({
+  id: '/api/admin/upload-s3',
+  path: '/api/admin/upload-s3',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthBlueskyRoute = ApiAuthBlueskyRouteImport.update({
+  id: '/api/auth/bluesky',
+  path: '/api/auth/bluesky',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthConfigCheckRoute = ApiAuthConfigCheckRouteImport.update({
+  id: '/api/auth/config-check',
+  path: '/api/auth/config-check',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthGithubRoute = ApiAuthGithubRouteImport.update({
+  id: '/api/auth/github',
+  path: '/api/auth/github',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthGoogleRoute = ApiAuthGoogleRouteImport.update({
+  id: '/api/auth/google',
+  path: '/api/auth/google',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthMagicLinkRoute = ApiAuthMagicLinkRouteImport.update({
+  id: '/api/auth/magic-link',
+  path: '/api/auth/magic-link',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthMastodonRoute = ApiAuthMastodonRouteImport.update({
+  id: '/api/auth/mastodon',
+  path: '/api/auth/mastodon',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthProvidersRoute = ApiAuthProvidersRouteImport.update({
+  id: '/api/auth/providers',
+  path: '/api/auth/providers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthRoutRoute = ApiAuthRoutRouteImport.update({
+  id: '/api/auth/rout',
+  path: '/api/auth/rout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiChatEmailRoute = ApiChatEmailRouteImport.update({
+  id: '/email',
+  path: '/email',
+  getParentRoute: () => ApiChatRoute,
+} as any)
+const ApiCheckoutCreateSessionRoute =
+  ApiCheckoutCreateSessionRouteImport.update({
+    id: '/api/checkout/create-session',
+    path: '/api/checkout/create-session',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiDevHealthRoute = ApiDevHealthRouteImport.update({
+  id: '/api/dev/health',
+  path: '/api/dev/health',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiDevRunMigrationsRoute = ApiDevRunMigrationsRouteImport.update({
+  id: '/api/dev/run-migrations',
+  path: '/api/dev/run-migrations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiEmailSendTransactionalRoute =
+  ApiEmailSendTransactionalRouteImport.update({
+    id: '/api/email/send-transactional',
+    path: '/api/email/send-transactional',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiEmailTestTemplatesRoute = ApiEmailTestTemplatesRouteImport.update({
+  id: '/api/email/test-templates',
+  path: '/api/email/test-templates',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGoogleStatusRoute = ApiGoogleStatusRouteImport.update({
+  id: '/api/google/status',
+  path: '/api/google/status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGoogleSyncRoute = ApiGoogleSyncRouteImport.update({
+  id: '/api/google/sync',
+  path: '/api/google/sync',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiInfomaniakStatusRoute = ApiInfomaniakStatusRouteImport.update({
+  id: '/api/infomaniak/status',
+  path: '/api/infomaniak/status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiInfomaniakSyncRoute = ApiInfomaniakSyncRouteImport.update({
+  id: '/api/infomaniak/sync',
+  path: '/api/infomaniak/sync',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPaymentsCreateSessionRoute =
+  ApiPaymentsCreateSessionRouteImport.update({
+    id: '/api/payments/create-session',
+    path: '/api/payments/create-session',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPaymentsOrderSessionRoute = ApiPaymentsOrderSessionRouteImport.update({
+  id: '/api/payments/order-session',
+  path: '/api/payments/order-session',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicHealthRoute = ApiPublicHealthRouteImport.update({
+  id: '/api/public/health',
+  path: '/api/public/health',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicOpeningStatusRoute = ApiPublicOpeningStatusRouteImport.update({
+  id: '/api/public/opening-status',
+  path: '/api/public/opening-status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicVerifyCertificateRoute =
+  ApiPublicVerifyCertificateRouteImport.update({
+    id: '/api/public/verify-certificate',
+    path: '/api/public/verify-certificate',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiSponsorshipCreateSessionRoute =
+  ApiSponsorshipCreateSessionRouteImport.update({
+    id: '/api/sponsorship/create-session',
+    path: '/api/sponsorship/create-session',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiSponsorshipStatusRoute = ApiSponsorshipStatusRouteImport.update({
+  id: '/api/sponsorship/status',
+  path: '/api/sponsorship/status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiStorageDeleteRoute = ApiStorageDeleteRouteImport.update({
+  id: '/api/storage/delete',
+  path: '/api/storage/delete',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiStorageUploadUrlRoute = ApiStorageUploadUrlRouteImport.update({
+  id: '/api/storage/upload-url',
+  path: '/api/storage/upload-url',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiStripeCreatePaymentIntentRoute =
+  ApiStripeCreatePaymentIntentRouteImport.update({
+    id: '/api/stripe/create-payment-intent',
+    path: '/api/stripe/create-payment-intent',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiV1AnimalsRoute = ApiV1AnimalsRouteImport.update({
+  id: '/api/v1/animals',
+  path: '/api/v1/animals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiV1BookingsRoute = ApiV1BookingsRouteImport.update({
+  id: '/api/v1/bookings',
+  path: '/api/v1/bookings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiV1ProductsRoute = ApiV1ProductsRouteImport.update({
+  id: '/api/v1/products',
+  path: '/api/v1/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiWebhooksRoutRoute = ApiWebhooksRoutRouteImport.update({
+  id: '/api/webhooks/rout',
+  path: '/api/webhooks/rout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiWebhooksStripeRoute = ApiWebhooksStripeRouteImport.update({
+  id: '/api/webhooks/stripe',
+  path: '/api/webhooks/stripe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthCallbackRoutRoute = AuthCallbackRoutRouteImport.update({
+  id: '/auth_/callback/rout',
+  path: '/auth/callback/rout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedPortaalLangSlugRoute =
+  AuthenticatedPortaalLangSlugRouteImport.update({
+    id: '/portaal/$lang/$slug',
+    path: '/portaal/$lang/$slug',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const ApiAdminCoPilotUndoRoute = ApiAdminCoPilotUndoRouteImport.update({
+  id: '/undo',
+  path: '/undo',
+  getParentRoute: () => ApiAdminCoPilotRoute,
+} as any)
+const ApiAuthCallbackBlueskyRoute = ApiAuthCallbackBlueskyRouteImport.update({
+  id: '/api/auth/callback/bluesky',
+  path: '/api/auth/callback/bluesky',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthCallbackGithubRoute = ApiAuthCallbackGithubRouteImport.update({
+  id: '/api/auth/callback/github',
+  path: '/api/auth/callback/github',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthCallbackGoogleRoute = ApiAuthCallbackGoogleRouteImport.update({
+  id: '/api/auth/callback/google',
+  path: '/api/auth/callback/google',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthCallbackMastodonRoute = ApiAuthCallbackMastodonRouteImport.update({
+  id: '/api/auth/callback/mastodon',
+  path: '/api/auth/callback/mastodon',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthLoginProviderRoute = ApiAuthLoginProviderRouteImport.update({
+  id: '/api/auth/login/$provider',
+  path: '/api/auth/login/$provider',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthRoutLogoutRoute = ApiAuthRoutLogoutRouteImport.update({
+  id: '/logout',
+  path: '/logout',
+  getParentRoute: () => ApiAuthRoutRoute,
+} as any)
+const ApiMediaScalewayDeleteRoute = ApiMediaScalewayDeleteRouteImport.update({
+  id: '/api/media/scaleway/delete',
+  path: '/api/media/scaleway/delete',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMediaScalewayListRoute = ApiMediaScalewayListRouteImport.update({
+  id: '/api/media/scaleway/list',
+  path: '/api/media/scaleway/list',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMediaScalewaySimilarRoute = ApiMediaScalewaySimilarRouteImport.update({
+  id: '/api/media/scaleway/similar',
+  path: '/api/media/scaleway/similar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMediaScalewayUploadRoute = ApiMediaScalewayUploadRouteImport.update({
+  id: '/api/media/scaleway/upload',
+  path: '/api/media/scaleway/upload',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicAtprotoClientMetadataDotjsonRoute =
+  ApiPublicAtprotoClientMetadataDotjsonRouteImport.update({
+    id: '/api/public/atproto/client-metadata.json',
+    path: '/api/public/atproto/client-metadata.json',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicCalendarFeedRoute = ApiPublicCalendarFeedRouteImport.update({
+  id: '/api/public/calendar/feed',
+  path: '/api/public/calendar/feed',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicMediaIdRoute = ApiPublicMediaIdRouteImport.update({
+  id: '/api/public/media/$id',
+  path: '/api/public/media/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicPickupPassRoute = ApiPublicPickupPassRouteImport.update({
+  id: '/api/public/pickup/pass',
+  path: '/api/public/pickup/pass',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicPickupQrRoute = ApiPublicPickupQrRouteImport.update({
+  id: '/api/public/pickup/qr',
+  path: '/api/public/pickup/qr',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicStripeWebhookRoute = ApiPublicStripeWebhookRouteImport.update({
+  id: '/api/public/stripe/webhook',
+  path: '/api/public/stripe/webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicTelegramWebhookRoute =
+  ApiPublicTelegramWebhookRouteImport.update({
+    id: '/api/public/telegram/webhook',
+    path: '/api/public/telegram/webhook',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicWebhooksStripeRoute = ApiPublicWebhooksStripeRouteImport.update({
+  id: '/api/public/webhooks/stripe',
+  path: '/api/public/webhooks/stripe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSponsorshipCertificateCertificateIdRoute =
+  ApiSponsorshipCertificateCertificateIdRouteImport.update({
+    id: '/api/sponsorship/certificate/$certificateId',
+    path: '/api/sponsorship/certificate/$certificateId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiV1MaximAnnouncementsRoute = ApiV1MaximAnnouncementsRouteImport.update({
+  id: '/api/v1/maxim/announcements',
+  path: '/api/v1/maxim/announcements',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiV1ProductsIdRoute = ApiV1ProductsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ApiV1ProductsRoute,
+} as any)
+const ApiWalletGooglePassRoute = ApiWalletGooglePassRouteImport.update({
+  id: '/api/wallet/google/pass',
+  path: '/api/wallet/google/pass',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiV1BookingsIdCheckinRoute = ApiV1BookingsIdCheckinRouteImport.update({
+  id: '/$id/checkin',
+  path: '/$id/checkin',
+  getParentRoute: () => ApiV1BookingsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$lang': typeof LangRouteWithChildren
+  '/account': typeof AccountRoute
+  '/admin': typeof AdminRoute
+  '/adoptie': typeof AdoptieRoute
+  '/auth': typeof AuthRouteWithChildren
+  '/beveiliging': typeof BeveiligingRoute
+  '/bevestigen': typeof BevestigenRoute
+  '/contact': typeof ContactRoute
+  '/cookies': typeof CookiesRoute
+  '/e-mailadres-bevestigen': typeof EMailadresBevestigenRoute
+  '/fairtech': typeof FairtechRoute
+  '/field': typeof FieldRoute
+  '/impressum': typeof ImpressumRoute
+  '/inloglink': typeof InloglinkRoute
+  '/klantenkaart': typeof KlantenkaartRoute
+  '/login': typeof LoginRoute
+  '/mijn-hoefjes': typeof MijnHoefjesRoute
+  '/partners': typeof PartnersRoute
+  '/pers': typeof PersRoute
+  '/press': typeof PressRoute
+  '/privacy': typeof PrivacyRoute
+  '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/social': typeof SocialRoute
+  '/status': typeof StatusRoute
+  '/stempel-varianten': typeof StempelVariantenRoute
+  '/steun': typeof SteunRoute
+  '/vakantiestages': typeof VakantiestagesRoute
+  '/veld': typeof VeldRouteWithChildren
+  '/verhuur': typeof VerhuurRoute
+  '/voorwaarden': typeof VoorwaardenRoute
+  '/wachtwoord-herstellen': typeof WachtwoordHerstellenRoute
+  '/wachtwoord-vergeten': typeof WachtwoordVergetenRoute
+  '/wie-zijn-we': typeof WieZijnWeRoute
+  '/$lang/$': typeof LangSplatRoute
+  '/aanvragen': typeof AuthenticatedAanvragenRoute
+  '/diensten': typeof AuthenticatedDienstenRoute
+  '/foutmeldingen': typeof AuthenticatedFoutmeldingenRoute
+  '/kalender': typeof AuthenticatedKalenderRoute
+  '/team': typeof AuthenticatedTeamRoute
+  '/vandaag': typeof AuthenticatedVandaagRoute
+  '/academy/$slug': typeof AcademySlugRoute
+  '/academy/verify': typeof AcademyVerifyRoute
+  '/api/chat': typeof ApiChatRouteWithChildren
+  '/api/contact': typeof ApiContactRoute
+  '/api/create-payment-intent': typeof ApiCreatePaymentIntentRoute
+  '/api/generate-google-wallet-pass': typeof ApiGenerateGoogleWalletPassRoute
+  '/api/route-map': typeof ApiRouteMapRoute
+  '/api/speak': typeof ApiSpeakRoute
+  '/api/stripe-config': typeof ApiStripeConfigRoute
+  '/api/transcribe': typeof ApiTranscribeRoute
+  '/api/transit': typeof ApiTransitRoute
+  '/api/villo': typeof ApiVilloRoute
+  '/api/weather': typeof ApiWeatherRoute
+  '/auth/reset-password': typeof AuthResetPasswordRoute
+  '/betrokkenheid/$onderwerp': typeof BetrokkenheidOnderwerpRoute
+  '/bezoekers/$doelgroep': typeof BezoekersDoelgroepRoute
+  '/boeking/bevestiging': typeof BoekingBevestigingRoute
+  '/certificaat/$id': typeof CertificaatIdRoute
+  '/informatie/$onderwerp': typeof InformatieOnderwerpRoute
+  '/product/$slug': typeof ProductSlugRoute
+  '/qr/$animalId': typeof QrAnimalIdRoute
+  '/veld/aanvragen': typeof VeldAanvragenRoute
+  '/veld/diensten': typeof VeldDienstenRoute
+  '/veld/meer': typeof VeldMeerRoute
+  '/veld/scanner': typeof VeldScannerRoute
+  '/veld/taken': typeof VeldTakenRoute
+  '/verifieer/$code': typeof VerifieerCodeRoute
+  '/verify/$code': typeof VerifyCodeRoute
+  '/webshop/bedankt': typeof WebshopBedanktRoute
+  '/webshop/winkelmand': typeof WebshopWinkelmandRoute
+  '/word-partner/contact': typeof WordPartnerContactRoute
+  '/$lang/': typeof LangIndexRoute
+  '/academy/': typeof AcademyIndexRoute
+  '/auth/': typeof AuthIndexRoute
+  '/boeking/': typeof BoekingIndexRoute
+  '/veld/': typeof VeldIndexRoute
+  '/verifieer/': typeof VerifieerIndexRoute
+  '/webshop/': typeof WebshopIndexRoute
+  '/word-partner/': typeof WordPartnerIndexRoute
+  '/$lang/u/$id': typeof LangUIdRoute
+  '/admin/berichten': typeof AuthenticatedAdminBerichtenRoute
+  '/admin/profiel': typeof AuthenticatedAdminProfielRoute
+  '/admin/scan': typeof AuthenticatedAdminScanRoute
+  '/admin/scanner': typeof AuthenticatedAdminScannerRoute
+  '/academie/$slug/certificaat': typeof AcademieSlugCertificaatRoute
+  '/academie/certificaat/$id': typeof AcademieCertificaatIdRoute
+  '/api/admin/co-pilot': typeof ApiAdminCoPilotRouteWithChildren
+  '/api/admin/init-s3-cors': typeof ApiAdminInitS3CorsRoute
+  '/api/admin/presigned-upload': typeof ApiAdminPresignedUploadRoute
+  '/api/admin/upload-s3': typeof ApiAdminUploadS3Route
+  '/api/auth/bluesky': typeof ApiAuthBlueskyRoute
+  '/api/auth/config-check': typeof ApiAuthConfigCheckRoute
+  '/api/auth/github': typeof ApiAuthGithubRoute
+  '/api/auth/google': typeof ApiAuthGoogleRoute
+  '/api/auth/magic-link': typeof ApiAuthMagicLinkRoute
+  '/api/auth/mastodon': typeof ApiAuthMastodonRoute
+  '/api/auth/providers': typeof ApiAuthProvidersRoute
+  '/api/auth/rout': typeof ApiAuthRoutRouteWithChildren
+  '/api/chat/email': typeof ApiChatEmailRoute
+  '/api/checkout/create-session': typeof ApiCheckoutCreateSessionRoute
+  '/api/dev/health': typeof ApiDevHealthRoute
+  '/api/dev/run-migrations': typeof ApiDevRunMigrationsRoute
+  '/api/email/send-transactional': typeof ApiEmailSendTransactionalRoute
+  '/api/email/test-templates': typeof ApiEmailTestTemplatesRoute
+  '/api/google/status': typeof ApiGoogleStatusRoute
+  '/api/google/sync': typeof ApiGoogleSyncRoute
+  '/api/infomaniak/status': typeof ApiInfomaniakStatusRoute
+  '/api/infomaniak/sync': typeof ApiInfomaniakSyncRoute
+  '/api/payments/create-session': typeof ApiPaymentsCreateSessionRoute
+  '/api/payments/order-session': typeof ApiPaymentsOrderSessionRoute
+  '/api/public/health': typeof ApiPublicHealthRoute
+  '/api/public/opening-status': typeof ApiPublicOpeningStatusRoute
+  '/api/public/verify-certificate': typeof ApiPublicVerifyCertificateRoute
+  '/api/sponsorship/create-session': typeof ApiSponsorshipCreateSessionRoute
+  '/api/sponsorship/status': typeof ApiSponsorshipStatusRoute
+  '/api/storage/delete': typeof ApiStorageDeleteRoute
+  '/api/storage/upload-url': typeof ApiStorageUploadUrlRoute
+  '/api/stripe/create-payment-intent': typeof ApiStripeCreatePaymentIntentRoute
+  '/api/v1/animals': typeof ApiV1AnimalsRoute
+  '/api/v1/bookings': typeof ApiV1BookingsRouteWithChildren
+  '/api/v1/products': typeof ApiV1ProductsRouteWithChildren
+  '/api/webhooks/rout': typeof ApiWebhooksRoutRoute
+  '/api/webhooks/stripe': typeof ApiWebhooksStripeRoute
+  '/auth/callback/rout': typeof AuthCallbackRoutRoute
+  '/portaal/$lang/$slug': typeof AuthenticatedPortaalLangSlugRoute
+  '/api/admin/co-pilot/undo': typeof ApiAdminCoPilotUndoRoute
+  '/api/auth/callback/bluesky': typeof ApiAuthCallbackBlueskyRoute
+  '/api/auth/callback/github': typeof ApiAuthCallbackGithubRoute
+  '/api/auth/callback/google': typeof ApiAuthCallbackGoogleRoute
+  '/api/auth/callback/mastodon': typeof ApiAuthCallbackMastodonRoute
+  '/api/auth/login/$provider': typeof ApiAuthLoginProviderRoute
+  '/api/auth/rout/logout': typeof ApiAuthRoutLogoutRoute
+  '/api/media/scaleway/delete': typeof ApiMediaScalewayDeleteRoute
+  '/api/media/scaleway/list': typeof ApiMediaScalewayListRoute
+  '/api/media/scaleway/similar': typeof ApiMediaScalewaySimilarRoute
+  '/api/media/scaleway/upload': typeof ApiMediaScalewayUploadRoute
+  '/api/public/atproto/client-metadata.json': typeof ApiPublicAtprotoClientMetadataDotjsonRoute
+  '/api/public/calendar/feed': typeof ApiPublicCalendarFeedRoute
+  '/api/public/media/$id': typeof ApiPublicMediaIdRoute
+  '/api/public/pickup/pass': typeof ApiPublicPickupPassRoute
+  '/api/public/pickup/qr': typeof ApiPublicPickupQrRoute
+  '/api/public/stripe/webhook': typeof ApiPublicStripeWebhookRoute
+  '/api/public/telegram/webhook': typeof ApiPublicTelegramWebhookRoute
+  '/api/public/webhooks/stripe': typeof ApiPublicWebhooksStripeRoute
+  '/api/sponsorship/certificate/$certificateId': typeof ApiSponsorshipCertificateCertificateIdRoute
+  '/api/v1/maxim/announcements': typeof ApiV1MaximAnnouncementsRoute
+  '/api/v1/products/$id': typeof ApiV1ProductsIdRoute
+  '/api/wallet/google/pass': typeof ApiWalletGooglePassRoute
+  '/api/v1/bookings/$id/checkin': typeof ApiV1BookingsIdCheckinRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
+  '/admin': typeof AdminRoute
+  '/adoptie': typeof AdoptieRoute
+  '/beveiliging': typeof BeveiligingRoute
+  '/bevestigen': typeof BevestigenRoute
+  '/contact': typeof ContactRoute
+  '/cookies': typeof CookiesRoute
+  '/e-mailadres-bevestigen': typeof EMailadresBevestigenRoute
+  '/fairtech': typeof FairtechRoute
+  '/field': typeof FieldRoute
+  '/impressum': typeof ImpressumRoute
+  '/inloglink': typeof InloglinkRoute
+  '/klantenkaart': typeof KlantenkaartRoute
+  '/login': typeof LoginRoute
+  '/mijn-hoefjes': typeof MijnHoefjesRoute
+  '/partners': typeof PartnersRoute
+  '/pers': typeof PersRoute
+  '/press': typeof PressRoute
+  '/privacy': typeof PrivacyRoute
+  '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/social': typeof SocialRoute
+  '/status': typeof StatusRoute
+  '/stempel-varianten': typeof StempelVariantenRoute
+  '/steun': typeof SteunRoute
+  '/vakantiestages': typeof VakantiestagesRoute
+  '/verhuur': typeof VerhuurRoute
+  '/voorwaarden': typeof VoorwaardenRoute
+  '/wachtwoord-herstellen': typeof WachtwoordHerstellenRoute
+  '/wachtwoord-vergeten': typeof WachtwoordVergetenRoute
+  '/wie-zijn-we': typeof WieZijnWeRoute
+  '/$lang/$': typeof LangSplatRoute
+  '/aanvragen': typeof AuthenticatedAanvragenRoute
+  '/diensten': typeof AuthenticatedDienstenRoute
+  '/foutmeldingen': typeof AuthenticatedFoutmeldingenRoute
+  '/kalender': typeof AuthenticatedKalenderRoute
+  '/team': typeof AuthenticatedTeamRoute
+  '/vandaag': typeof AuthenticatedVandaagRoute
+  '/academy/$slug': typeof AcademySlugRoute
+  '/academy/verify': typeof AcademyVerifyRoute
+  '/api/chat': typeof ApiChatRouteWithChildren
+  '/api/contact': typeof ApiContactRoute
+  '/api/create-payment-intent': typeof ApiCreatePaymentIntentRoute
+  '/api/generate-google-wallet-pass': typeof ApiGenerateGoogleWalletPassRoute
+  '/api/route-map': typeof ApiRouteMapRoute
+  '/api/speak': typeof ApiSpeakRoute
+  '/api/stripe-config': typeof ApiStripeConfigRoute
+  '/api/transcribe': typeof ApiTranscribeRoute
+  '/api/transit': typeof ApiTransitRoute
+  '/api/villo': typeof ApiVilloRoute
+  '/api/weather': typeof ApiWeatherRoute
+  '/auth/reset-password': typeof AuthResetPasswordRoute
+  '/betrokkenheid/$onderwerp': typeof BetrokkenheidOnderwerpRoute
+  '/bezoekers/$doelgroep': typeof BezoekersDoelgroepRoute
+  '/boeking/bevestiging': typeof BoekingBevestigingRoute
+  '/certificaat/$id': typeof CertificaatIdRoute
+  '/informatie/$onderwerp': typeof InformatieOnderwerpRoute
+  '/product/$slug': typeof ProductSlugRoute
+  '/qr/$animalId': typeof QrAnimalIdRoute
+  '/veld/aanvragen': typeof VeldAanvragenRoute
+  '/veld/diensten': typeof VeldDienstenRoute
+  '/veld/meer': typeof VeldMeerRoute
+  '/veld/scanner': typeof VeldScannerRoute
+  '/veld/taken': typeof VeldTakenRoute
+  '/verifieer/$code': typeof VerifieerCodeRoute
+  '/verify/$code': typeof VerifyCodeRoute
+  '/webshop/bedankt': typeof WebshopBedanktRoute
+  '/webshop/winkelmand': typeof WebshopWinkelmandRoute
+  '/word-partner/contact': typeof WordPartnerContactRoute
+  '/$lang': typeof LangIndexRoute
+  '/academy': typeof AcademyIndexRoute
+  '/auth': typeof AuthIndexRoute
+  '/boeking': typeof BoekingIndexRoute
+  '/veld': typeof VeldIndexRoute
+  '/verifieer': typeof VerifieerIndexRoute
+  '/webshop': typeof WebshopIndexRoute
+  '/word-partner': typeof WordPartnerIndexRoute
+  '/$lang/u/$id': typeof LangUIdRoute
+  '/admin/berichten': typeof AuthenticatedAdminBerichtenRoute
+  '/admin/profiel': typeof AuthenticatedAdminProfielRoute
+  '/admin/scan': typeof AuthenticatedAdminScanRoute
+  '/admin/scanner': typeof AuthenticatedAdminScannerRoute
+  '/academie/$slug/certificaat': typeof AcademieSlugCertificaatRoute
+  '/academie/certificaat/$id': typeof AcademieCertificaatIdRoute
+  '/api/admin/co-pilot': typeof ApiAdminCoPilotRouteWithChildren
+  '/api/admin/init-s3-cors': typeof ApiAdminInitS3CorsRoute
+  '/api/admin/presigned-upload': typeof ApiAdminPresignedUploadRoute
+  '/api/admin/upload-s3': typeof ApiAdminUploadS3Route
+  '/api/auth/bluesky': typeof ApiAuthBlueskyRoute
+  '/api/auth/config-check': typeof ApiAuthConfigCheckRoute
+  '/api/auth/github': typeof ApiAuthGithubRoute
+  '/api/auth/google': typeof ApiAuthGoogleRoute
+  '/api/auth/magic-link': typeof ApiAuthMagicLinkRoute
+  '/api/auth/mastodon': typeof ApiAuthMastodonRoute
+  '/api/auth/providers': typeof ApiAuthProvidersRoute
+  '/api/auth/rout': typeof ApiAuthRoutRouteWithChildren
+  '/api/chat/email': typeof ApiChatEmailRoute
+  '/api/checkout/create-session': typeof ApiCheckoutCreateSessionRoute
+  '/api/dev/health': typeof ApiDevHealthRoute
+  '/api/dev/run-migrations': typeof ApiDevRunMigrationsRoute
+  '/api/email/send-transactional': typeof ApiEmailSendTransactionalRoute
+  '/api/email/test-templates': typeof ApiEmailTestTemplatesRoute
+  '/api/google/status': typeof ApiGoogleStatusRoute
+  '/api/google/sync': typeof ApiGoogleSyncRoute
+  '/api/infomaniak/status': typeof ApiInfomaniakStatusRoute
+  '/api/infomaniak/sync': typeof ApiInfomaniakSyncRoute
+  '/api/payments/create-session': typeof ApiPaymentsCreateSessionRoute
+  '/api/payments/order-session': typeof ApiPaymentsOrderSessionRoute
+  '/api/public/health': typeof ApiPublicHealthRoute
+  '/api/public/opening-status': typeof ApiPublicOpeningStatusRoute
+  '/api/public/verify-certificate': typeof ApiPublicVerifyCertificateRoute
+  '/api/sponsorship/create-session': typeof ApiSponsorshipCreateSessionRoute
+  '/api/sponsorship/status': typeof ApiSponsorshipStatusRoute
+  '/api/storage/delete': typeof ApiStorageDeleteRoute
+  '/api/storage/upload-url': typeof ApiStorageUploadUrlRoute
+  '/api/stripe/create-payment-intent': typeof ApiStripeCreatePaymentIntentRoute
+  '/api/v1/animals': typeof ApiV1AnimalsRoute
+  '/api/v1/bookings': typeof ApiV1BookingsRouteWithChildren
+  '/api/v1/products': typeof ApiV1ProductsRouteWithChildren
+  '/api/webhooks/rout': typeof ApiWebhooksRoutRoute
+  '/api/webhooks/stripe': typeof ApiWebhooksStripeRoute
+  '/auth/callback/rout': typeof AuthCallbackRoutRoute
+  '/portaal/$lang/$slug': typeof AuthenticatedPortaalLangSlugRoute
+  '/api/admin/co-pilot/undo': typeof ApiAdminCoPilotUndoRoute
+  '/api/auth/callback/bluesky': typeof ApiAuthCallbackBlueskyRoute
+  '/api/auth/callback/github': typeof ApiAuthCallbackGithubRoute
+  '/api/auth/callback/google': typeof ApiAuthCallbackGoogleRoute
+  '/api/auth/callback/mastodon': typeof ApiAuthCallbackMastodonRoute
+  '/api/auth/login/$provider': typeof ApiAuthLoginProviderRoute
+  '/api/auth/rout/logout': typeof ApiAuthRoutLogoutRoute
+  '/api/media/scaleway/delete': typeof ApiMediaScalewayDeleteRoute
+  '/api/media/scaleway/list': typeof ApiMediaScalewayListRoute
+  '/api/media/scaleway/similar': typeof ApiMediaScalewaySimilarRoute
+  '/api/media/scaleway/upload': typeof ApiMediaScalewayUploadRoute
+  '/api/public/atproto/client-metadata.json': typeof ApiPublicAtprotoClientMetadataDotjsonRoute
+  '/api/public/calendar/feed': typeof ApiPublicCalendarFeedRoute
+  '/api/public/media/$id': typeof ApiPublicMediaIdRoute
+  '/api/public/pickup/pass': typeof ApiPublicPickupPassRoute
+  '/api/public/pickup/qr': typeof ApiPublicPickupQrRoute
+  '/api/public/stripe/webhook': typeof ApiPublicStripeWebhookRoute
+  '/api/public/telegram/webhook': typeof ApiPublicTelegramWebhookRoute
+  '/api/public/webhooks/stripe': typeof ApiPublicWebhooksStripeRoute
+  '/api/sponsorship/certificate/$certificateId': typeof ApiSponsorshipCertificateCertificateIdRoute
+  '/api/v1/maxim/announcements': typeof ApiV1MaximAnnouncementsRoute
+  '/api/v1/products/$id': typeof ApiV1ProductsIdRoute
+  '/api/wallet/google/pass': typeof ApiWalletGooglePassRoute
+  '/api/v1/bookings/$id/checkin': typeof ApiV1BookingsIdCheckinRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/$lang': typeof LangRouteWithChildren
+  '/account': typeof AccountRoute
+  '/admin': typeof AdminRoute
+  '/adoptie': typeof AdoptieRoute
+  '/auth': typeof AuthRouteWithChildren
+  '/beveiliging': typeof BeveiligingRoute
+  '/bevestigen': typeof BevestigenRoute
+  '/contact': typeof ContactRoute
+  '/cookies': typeof CookiesRoute
+  '/e-mailadres-bevestigen': typeof EMailadresBevestigenRoute
+  '/fairtech': typeof FairtechRoute
+  '/field': typeof FieldRoute
+  '/impressum': typeof ImpressumRoute
+  '/inloglink': typeof InloglinkRoute
+  '/klantenkaart': typeof KlantenkaartRoute
+  '/login': typeof LoginRoute
+  '/mijn-hoefjes': typeof MijnHoefjesRoute
+  '/partners': typeof PartnersRoute
+  '/pers': typeof PersRoute
+  '/press': typeof PressRoute
+  '/privacy': typeof PrivacyRoute
+  '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/social': typeof SocialRoute
+  '/status': typeof StatusRoute
+  '/stempel-varianten': typeof StempelVariantenRoute
+  '/steun': typeof SteunRoute
+  '/vakantiestages': typeof VakantiestagesRoute
+  '/veld': typeof VeldRouteWithChildren
+  '/verhuur': typeof VerhuurRoute
+  '/voorwaarden': typeof VoorwaardenRoute
+  '/wachtwoord-herstellen': typeof WachtwoordHerstellenRoute
+  '/wachtwoord-vergeten': typeof WachtwoordVergetenRoute
+  '/wie-zijn-we': typeof WieZijnWeRoute
+  '/$lang/$': typeof LangSplatRoute
+  '/_authenticated/aanvragen': typeof AuthenticatedAanvragenRoute
+  '/_authenticated/diensten': typeof AuthenticatedDienstenRoute
+  '/_authenticated/foutmeldingen': typeof AuthenticatedFoutmeldingenRoute
+  '/_authenticated/kalender': typeof AuthenticatedKalenderRoute
+  '/_authenticated/team': typeof AuthenticatedTeamRoute
+  '/_authenticated/vandaag': typeof AuthenticatedVandaagRoute
+  '/academy/$slug': typeof AcademySlugRoute
+  '/academy/verify': typeof AcademyVerifyRoute
+  '/api/chat': typeof ApiChatRouteWithChildren
+  '/api/contact': typeof ApiContactRoute
+  '/api/create-payment-intent': typeof ApiCreatePaymentIntentRoute
+  '/api/generate-google-wallet-pass': typeof ApiGenerateGoogleWalletPassRoute
+  '/api/route-map': typeof ApiRouteMapRoute
+  '/api/speak': typeof ApiSpeakRoute
+  '/api/stripe-config': typeof ApiStripeConfigRoute
+  '/api/transcribe': typeof ApiTranscribeRoute
+  '/api/transit': typeof ApiTransitRoute
+  '/api/villo': typeof ApiVilloRoute
+  '/api/weather': typeof ApiWeatherRoute
+  '/auth/reset-password': typeof AuthResetPasswordRoute
+  '/betrokkenheid/$onderwerp': typeof BetrokkenheidOnderwerpRoute
+  '/bezoekers/$doelgroep': typeof BezoekersDoelgroepRoute
+  '/boeking/bevestiging': typeof BoekingBevestigingRoute
+  '/certificaat/$id': typeof CertificaatIdRoute
+  '/informatie/$onderwerp': typeof InformatieOnderwerpRoute
+  '/product/$slug': typeof ProductSlugRoute
+  '/qr/$animalId': typeof QrAnimalIdRoute
+  '/veld/aanvragen': typeof VeldAanvragenRoute
+  '/veld/diensten': typeof VeldDienstenRoute
+  '/veld/meer': typeof VeldMeerRoute
+  '/veld/scanner': typeof VeldScannerRoute
+  '/veld/taken': typeof VeldTakenRoute
+  '/verifieer/$code': typeof VerifieerCodeRoute
+  '/verify/$code': typeof VerifyCodeRoute
+  '/webshop/bedankt': typeof WebshopBedanktRoute
+  '/webshop/winkelmand': typeof WebshopWinkelmandRoute
+  '/word-partner/contact': typeof WordPartnerContactRoute
+  '/$lang/': typeof LangIndexRoute
+  '/academy/': typeof AcademyIndexRoute
+  '/auth/': typeof AuthIndexRoute
+  '/boeking/': typeof BoekingIndexRoute
+  '/veld/': typeof VeldIndexRoute
+  '/verifieer/': typeof VerifieerIndexRoute
+  '/webshop/': typeof WebshopIndexRoute
+  '/word-partner/': typeof WordPartnerIndexRoute
+  '/$lang/u/$id': typeof LangUIdRoute
+  '/_authenticated/admin/berichten': typeof AuthenticatedAdminBerichtenRoute
+  '/_authenticated/admin/profiel': typeof AuthenticatedAdminProfielRoute
+  '/_authenticated/admin/scan': typeof AuthenticatedAdminScanRoute
+  '/_authenticated/admin/scanner': typeof AuthenticatedAdminScannerRoute
+  '/academie/$slug/certificaat': typeof AcademieSlugCertificaatRoute
+  '/academie/certificaat/$id': typeof AcademieCertificaatIdRoute
+  '/api/admin/co-pilot': typeof ApiAdminCoPilotRouteWithChildren
+  '/api/admin/init-s3-cors': typeof ApiAdminInitS3CorsRoute
+  '/api/admin/presigned-upload': typeof ApiAdminPresignedUploadRoute
+  '/api/admin/upload-s3': typeof ApiAdminUploadS3Route
+  '/api/auth/bluesky': typeof ApiAuthBlueskyRoute
+  '/api/auth/config-check': typeof ApiAuthConfigCheckRoute
+  '/api/auth/github': typeof ApiAuthGithubRoute
+  '/api/auth/google': typeof ApiAuthGoogleRoute
+  '/api/auth/magic-link': typeof ApiAuthMagicLinkRoute
+  '/api/auth/mastodon': typeof ApiAuthMastodonRoute
+  '/api/auth/providers': typeof ApiAuthProvidersRoute
+  '/api/auth/rout': typeof ApiAuthRoutRouteWithChildren
+  '/api/chat/email': typeof ApiChatEmailRoute
+  '/api/checkout/create-session': typeof ApiCheckoutCreateSessionRoute
+  '/api/dev/health': typeof ApiDevHealthRoute
+  '/api/dev/run-migrations': typeof ApiDevRunMigrationsRoute
+  '/api/email/send-transactional': typeof ApiEmailSendTransactionalRoute
+  '/api/email/test-templates': typeof ApiEmailTestTemplatesRoute
+  '/api/google/status': typeof ApiGoogleStatusRoute
+  '/api/google/sync': typeof ApiGoogleSyncRoute
+  '/api/infomaniak/status': typeof ApiInfomaniakStatusRoute
+  '/api/infomaniak/sync': typeof ApiInfomaniakSyncRoute
+  '/api/payments/create-session': typeof ApiPaymentsCreateSessionRoute
+  '/api/payments/order-session': typeof ApiPaymentsOrderSessionRoute
+  '/api/public/health': typeof ApiPublicHealthRoute
+  '/api/public/opening-status': typeof ApiPublicOpeningStatusRoute
+  '/api/public/verify-certificate': typeof ApiPublicVerifyCertificateRoute
+  '/api/sponsorship/create-session': typeof ApiSponsorshipCreateSessionRoute
+  '/api/sponsorship/status': typeof ApiSponsorshipStatusRoute
+  '/api/storage/delete': typeof ApiStorageDeleteRoute
+  '/api/storage/upload-url': typeof ApiStorageUploadUrlRoute
+  '/api/stripe/create-payment-intent': typeof ApiStripeCreatePaymentIntentRoute
+  '/api/v1/animals': typeof ApiV1AnimalsRoute
+  '/api/v1/bookings': typeof ApiV1BookingsRouteWithChildren
+  '/api/v1/products': typeof ApiV1ProductsRouteWithChildren
+  '/api/webhooks/rout': typeof ApiWebhooksRoutRoute
+  '/api/webhooks/stripe': typeof ApiWebhooksStripeRoute
+  '/auth_/callback/rout': typeof AuthCallbackRoutRoute
+  '/_authenticated/portaal/$lang/$slug': typeof AuthenticatedPortaalLangSlugRoute
+  '/api/admin/co-pilot/undo': typeof ApiAdminCoPilotUndoRoute
+  '/api/auth/callback/bluesky': typeof ApiAuthCallbackBlueskyRoute
+  '/api/auth/callback/github': typeof ApiAuthCallbackGithubRoute
+  '/api/auth/callback/google': typeof ApiAuthCallbackGoogleRoute
+  '/api/auth/callback/mastodon': typeof ApiAuthCallbackMastodonRoute
+  '/api/auth/login/$provider': typeof ApiAuthLoginProviderRoute
+  '/api/auth/rout/logout': typeof ApiAuthRoutLogoutRoute
+  '/api/media/scaleway/delete': typeof ApiMediaScalewayDeleteRoute
+  '/api/media/scaleway/list': typeof ApiMediaScalewayListRoute
+  '/api/media/scaleway/similar': typeof ApiMediaScalewaySimilarRoute
+  '/api/media/scaleway/upload': typeof ApiMediaScalewayUploadRoute
+  '/api/public/atproto/client-metadata.json': typeof ApiPublicAtprotoClientMetadataDotjsonRoute
+  '/api/public/calendar/feed': typeof ApiPublicCalendarFeedRoute
+  '/api/public/media/$id': typeof ApiPublicMediaIdRoute
+  '/api/public/pickup/pass': typeof ApiPublicPickupPassRoute
+  '/api/public/pickup/qr': typeof ApiPublicPickupQrRoute
+  '/api/public/stripe/webhook': typeof ApiPublicStripeWebhookRoute
+  '/api/public/telegram/webhook': typeof ApiPublicTelegramWebhookRoute
+  '/api/public/webhooks/stripe': typeof ApiPublicWebhooksStripeRoute
+  '/api/sponsorship/certificate/$certificateId': typeof ApiSponsorshipCertificateCertificateIdRoute
+  '/api/v1/maxim/announcements': typeof ApiV1MaximAnnouncementsRoute
+  '/api/v1/products/$id': typeof ApiV1ProductsIdRoute
+  '/api/wallet/google/pass': typeof ApiWalletGooglePassRoute
+  '/api/v1/bookings/$id/checkin': typeof ApiV1BookingsIdCheckinRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/$lang'
+    | '/account'
+    | '/admin'
+    | '/adoptie'
+    | '/auth'
+    | '/beveiliging'
+    | '/bevestigen'
+    | '/contact'
+    | '/cookies'
+    | '/e-mailadres-bevestigen'
+    | '/fairtech'
+    | '/field'
+    | '/impressum'
+    | '/inloglink'
+    | '/klantenkaart'
+    | '/login'
+    | '/mijn-hoefjes'
+    | '/partners'
+    | '/pers'
+    | '/press'
+    | '/privacy'
+    | '/register'
+    | '/reset-password'
+    | '/sitemap.xml'
+    | '/social'
+    | '/status'
+    | '/stempel-varianten'
+    | '/steun'
+    | '/vakantiestages'
+    | '/veld'
+    | '/verhuur'
+    | '/voorwaarden'
+    | '/wachtwoord-herstellen'
+    | '/wachtwoord-vergeten'
+    | '/wie-zijn-we'
+    | '/$lang/$'
+    | '/aanvragen'
+    | '/diensten'
+    | '/foutmeldingen'
+    | '/kalender'
+    | '/team'
+    | '/vandaag'
+    | '/academy/$slug'
+    | '/academy/verify'
+    | '/api/chat'
+    | '/api/contact'
+    | '/api/create-payment-intent'
+    | '/api/generate-google-wallet-pass'
+    | '/api/route-map'
+    | '/api/speak'
+    | '/api/stripe-config'
+    | '/api/transcribe'
+    | '/api/transit'
+    | '/api/villo'
+    | '/api/weather'
+    | '/auth/reset-password'
+    | '/betrokkenheid/$onderwerp'
+    | '/bezoekers/$doelgroep'
+    | '/boeking/bevestiging'
+    | '/certificaat/$id'
+    | '/informatie/$onderwerp'
+    | '/product/$slug'
+    | '/qr/$animalId'
+    | '/veld/aanvragen'
+    | '/veld/diensten'
+    | '/veld/meer'
+    | '/veld/scanner'
+    | '/veld/taken'
+    | '/verifieer/$code'
+    | '/verify/$code'
+    | '/webshop/bedankt'
+    | '/webshop/winkelmand'
+    | '/word-partner/contact'
+    | '/$lang/'
+    | '/academy/'
+    | '/auth/'
+    | '/boeking/'
+    | '/veld/'
+    | '/verifieer/'
+    | '/webshop/'
+    | '/word-partner/'
+    | '/$lang/u/$id'
+    | '/admin/berichten'
+    | '/admin/profiel'
+    | '/admin/scan'
+    | '/admin/scanner'
+    | '/academie/$slug/certificaat'
+    | '/academie/certificaat/$id'
+    | '/api/admin/co-pilot'
+    | '/api/admin/init-s3-cors'
+    | '/api/admin/presigned-upload'
+    | '/api/admin/upload-s3'
+    | '/api/auth/bluesky'
+    | '/api/auth/config-check'
+    | '/api/auth/github'
+    | '/api/auth/google'
+    | '/api/auth/magic-link'
+    | '/api/auth/mastodon'
+    | '/api/auth/providers'
+    | '/api/auth/rout'
+    | '/api/chat/email'
+    | '/api/checkout/create-session'
+    | '/api/dev/health'
+    | '/api/dev/run-migrations'
+    | '/api/email/send-transactional'
+    | '/api/email/test-templates'
+    | '/api/google/status'
+    | '/api/google/sync'
+    | '/api/infomaniak/status'
+    | '/api/infomaniak/sync'
+    | '/api/payments/create-session'
+    | '/api/payments/order-session'
+    | '/api/public/health'
+    | '/api/public/opening-status'
+    | '/api/public/verify-certificate'
+    | '/api/sponsorship/create-session'
+    | '/api/sponsorship/status'
+    | '/api/storage/delete'
+    | '/api/storage/upload-url'
+    | '/api/stripe/create-payment-intent'
+    | '/api/v1/animals'
+    | '/api/v1/bookings'
+    | '/api/v1/products'
+    | '/api/webhooks/rout'
+    | '/api/webhooks/stripe'
+    | '/auth/callback/rout'
+    | '/portaal/$lang/$slug'
+    | '/api/admin/co-pilot/undo'
+    | '/api/auth/callback/bluesky'
+    | '/api/auth/callback/github'
+    | '/api/auth/callback/google'
+    | '/api/auth/callback/mastodon'
+    | '/api/auth/login/$provider'
+    | '/api/auth/rout/logout'
+    | '/api/media/scaleway/delete'
+    | '/api/media/scaleway/list'
+    | '/api/media/scaleway/similar'
+    | '/api/media/scaleway/upload'
+    | '/api/public/atproto/client-metadata.json'
+    | '/api/public/calendar/feed'
+    | '/api/public/media/$id'
+    | '/api/public/pickup/pass'
+    | '/api/public/pickup/qr'
+    | '/api/public/stripe/webhook'
+    | '/api/public/telegram/webhook'
+    | '/api/public/webhooks/stripe'
+    | '/api/sponsorship/certificate/$certificateId'
+    | '/api/v1/maxim/announcements'
+    | '/api/v1/products/$id'
+    | '/api/wallet/google/pass'
+    | '/api/v1/bookings/$id/checkin'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/account'
+    | '/admin'
+    | '/adoptie'
+    | '/beveiliging'
+    | '/bevestigen'
+    | '/contact'
+    | '/cookies'
+    | '/e-mailadres-bevestigen'
+    | '/fairtech'
+    | '/field'
+    | '/impressum'
+    | '/inloglink'
+    | '/klantenkaart'
+    | '/login'
+    | '/mijn-hoefjes'
+    | '/partners'
+    | '/pers'
+    | '/press'
+    | '/privacy'
+    | '/register'
+    | '/reset-password'
+    | '/sitemap.xml'
+    | '/social'
+    | '/status'
+    | '/stempel-varianten'
+    | '/steun'
+    | '/vakantiestages'
+    | '/verhuur'
+    | '/voorwaarden'
+    | '/wachtwoord-herstellen'
+    | '/wachtwoord-vergeten'
+    | '/wie-zijn-we'
+    | '/$lang/$'
+    | '/aanvragen'
+    | '/diensten'
+    | '/foutmeldingen'
+    | '/kalender'
+    | '/team'
+    | '/vandaag'
+    | '/academy/$slug'
+    | '/academy/verify'
+    | '/api/chat'
+    | '/api/contact'
+    | '/api/create-payment-intent'
+    | '/api/generate-google-wallet-pass'
+    | '/api/route-map'
+    | '/api/speak'
+    | '/api/stripe-config'
+    | '/api/transcribe'
+    | '/api/transit'
+    | '/api/villo'
+    | '/api/weather'
+    | '/auth/reset-password'
+    | '/betrokkenheid/$onderwerp'
+    | '/bezoekers/$doelgroep'
+    | '/boeking/bevestiging'
+    | '/certificaat/$id'
+    | '/informatie/$onderwerp'
+    | '/product/$slug'
+    | '/qr/$animalId'
+    | '/veld/aanvragen'
+    | '/veld/diensten'
+    | '/veld/meer'
+    | '/veld/scanner'
+    | '/veld/taken'
+    | '/verifieer/$code'
+    | '/verify/$code'
+    | '/webshop/bedankt'
+    | '/webshop/winkelmand'
+    | '/word-partner/contact'
+    | '/$lang'
+    | '/academy'
+    | '/auth'
+    | '/boeking'
+    | '/veld'
+    | '/verifieer'
+    | '/webshop'
+    | '/word-partner'
+    | '/$lang/u/$id'
+    | '/admin/berichten'
+    | '/admin/profiel'
+    | '/admin/scan'
+    | '/admin/scanner'
+    | '/academie/$slug/certificaat'
+    | '/academie/certificaat/$id'
+    | '/api/admin/co-pilot'
+    | '/api/admin/init-s3-cors'
+    | '/api/admin/presigned-upload'
+    | '/api/admin/upload-s3'
+    | '/api/auth/bluesky'
+    | '/api/auth/config-check'
+    | '/api/auth/github'
+    | '/api/auth/google'
+    | '/api/auth/magic-link'
+    | '/api/auth/mastodon'
+    | '/api/auth/providers'
+    | '/api/auth/rout'
+    | '/api/chat/email'
+    | '/api/checkout/create-session'
+    | '/api/dev/health'
+    | '/api/dev/run-migrations'
+    | '/api/email/send-transactional'
+    | '/api/email/test-templates'
+    | '/api/google/status'
+    | '/api/google/sync'
+    | '/api/infomaniak/status'
+    | '/api/infomaniak/sync'
+    | '/api/payments/create-session'
+    | '/api/payments/order-session'
+    | '/api/public/health'
+    | '/api/public/opening-status'
+    | '/api/public/verify-certificate'
+    | '/api/sponsorship/create-session'
+    | '/api/sponsorship/status'
+    | '/api/storage/delete'
+    | '/api/storage/upload-url'
+    | '/api/stripe/create-payment-intent'
+    | '/api/v1/animals'
+    | '/api/v1/bookings'
+    | '/api/v1/products'
+    | '/api/webhooks/rout'
+    | '/api/webhooks/stripe'
+    | '/auth/callback/rout'
+    | '/portaal/$lang/$slug'
+    | '/api/admin/co-pilot/undo'
+    | '/api/auth/callback/bluesky'
+    | '/api/auth/callback/github'
+    | '/api/auth/callback/google'
+    | '/api/auth/callback/mastodon'
+    | '/api/auth/login/$provider'
+    | '/api/auth/rout/logout'
+    | '/api/media/scaleway/delete'
+    | '/api/media/scaleway/list'
+    | '/api/media/scaleway/similar'
+    | '/api/media/scaleway/upload'
+    | '/api/public/atproto/client-metadata.json'
+    | '/api/public/calendar/feed'
+    | '/api/public/media/$id'
+    | '/api/public/pickup/pass'
+    | '/api/public/pickup/qr'
+    | '/api/public/stripe/webhook'
+    | '/api/public/telegram/webhook'
+    | '/api/public/webhooks/stripe'
+    | '/api/sponsorship/certificate/$certificateId'
+    | '/api/v1/maxim/announcements'
+    | '/api/v1/products/$id'
+    | '/api/wallet/google/pass'
+    | '/api/v1/bookings/$id/checkin'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/$lang'
+    | '/account'
+    | '/admin'
+    | '/adoptie'
+    | '/auth'
+    | '/beveiliging'
+    | '/bevestigen'
+    | '/contact'
+    | '/cookies'
+    | '/e-mailadres-bevestigen'
+    | '/fairtech'
+    | '/field'
+    | '/impressum'
+    | '/inloglink'
+    | '/klantenkaart'
+    | '/login'
+    | '/mijn-hoefjes'
+    | '/partners'
+    | '/pers'
+    | '/press'
+    | '/privacy'
+    | '/register'
+    | '/reset-password'
+    | '/sitemap.xml'
+    | '/social'
+    | '/status'
+    | '/stempel-varianten'
+    | '/steun'
+    | '/vakantiestages'
+    | '/veld'
+    | '/verhuur'
+    | '/voorwaarden'
+    | '/wachtwoord-herstellen'
+    | '/wachtwoord-vergeten'
+    | '/wie-zijn-we'
+    | '/$lang/$'
+    | '/_authenticated/aanvragen'
+    | '/_authenticated/diensten'
+    | '/_authenticated/foutmeldingen'
+    | '/_authenticated/kalender'
+    | '/_authenticated/team'
+    | '/_authenticated/vandaag'
+    | '/academy/$slug'
+    | '/academy/verify'
+    | '/api/chat'
+    | '/api/contact'
+    | '/api/create-payment-intent'
+    | '/api/generate-google-wallet-pass'
+    | '/api/route-map'
+    | '/api/speak'
+    | '/api/stripe-config'
+    | '/api/transcribe'
+    | '/api/transit'
+    | '/api/villo'
+    | '/api/weather'
+    | '/auth/reset-password'
+    | '/betrokkenheid/$onderwerp'
+    | '/bezoekers/$doelgroep'
+    | '/boeking/bevestiging'
+    | '/certificaat/$id'
+    | '/informatie/$onderwerp'
+    | '/product/$slug'
+    | '/qr/$animalId'
+    | '/veld/aanvragen'
+    | '/veld/diensten'
+    | '/veld/meer'
+    | '/veld/scanner'
+    | '/veld/taken'
+    | '/verifieer/$code'
+    | '/verify/$code'
+    | '/webshop/bedankt'
+    | '/webshop/winkelmand'
+    | '/word-partner/contact'
+    | '/$lang/'
+    | '/academy/'
+    | '/auth/'
+    | '/boeking/'
+    | '/veld/'
+    | '/verifieer/'
+    | '/webshop/'
+    | '/word-partner/'
+    | '/$lang/u/$id'
+    | '/_authenticated/admin/berichten'
+    | '/_authenticated/admin/profiel'
+    | '/_authenticated/admin/scan'
+    | '/_authenticated/admin/scanner'
+    | '/academie/$slug/certificaat'
+    | '/academie/certificaat/$id'
+    | '/api/admin/co-pilot'
+    | '/api/admin/init-s3-cors'
+    | '/api/admin/presigned-upload'
+    | '/api/admin/upload-s3'
+    | '/api/auth/bluesky'
+    | '/api/auth/config-check'
+    | '/api/auth/github'
+    | '/api/auth/google'
+    | '/api/auth/magic-link'
+    | '/api/auth/mastodon'
+    | '/api/auth/providers'
+    | '/api/auth/rout'
+    | '/api/chat/email'
+    | '/api/checkout/create-session'
+    | '/api/dev/health'
+    | '/api/dev/run-migrations'
+    | '/api/email/send-transactional'
+    | '/api/email/test-templates'
+    | '/api/google/status'
+    | '/api/google/sync'
+    | '/api/infomaniak/status'
+    | '/api/infomaniak/sync'
+    | '/api/payments/create-session'
+    | '/api/payments/order-session'
+    | '/api/public/health'
+    | '/api/public/opening-status'
+    | '/api/public/verify-certificate'
+    | '/api/sponsorship/create-session'
+    | '/api/sponsorship/status'
+    | '/api/storage/delete'
+    | '/api/storage/upload-url'
+    | '/api/stripe/create-payment-intent'
+    | '/api/v1/animals'
+    | '/api/v1/bookings'
+    | '/api/v1/products'
+    | '/api/webhooks/rout'
+    | '/api/webhooks/stripe'
+    | '/auth_/callback/rout'
+    | '/_authenticated/portaal/$lang/$slug'
+    | '/api/admin/co-pilot/undo'
+    | '/api/auth/callback/bluesky'
+    | '/api/auth/callback/github'
+    | '/api/auth/callback/google'
+    | '/api/auth/callback/mastodon'
+    | '/api/auth/login/$provider'
+    | '/api/auth/rout/logout'
+    | '/api/media/scaleway/delete'
+    | '/api/media/scaleway/list'
+    | '/api/media/scaleway/similar'
+    | '/api/media/scaleway/upload'
+    | '/api/public/atproto/client-metadata.json'
+    | '/api/public/calendar/feed'
+    | '/api/public/media/$id'
+    | '/api/public/pickup/pass'
+    | '/api/public/pickup/qr'
+    | '/api/public/stripe/webhook'
+    | '/api/public/telegram/webhook'
+    | '/api/public/webhooks/stripe'
+    | '/api/sponsorship/certificate/$certificateId'
+    | '/api/v1/maxim/announcements'
+    | '/api/v1/products/$id'
+    | '/api/wallet/google/pass'
+    | '/api/v1/bookings/$id/checkin'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  LangRoute: typeof LangRouteWithChildren
+  AccountRoute: typeof AccountRoute
+  AdminRoute: typeof AdminRoute
+  AdoptieRoute: typeof AdoptieRoute
+  AuthRoute: typeof AuthRouteWithChildren
+  BeveiligingRoute: typeof BeveiligingRoute
+  BevestigenRoute: typeof BevestigenRoute
+  ContactRoute: typeof ContactRoute
+  CookiesRoute: typeof CookiesRoute
+  EMailadresBevestigenRoute: typeof EMailadresBevestigenRoute
+  FairtechRoute: typeof FairtechRoute
+  FieldRoute: typeof FieldRoute
+  ImpressumRoute: typeof ImpressumRoute
+  InloglinkRoute: typeof InloglinkRoute
+  KlantenkaartRoute: typeof KlantenkaartRoute
+  LoginRoute: typeof LoginRoute
+  MijnHoefjesRoute: typeof MijnHoefjesRoute
+  PartnersRoute: typeof PartnersRoute
+  PersRoute: typeof PersRoute
+  PressRoute: typeof PressRoute
+  PrivacyRoute: typeof PrivacyRoute
+  RegisterRoute: typeof RegisterRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SocialRoute: typeof SocialRoute
+  StatusRoute: typeof StatusRoute
+  StempelVariantenRoute: typeof StempelVariantenRoute
+  SteunRoute: typeof SteunRoute
+  VakantiestagesRoute: typeof VakantiestagesRoute
+  VeldRoute: typeof VeldRouteWithChildren
+  VerhuurRoute: typeof VerhuurRoute
+  VoorwaardenRoute: typeof VoorwaardenRoute
+  WachtwoordHerstellenRoute: typeof WachtwoordHerstellenRoute
+  WachtwoordVergetenRoute: typeof WachtwoordVergetenRoute
+  WieZijnWeRoute: typeof WieZijnWeRoute
+  AcademySlugRoute: typeof AcademySlugRoute
+  AcademyVerifyRoute: typeof AcademyVerifyRoute
+  ApiChatRoute: typeof ApiChatRouteWithChildren
+  ApiContactRoute: typeof ApiContactRoute
+  ApiCreatePaymentIntentRoute: typeof ApiCreatePaymentIntentRoute
+  ApiGenerateGoogleWalletPassRoute: typeof ApiGenerateGoogleWalletPassRoute
+  ApiRouteMapRoute: typeof ApiRouteMapRoute
+  ApiSpeakRoute: typeof ApiSpeakRoute
+  ApiStripeConfigRoute: typeof ApiStripeConfigRoute
+  ApiTranscribeRoute: typeof ApiTranscribeRoute
+  ApiTransitRoute: typeof ApiTransitRoute
+  ApiVilloRoute: typeof ApiVilloRoute
+  ApiWeatherRoute: typeof ApiWeatherRoute
+  BetrokkenheidOnderwerpRoute: typeof BetrokkenheidOnderwerpRoute
+  BezoekersDoelgroepRoute: typeof BezoekersDoelgroepRoute
+  BoekingBevestigingRoute: typeof BoekingBevestigingRoute
+  CertificaatIdRoute: typeof CertificaatIdRoute
+  InformatieOnderwerpRoute: typeof InformatieOnderwerpRoute
+  ProductSlugRoute: typeof ProductSlugRoute
+  QrAnimalIdRoute: typeof QrAnimalIdRoute
+  VerifieerCodeRoute: typeof VerifieerCodeRoute
+  VerifyCodeRoute: typeof VerifyCodeRoute
+  WebshopBedanktRoute: typeof WebshopBedanktRoute
+  WebshopWinkelmandRoute: typeof WebshopWinkelmandRoute
+  WordPartnerContactRoute: typeof WordPartnerContactRoute
+  AcademyIndexRoute: typeof AcademyIndexRoute
+  BoekingIndexRoute: typeof BoekingIndexRoute
+  VerifieerIndexRoute: typeof VerifieerIndexRoute
+  WebshopIndexRoute: typeof WebshopIndexRoute
+  WordPartnerIndexRoute: typeof WordPartnerIndexRoute
+  AcademieSlugCertificaatRoute: typeof AcademieSlugCertificaatRoute
+  AcademieCertificaatIdRoute: typeof AcademieCertificaatIdRoute
+  ApiAdminCoPilotRoute: typeof ApiAdminCoPilotRouteWithChildren
+  ApiAdminInitS3CorsRoute: typeof ApiAdminInitS3CorsRoute
+  ApiAdminPresignedUploadRoute: typeof ApiAdminPresignedUploadRoute
+  ApiAdminUploadS3Route: typeof ApiAdminUploadS3Route
+  ApiAuthBlueskyRoute: typeof ApiAuthBlueskyRoute
+  ApiAuthConfigCheckRoute: typeof ApiAuthConfigCheckRoute
+  ApiAuthGithubRoute: typeof ApiAuthGithubRoute
+  ApiAuthGoogleRoute: typeof ApiAuthGoogleRoute
+  ApiAuthMagicLinkRoute: typeof ApiAuthMagicLinkRoute
+  ApiAuthMastodonRoute: typeof ApiAuthMastodonRoute
+  ApiAuthProvidersRoute: typeof ApiAuthProvidersRoute
+  ApiAuthRoutRoute: typeof ApiAuthRoutRouteWithChildren
+  ApiCheckoutCreateSessionRoute: typeof ApiCheckoutCreateSessionRoute
+  ApiDevHealthRoute: typeof ApiDevHealthRoute
+  ApiDevRunMigrationsRoute: typeof ApiDevRunMigrationsRoute
+  ApiEmailSendTransactionalRoute: typeof ApiEmailSendTransactionalRoute
+  ApiEmailTestTemplatesRoute: typeof ApiEmailTestTemplatesRoute
+  ApiGoogleStatusRoute: typeof ApiGoogleStatusRoute
+  ApiGoogleSyncRoute: typeof ApiGoogleSyncRoute
+  ApiInfomaniakStatusRoute: typeof ApiInfomaniakStatusRoute
+  ApiInfomaniakSyncRoute: typeof ApiInfomaniakSyncRoute
+  ApiPaymentsCreateSessionRoute: typeof ApiPaymentsCreateSessionRoute
+  ApiPaymentsOrderSessionRoute: typeof ApiPaymentsOrderSessionRoute
+  ApiPublicHealthRoute: typeof ApiPublicHealthRoute
+  ApiPublicOpeningStatusRoute: typeof ApiPublicOpeningStatusRoute
+  ApiPublicVerifyCertificateRoute: typeof ApiPublicVerifyCertificateRoute
+  ApiSponsorshipCreateSessionRoute: typeof ApiSponsorshipCreateSessionRoute
+  ApiSponsorshipStatusRoute: typeof ApiSponsorshipStatusRoute
+  ApiStorageDeleteRoute: typeof ApiStorageDeleteRoute
+  ApiStorageUploadUrlRoute: typeof ApiStorageUploadUrlRoute
+  ApiStripeCreatePaymentIntentRoute: typeof ApiStripeCreatePaymentIntentRoute
+  ApiV1AnimalsRoute: typeof ApiV1AnimalsRoute
+  ApiV1BookingsRoute: typeof ApiV1BookingsRouteWithChildren
+  ApiV1ProductsRoute: typeof ApiV1ProductsRouteWithChildren
+  ApiWebhooksRoutRoute: typeof ApiWebhooksRoutRoute
+  ApiWebhooksStripeRoute: typeof ApiWebhooksStripeRoute
+  AuthCallbackRoutRoute: typeof AuthCallbackRoutRoute
+  ApiAuthCallbackBlueskyRoute: typeof ApiAuthCallbackBlueskyRoute
+  ApiAuthCallbackGithubRoute: typeof ApiAuthCallbackGithubRoute
+  ApiAuthCallbackGoogleRoute: typeof ApiAuthCallbackGoogleRoute
+  ApiAuthCallbackMastodonRoute: typeof ApiAuthCallbackMastodonRoute
+  ApiAuthLoginProviderRoute: typeof ApiAuthLoginProviderRoute
+  ApiMediaScalewayDeleteRoute: typeof ApiMediaScalewayDeleteRoute
+  ApiMediaScalewayListRoute: typeof ApiMediaScalewayListRoute
+  ApiMediaScalewaySimilarRoute: typeof ApiMediaScalewaySimilarRoute
+  ApiMediaScalewayUploadRoute: typeof ApiMediaScalewayUploadRoute
+  ApiPublicAtprotoClientMetadataDotjsonRoute: typeof ApiPublicAtprotoClientMetadataDotjsonRoute
+  ApiPublicCalendarFeedRoute: typeof ApiPublicCalendarFeedRoute
+  ApiPublicMediaIdRoute: typeof ApiPublicMediaIdRoute
+  ApiPublicPickupPassRoute: typeof ApiPublicPickupPassRoute
+  ApiPublicPickupQrRoute: typeof ApiPublicPickupQrRoute
+  ApiPublicStripeWebhookRoute: typeof ApiPublicStripeWebhookRoute
+  ApiPublicTelegramWebhookRoute: typeof ApiPublicTelegramWebhookRoute
+  ApiPublicWebhooksStripeRoute: typeof ApiPublicWebhooksStripeRoute
+  ApiSponsorshipCertificateCertificateIdRoute: typeof ApiSponsorshipCertificateCertificateIdRoute
+  ApiV1MaximAnnouncementsRoute: typeof ApiV1MaximAnnouncementsRoute
+  ApiWalletGooglePassRoute: typeof ApiWalletGooglePassRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +2005,1338 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$lang': {
+      id: '/$lang'
+      path: '/$lang'
+      fullPath: '/$lang'
+      preLoaderRoute: typeof LangRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account': {
+      id: '/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/adoptie': {
+      id: '/adoptie'
+      path: '/adoptie'
+      fullPath: '/adoptie'
+      preLoaderRoute: typeof AdoptieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/beveiliging': {
+      id: '/beveiliging'
+      path: '/beveiliging'
+      fullPath: '/beveiliging'
+      preLoaderRoute: typeof BeveiligingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bevestigen': {
+      id: '/bevestigen'
+      path: '/bevestigen'
+      fullPath: '/bevestigen'
+      preLoaderRoute: typeof BevestigenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cookies': {
+      id: '/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof CookiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/e-mailadres-bevestigen': {
+      id: '/e-mailadres-bevestigen'
+      path: '/e-mailadres-bevestigen'
+      fullPath: '/e-mailadres-bevestigen'
+      preLoaderRoute: typeof EMailadresBevestigenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fairtech': {
+      id: '/fairtech'
+      path: '/fairtech'
+      fullPath: '/fairtech'
+      preLoaderRoute: typeof FairtechRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/field': {
+      id: '/field'
+      path: '/field'
+      fullPath: '/field'
+      preLoaderRoute: typeof FieldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/impressum': {
+      id: '/impressum'
+      path: '/impressum'
+      fullPath: '/impressum'
+      preLoaderRoute: typeof ImpressumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inloglink': {
+      id: '/inloglink'
+      path: '/inloglink'
+      fullPath: '/inloglink'
+      preLoaderRoute: typeof InloglinkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/klantenkaart': {
+      id: '/klantenkaart'
+      path: '/klantenkaart'
+      fullPath: '/klantenkaart'
+      preLoaderRoute: typeof KlantenkaartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mijn-hoefjes': {
+      id: '/mijn-hoefjes'
+      path: '/mijn-hoefjes'
+      fullPath: '/mijn-hoefjes'
+      preLoaderRoute: typeof MijnHoefjesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partners': {
+      id: '/partners'
+      path: '/partners'
+      fullPath: '/partners'
+      preLoaderRoute: typeof PartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pers': {
+      id: '/pers'
+      path: '/pers'
+      fullPath: '/pers'
+      preLoaderRoute: typeof PersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/press': {
+      id: '/press'
+      path: '/press'
+      fullPath: '/press'
+      preLoaderRoute: typeof PressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/social': {
+      id: '/social'
+      path: '/social'
+      fullPath: '/social'
+      preLoaderRoute: typeof SocialRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/status': {
+      id: '/status'
+      path: '/status'
+      fullPath: '/status'
+      preLoaderRoute: typeof StatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stempel-varianten': {
+      id: '/stempel-varianten'
+      path: '/stempel-varianten'
+      fullPath: '/stempel-varianten'
+      preLoaderRoute: typeof StempelVariantenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/steun': {
+      id: '/steun'
+      path: '/steun'
+      fullPath: '/steun'
+      preLoaderRoute: typeof SteunRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vakantiestages': {
+      id: '/vakantiestages'
+      path: '/vakantiestages'
+      fullPath: '/vakantiestages'
+      preLoaderRoute: typeof VakantiestagesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/veld': {
+      id: '/veld'
+      path: '/veld'
+      fullPath: '/veld'
+      preLoaderRoute: typeof VeldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verhuur': {
+      id: '/verhuur'
+      path: '/verhuur'
+      fullPath: '/verhuur'
+      preLoaderRoute: typeof VerhuurRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/voorwaarden': {
+      id: '/voorwaarden'
+      path: '/voorwaarden'
+      fullPath: '/voorwaarden'
+      preLoaderRoute: typeof VoorwaardenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wachtwoord-herstellen': {
+      id: '/wachtwoord-herstellen'
+      path: '/wachtwoord-herstellen'
+      fullPath: '/wachtwoord-herstellen'
+      preLoaderRoute: typeof WachtwoordHerstellenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wachtwoord-vergeten': {
+      id: '/wachtwoord-vergeten'
+      path: '/wachtwoord-vergeten'
+      fullPath: '/wachtwoord-vergeten'
+      preLoaderRoute: typeof WachtwoordVergetenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wie-zijn-we': {
+      id: '/wie-zijn-we'
+      path: '/wie-zijn-we'
+      fullPath: '/wie-zijn-we'
+      preLoaderRoute: typeof WieZijnWeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$lang/': {
+      id: '/$lang/'
+      path: '/'
+      fullPath: '/$lang/'
+      preLoaderRoute: typeof LangIndexRouteImport
+      parentRoute: typeof LangRoute
+    }
+    '/$lang/$': {
+      id: '/$lang/$'
+      path: '/$'
+      fullPath: '/$lang/$'
+      preLoaderRoute: typeof LangSplatRouteImport
+      parentRoute: typeof LangRoute
+    }
+    '/_authenticated/aanvragen': {
+      id: '/_authenticated/aanvragen'
+      path: '/aanvragen'
+      fullPath: '/aanvragen'
+      preLoaderRoute: typeof AuthenticatedAanvragenRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/diensten': {
+      id: '/_authenticated/diensten'
+      path: '/diensten'
+      fullPath: '/diensten'
+      preLoaderRoute: typeof AuthenticatedDienstenRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/foutmeldingen': {
+      id: '/_authenticated/foutmeldingen'
+      path: '/foutmeldingen'
+      fullPath: '/foutmeldingen'
+      preLoaderRoute: typeof AuthenticatedFoutmeldingenRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/kalender': {
+      id: '/_authenticated/kalender'
+      path: '/kalender'
+      fullPath: '/kalender'
+      preLoaderRoute: typeof AuthenticatedKalenderRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/team': {
+      id: '/_authenticated/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof AuthenticatedTeamRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/vandaag': {
+      id: '/_authenticated/vandaag'
+      path: '/vandaag'
+      fullPath: '/vandaag'
+      preLoaderRoute: typeof AuthenticatedVandaagRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/academy/': {
+      id: '/academy/'
+      path: '/academy'
+      fullPath: '/academy/'
+      preLoaderRoute: typeof AcademyIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academy/$slug': {
+      id: '/academy/$slug'
+      path: '/academy/$slug'
+      fullPath: '/academy/$slug'
+      preLoaderRoute: typeof AcademySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academy/verify': {
+      id: '/academy/verify'
+      path: '/academy/verify'
+      fullPath: '/academy/verify'
+      preLoaderRoute: typeof AcademyVerifyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/contact': {
+      id: '/api/contact'
+      path: '/api/contact'
+      fullPath: '/api/contact'
+      preLoaderRoute: typeof ApiContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/create-payment-intent': {
+      id: '/api/create-payment-intent'
+      path: '/api/create-payment-intent'
+      fullPath: '/api/create-payment-intent'
+      preLoaderRoute: typeof ApiCreatePaymentIntentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/generate-google-wallet-pass': {
+      id: '/api/generate-google-wallet-pass'
+      path: '/api/generate-google-wallet-pass'
+      fullPath: '/api/generate-google-wallet-pass'
+      preLoaderRoute: typeof ApiGenerateGoogleWalletPassRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/route-map': {
+      id: '/api/route-map'
+      path: '/api/route-map'
+      fullPath: '/api/route-map'
+      preLoaderRoute: typeof ApiRouteMapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/speak': {
+      id: '/api/speak'
+      path: '/api/speak'
+      fullPath: '/api/speak'
+      preLoaderRoute: typeof ApiSpeakRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/stripe-config': {
+      id: '/api/stripe-config'
+      path: '/api/stripe-config'
+      fullPath: '/api/stripe-config'
+      preLoaderRoute: typeof ApiStripeConfigRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/transcribe': {
+      id: '/api/transcribe'
+      path: '/api/transcribe'
+      fullPath: '/api/transcribe'
+      preLoaderRoute: typeof ApiTranscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/transit': {
+      id: '/api/transit'
+      path: '/api/transit'
+      fullPath: '/api/transit'
+      preLoaderRoute: typeof ApiTransitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/villo': {
+      id: '/api/villo'
+      path: '/api/villo'
+      fullPath: '/api/villo'
+      preLoaderRoute: typeof ApiVilloRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/weather': {
+      id: '/api/weather'
+      path: '/api/weather'
+      fullPath: '/api/weather'
+      preLoaderRoute: typeof ApiWeatherRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/': {
+      id: '/auth/'
+      path: '/'
+      fullPath: '/auth/'
+      preLoaderRoute: typeof AuthIndexRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/auth/reset-password': {
+      id: '/auth/reset-password'
+      path: '/reset-password'
+      fullPath: '/auth/reset-password'
+      preLoaderRoute: typeof AuthResetPasswordRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/betrokkenheid/$onderwerp': {
+      id: '/betrokkenheid/$onderwerp'
+      path: '/betrokkenheid/$onderwerp'
+      fullPath: '/betrokkenheid/$onderwerp'
+      preLoaderRoute: typeof BetrokkenheidOnderwerpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bezoekers/$doelgroep': {
+      id: '/bezoekers/$doelgroep'
+      path: '/bezoekers/$doelgroep'
+      fullPath: '/bezoekers/$doelgroep'
+      preLoaderRoute: typeof BezoekersDoelgroepRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/boeking/': {
+      id: '/boeking/'
+      path: '/boeking'
+      fullPath: '/boeking/'
+      preLoaderRoute: typeof BoekingIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/boeking/bevestiging': {
+      id: '/boeking/bevestiging'
+      path: '/boeking/bevestiging'
+      fullPath: '/boeking/bevestiging'
+      preLoaderRoute: typeof BoekingBevestigingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/certificaat/$id': {
+      id: '/certificaat/$id'
+      path: '/certificaat/$id'
+      fullPath: '/certificaat/$id'
+      preLoaderRoute: typeof CertificaatIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/informatie/$onderwerp': {
+      id: '/informatie/$onderwerp'
+      path: '/informatie/$onderwerp'
+      fullPath: '/informatie/$onderwerp'
+      preLoaderRoute: typeof InformatieOnderwerpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/product/$slug': {
+      id: '/product/$slug'
+      path: '/product/$slug'
+      fullPath: '/product/$slug'
+      preLoaderRoute: typeof ProductSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/qr/$animalId': {
+      id: '/qr/$animalId'
+      path: '/qr/$animalId'
+      fullPath: '/qr/$animalId'
+      preLoaderRoute: typeof QrAnimalIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/veld/': {
+      id: '/veld/'
+      path: '/'
+      fullPath: '/veld/'
+      preLoaderRoute: typeof VeldIndexRouteImport
+      parentRoute: typeof VeldRoute
+    }
+    '/veld/aanvragen': {
+      id: '/veld/aanvragen'
+      path: '/aanvragen'
+      fullPath: '/veld/aanvragen'
+      preLoaderRoute: typeof VeldAanvragenRouteImport
+      parentRoute: typeof VeldRoute
+    }
+    '/veld/diensten': {
+      id: '/veld/diensten'
+      path: '/diensten'
+      fullPath: '/veld/diensten'
+      preLoaderRoute: typeof VeldDienstenRouteImport
+      parentRoute: typeof VeldRoute
+    }
+    '/veld/meer': {
+      id: '/veld/meer'
+      path: '/meer'
+      fullPath: '/veld/meer'
+      preLoaderRoute: typeof VeldMeerRouteImport
+      parentRoute: typeof VeldRoute
+    }
+    '/veld/scanner': {
+      id: '/veld/scanner'
+      path: '/scanner'
+      fullPath: '/veld/scanner'
+      preLoaderRoute: typeof VeldScannerRouteImport
+      parentRoute: typeof VeldRoute
+    }
+    '/veld/taken': {
+      id: '/veld/taken'
+      path: '/taken'
+      fullPath: '/veld/taken'
+      preLoaderRoute: typeof VeldTakenRouteImport
+      parentRoute: typeof VeldRoute
+    }
+    '/verifieer/': {
+      id: '/verifieer/'
+      path: '/verifieer'
+      fullPath: '/verifieer/'
+      preLoaderRoute: typeof VerifieerIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verifieer/$code': {
+      id: '/verifieer/$code'
+      path: '/verifieer/$code'
+      fullPath: '/verifieer/$code'
+      preLoaderRoute: typeof VerifieerCodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verify/$code': {
+      id: '/verify/$code'
+      path: '/verify/$code'
+      fullPath: '/verify/$code'
+      preLoaderRoute: typeof VerifyCodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/webshop/': {
+      id: '/webshop/'
+      path: '/webshop'
+      fullPath: '/webshop/'
+      preLoaderRoute: typeof WebshopIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/webshop/bedankt': {
+      id: '/webshop/bedankt'
+      path: '/webshop/bedankt'
+      fullPath: '/webshop/bedankt'
+      preLoaderRoute: typeof WebshopBedanktRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/webshop/winkelmand': {
+      id: '/webshop/winkelmand'
+      path: '/webshop/winkelmand'
+      fullPath: '/webshop/winkelmand'
+      preLoaderRoute: typeof WebshopWinkelmandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/word-partner/': {
+      id: '/word-partner/'
+      path: '/word-partner'
+      fullPath: '/word-partner/'
+      preLoaderRoute: typeof WordPartnerIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/word-partner/contact': {
+      id: '/word-partner/contact'
+      path: '/word-partner/contact'
+      fullPath: '/word-partner/contact'
+      preLoaderRoute: typeof WordPartnerContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$lang/u/$id': {
+      id: '/$lang/u/$id'
+      path: '/u/$id'
+      fullPath: '/$lang/u/$id'
+      preLoaderRoute: typeof LangUIdRouteImport
+      parentRoute: typeof LangRoute
+    }
+    '/_authenticated/admin/berichten': {
+      id: '/_authenticated/admin/berichten'
+      path: '/admin/berichten'
+      fullPath: '/admin/berichten'
+      preLoaderRoute: typeof AuthenticatedAdminBerichtenRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/profiel': {
+      id: '/_authenticated/admin/profiel'
+      path: '/admin/profiel'
+      fullPath: '/admin/profiel'
+      preLoaderRoute: typeof AuthenticatedAdminProfielRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/scan': {
+      id: '/_authenticated/admin/scan'
+      path: '/admin/scan'
+      fullPath: '/admin/scan'
+      preLoaderRoute: typeof AuthenticatedAdminScanRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/scanner': {
+      id: '/_authenticated/admin/scanner'
+      path: '/admin/scanner'
+      fullPath: '/admin/scanner'
+      preLoaderRoute: typeof AuthenticatedAdminScannerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/academie/$slug/certificaat': {
+      id: '/academie/$slug/certificaat'
+      path: '/academie/$slug/certificaat'
+      fullPath: '/academie/$slug/certificaat'
+      preLoaderRoute: typeof AcademieSlugCertificaatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academie/certificaat/$id': {
+      id: '/academie/certificaat/$id'
+      path: '/academie/certificaat/$id'
+      fullPath: '/academie/certificaat/$id'
+      preLoaderRoute: typeof AcademieCertificaatIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/co-pilot': {
+      id: '/api/admin/co-pilot'
+      path: '/api/admin/co-pilot'
+      fullPath: '/api/admin/co-pilot'
+      preLoaderRoute: typeof ApiAdminCoPilotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/init-s3-cors': {
+      id: '/api/admin/init-s3-cors'
+      path: '/api/admin/init-s3-cors'
+      fullPath: '/api/admin/init-s3-cors'
+      preLoaderRoute: typeof ApiAdminInitS3CorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/presigned-upload': {
+      id: '/api/admin/presigned-upload'
+      path: '/api/admin/presigned-upload'
+      fullPath: '/api/admin/presigned-upload'
+      preLoaderRoute: typeof ApiAdminPresignedUploadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/upload-s3': {
+      id: '/api/admin/upload-s3'
+      path: '/api/admin/upload-s3'
+      fullPath: '/api/admin/upload-s3'
+      preLoaderRoute: typeof ApiAdminUploadS3RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/bluesky': {
+      id: '/api/auth/bluesky'
+      path: '/api/auth/bluesky'
+      fullPath: '/api/auth/bluesky'
+      preLoaderRoute: typeof ApiAuthBlueskyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/config-check': {
+      id: '/api/auth/config-check'
+      path: '/api/auth/config-check'
+      fullPath: '/api/auth/config-check'
+      preLoaderRoute: typeof ApiAuthConfigCheckRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/github': {
+      id: '/api/auth/github'
+      path: '/api/auth/github'
+      fullPath: '/api/auth/github'
+      preLoaderRoute: typeof ApiAuthGithubRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/google': {
+      id: '/api/auth/google'
+      path: '/api/auth/google'
+      fullPath: '/api/auth/google'
+      preLoaderRoute: typeof ApiAuthGoogleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/magic-link': {
+      id: '/api/auth/magic-link'
+      path: '/api/auth/magic-link'
+      fullPath: '/api/auth/magic-link'
+      preLoaderRoute: typeof ApiAuthMagicLinkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/mastodon': {
+      id: '/api/auth/mastodon'
+      path: '/api/auth/mastodon'
+      fullPath: '/api/auth/mastodon'
+      preLoaderRoute: typeof ApiAuthMastodonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/providers': {
+      id: '/api/auth/providers'
+      path: '/api/auth/providers'
+      fullPath: '/api/auth/providers'
+      preLoaderRoute: typeof ApiAuthProvidersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/rout': {
+      id: '/api/auth/rout'
+      path: '/api/auth/rout'
+      fullPath: '/api/auth/rout'
+      preLoaderRoute: typeof ApiAuthRoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/chat/email': {
+      id: '/api/chat/email'
+      path: '/email'
+      fullPath: '/api/chat/email'
+      preLoaderRoute: typeof ApiChatEmailRouteImport
+      parentRoute: typeof ApiChatRoute
+    }
+    '/api/checkout/create-session': {
+      id: '/api/checkout/create-session'
+      path: '/api/checkout/create-session'
+      fullPath: '/api/checkout/create-session'
+      preLoaderRoute: typeof ApiCheckoutCreateSessionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/dev/health': {
+      id: '/api/dev/health'
+      path: '/api/dev/health'
+      fullPath: '/api/dev/health'
+      preLoaderRoute: typeof ApiDevHealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/dev/run-migrations': {
+      id: '/api/dev/run-migrations'
+      path: '/api/dev/run-migrations'
+      fullPath: '/api/dev/run-migrations'
+      preLoaderRoute: typeof ApiDevRunMigrationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/email/send-transactional': {
+      id: '/api/email/send-transactional'
+      path: '/api/email/send-transactional'
+      fullPath: '/api/email/send-transactional'
+      preLoaderRoute: typeof ApiEmailSendTransactionalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/email/test-templates': {
+      id: '/api/email/test-templates'
+      path: '/api/email/test-templates'
+      fullPath: '/api/email/test-templates'
+      preLoaderRoute: typeof ApiEmailTestTemplatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/google/status': {
+      id: '/api/google/status'
+      path: '/api/google/status'
+      fullPath: '/api/google/status'
+      preLoaderRoute: typeof ApiGoogleStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/google/sync': {
+      id: '/api/google/sync'
+      path: '/api/google/sync'
+      fullPath: '/api/google/sync'
+      preLoaderRoute: typeof ApiGoogleSyncRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/infomaniak/status': {
+      id: '/api/infomaniak/status'
+      path: '/api/infomaniak/status'
+      fullPath: '/api/infomaniak/status'
+      preLoaderRoute: typeof ApiInfomaniakStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/infomaniak/sync': {
+      id: '/api/infomaniak/sync'
+      path: '/api/infomaniak/sync'
+      fullPath: '/api/infomaniak/sync'
+      preLoaderRoute: typeof ApiInfomaniakSyncRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/payments/create-session': {
+      id: '/api/payments/create-session'
+      path: '/api/payments/create-session'
+      fullPath: '/api/payments/create-session'
+      preLoaderRoute: typeof ApiPaymentsCreateSessionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/payments/order-session': {
+      id: '/api/payments/order-session'
+      path: '/api/payments/order-session'
+      fullPath: '/api/payments/order-session'
+      preLoaderRoute: typeof ApiPaymentsOrderSessionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/health': {
+      id: '/api/public/health'
+      path: '/api/public/health'
+      fullPath: '/api/public/health'
+      preLoaderRoute: typeof ApiPublicHealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/opening-status': {
+      id: '/api/public/opening-status'
+      path: '/api/public/opening-status'
+      fullPath: '/api/public/opening-status'
+      preLoaderRoute: typeof ApiPublicOpeningStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/verify-certificate': {
+      id: '/api/public/verify-certificate'
+      path: '/api/public/verify-certificate'
+      fullPath: '/api/public/verify-certificate'
+      preLoaderRoute: typeof ApiPublicVerifyCertificateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/sponsorship/create-session': {
+      id: '/api/sponsorship/create-session'
+      path: '/api/sponsorship/create-session'
+      fullPath: '/api/sponsorship/create-session'
+      preLoaderRoute: typeof ApiSponsorshipCreateSessionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/sponsorship/status': {
+      id: '/api/sponsorship/status'
+      path: '/api/sponsorship/status'
+      fullPath: '/api/sponsorship/status'
+      preLoaderRoute: typeof ApiSponsorshipStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/storage/delete': {
+      id: '/api/storage/delete'
+      path: '/api/storage/delete'
+      fullPath: '/api/storage/delete'
+      preLoaderRoute: typeof ApiStorageDeleteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/storage/upload-url': {
+      id: '/api/storage/upload-url'
+      path: '/api/storage/upload-url'
+      fullPath: '/api/storage/upload-url'
+      preLoaderRoute: typeof ApiStorageUploadUrlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/stripe/create-payment-intent': {
+      id: '/api/stripe/create-payment-intent'
+      path: '/api/stripe/create-payment-intent'
+      fullPath: '/api/stripe/create-payment-intent'
+      preLoaderRoute: typeof ApiStripeCreatePaymentIntentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/animals': {
+      id: '/api/v1/animals'
+      path: '/api/v1/animals'
+      fullPath: '/api/v1/animals'
+      preLoaderRoute: typeof ApiV1AnimalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/bookings': {
+      id: '/api/v1/bookings'
+      path: '/api/v1/bookings'
+      fullPath: '/api/v1/bookings'
+      preLoaderRoute: typeof ApiV1BookingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/products': {
+      id: '/api/v1/products'
+      path: '/api/v1/products'
+      fullPath: '/api/v1/products'
+      preLoaderRoute: typeof ApiV1ProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/webhooks/rout': {
+      id: '/api/webhooks/rout'
+      path: '/api/webhooks/rout'
+      fullPath: '/api/webhooks/rout'
+      preLoaderRoute: typeof ApiWebhooksRoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/webhooks/stripe': {
+      id: '/api/webhooks/stripe'
+      path: '/api/webhooks/stripe'
+      fullPath: '/api/webhooks/stripe'
+      preLoaderRoute: typeof ApiWebhooksStripeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth_/callback/rout': {
+      id: '/auth_/callback/rout'
+      path: '/auth/callback/rout'
+      fullPath: '/auth/callback/rout'
+      preLoaderRoute: typeof AuthCallbackRoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/portaal/$lang/$slug': {
+      id: '/_authenticated/portaal/$lang/$slug'
+      path: '/portaal/$lang/$slug'
+      fullPath: '/portaal/$lang/$slug'
+      preLoaderRoute: typeof AuthenticatedPortaalLangSlugRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/api/admin/co-pilot/undo': {
+      id: '/api/admin/co-pilot/undo'
+      path: '/undo'
+      fullPath: '/api/admin/co-pilot/undo'
+      preLoaderRoute: typeof ApiAdminCoPilotUndoRouteImport
+      parentRoute: typeof ApiAdminCoPilotRoute
+    }
+    '/api/auth/callback/bluesky': {
+      id: '/api/auth/callback/bluesky'
+      path: '/api/auth/callback/bluesky'
+      fullPath: '/api/auth/callback/bluesky'
+      preLoaderRoute: typeof ApiAuthCallbackBlueskyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/callback/github': {
+      id: '/api/auth/callback/github'
+      path: '/api/auth/callback/github'
+      fullPath: '/api/auth/callback/github'
+      preLoaderRoute: typeof ApiAuthCallbackGithubRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/callback/google': {
+      id: '/api/auth/callback/google'
+      path: '/api/auth/callback/google'
+      fullPath: '/api/auth/callback/google'
+      preLoaderRoute: typeof ApiAuthCallbackGoogleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/callback/mastodon': {
+      id: '/api/auth/callback/mastodon'
+      path: '/api/auth/callback/mastodon'
+      fullPath: '/api/auth/callback/mastodon'
+      preLoaderRoute: typeof ApiAuthCallbackMastodonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/login/$provider': {
+      id: '/api/auth/login/$provider'
+      path: '/api/auth/login/$provider'
+      fullPath: '/api/auth/login/$provider'
+      preLoaderRoute: typeof ApiAuthLoginProviderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/rout/logout': {
+      id: '/api/auth/rout/logout'
+      path: '/logout'
+      fullPath: '/api/auth/rout/logout'
+      preLoaderRoute: typeof ApiAuthRoutLogoutRouteImport
+      parentRoute: typeof ApiAuthRoutRoute
+    }
+    '/api/media/scaleway/delete': {
+      id: '/api/media/scaleway/delete'
+      path: '/api/media/scaleway/delete'
+      fullPath: '/api/media/scaleway/delete'
+      preLoaderRoute: typeof ApiMediaScalewayDeleteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/media/scaleway/list': {
+      id: '/api/media/scaleway/list'
+      path: '/api/media/scaleway/list'
+      fullPath: '/api/media/scaleway/list'
+      preLoaderRoute: typeof ApiMediaScalewayListRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/media/scaleway/similar': {
+      id: '/api/media/scaleway/similar'
+      path: '/api/media/scaleway/similar'
+      fullPath: '/api/media/scaleway/similar'
+      preLoaderRoute: typeof ApiMediaScalewaySimilarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/media/scaleway/upload': {
+      id: '/api/media/scaleway/upload'
+      path: '/api/media/scaleway/upload'
+      fullPath: '/api/media/scaleway/upload'
+      preLoaderRoute: typeof ApiMediaScalewayUploadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/atproto/client-metadata.json': {
+      id: '/api/public/atproto/client-metadata.json'
+      path: '/api/public/atproto/client-metadata.json'
+      fullPath: '/api/public/atproto/client-metadata.json'
+      preLoaderRoute: typeof ApiPublicAtprotoClientMetadataDotjsonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/calendar/feed': {
+      id: '/api/public/calendar/feed'
+      path: '/api/public/calendar/feed'
+      fullPath: '/api/public/calendar/feed'
+      preLoaderRoute: typeof ApiPublicCalendarFeedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/media/$id': {
+      id: '/api/public/media/$id'
+      path: '/api/public/media/$id'
+      fullPath: '/api/public/media/$id'
+      preLoaderRoute: typeof ApiPublicMediaIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/pickup/pass': {
+      id: '/api/public/pickup/pass'
+      path: '/api/public/pickup/pass'
+      fullPath: '/api/public/pickup/pass'
+      preLoaderRoute: typeof ApiPublicPickupPassRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/pickup/qr': {
+      id: '/api/public/pickup/qr'
+      path: '/api/public/pickup/qr'
+      fullPath: '/api/public/pickup/qr'
+      preLoaderRoute: typeof ApiPublicPickupQrRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/stripe/webhook': {
+      id: '/api/public/stripe/webhook'
+      path: '/api/public/stripe/webhook'
+      fullPath: '/api/public/stripe/webhook'
+      preLoaderRoute: typeof ApiPublicStripeWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/telegram/webhook': {
+      id: '/api/public/telegram/webhook'
+      path: '/api/public/telegram/webhook'
+      fullPath: '/api/public/telegram/webhook'
+      preLoaderRoute: typeof ApiPublicTelegramWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/webhooks/stripe': {
+      id: '/api/public/webhooks/stripe'
+      path: '/api/public/webhooks/stripe'
+      fullPath: '/api/public/webhooks/stripe'
+      preLoaderRoute: typeof ApiPublicWebhooksStripeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/sponsorship/certificate/$certificateId': {
+      id: '/api/sponsorship/certificate/$certificateId'
+      path: '/api/sponsorship/certificate/$certificateId'
+      fullPath: '/api/sponsorship/certificate/$certificateId'
+      preLoaderRoute: typeof ApiSponsorshipCertificateCertificateIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/maxim/announcements': {
+      id: '/api/v1/maxim/announcements'
+      path: '/api/v1/maxim/announcements'
+      fullPath: '/api/v1/maxim/announcements'
+      preLoaderRoute: typeof ApiV1MaximAnnouncementsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/products/$id': {
+      id: '/api/v1/products/$id'
+      path: '/$id'
+      fullPath: '/api/v1/products/$id'
+      preLoaderRoute: typeof ApiV1ProductsIdRouteImport
+      parentRoute: typeof ApiV1ProductsRoute
+    }
+    '/api/wallet/google/pass': {
+      id: '/api/wallet/google/pass'
+      path: '/api/wallet/google/pass'
+      fullPath: '/api/wallet/google/pass'
+      preLoaderRoute: typeof ApiWalletGooglePassRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/bookings/$id/checkin': {
+      id: '/api/v1/bookings/$id/checkin'
+      path: '/$id/checkin'
+      fullPath: '/api/v1/bookings/$id/checkin'
+      preLoaderRoute: typeof ApiV1BookingsIdCheckinRouteImport
+      parentRoute: typeof ApiV1BookingsRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAanvragenRoute: typeof AuthenticatedAanvragenRoute
+  AuthenticatedDienstenRoute: typeof AuthenticatedDienstenRoute
+  AuthenticatedFoutmeldingenRoute: typeof AuthenticatedFoutmeldingenRoute
+  AuthenticatedKalenderRoute: typeof AuthenticatedKalenderRoute
+  AuthenticatedTeamRoute: typeof AuthenticatedTeamRoute
+  AuthenticatedVandaagRoute: typeof AuthenticatedVandaagRoute
+  AuthenticatedAdminBerichtenRoute: typeof AuthenticatedAdminBerichtenRoute
+  AuthenticatedAdminProfielRoute: typeof AuthenticatedAdminProfielRoute
+  AuthenticatedAdminScanRoute: typeof AuthenticatedAdminScanRoute
+  AuthenticatedAdminScannerRoute: typeof AuthenticatedAdminScannerRoute
+  AuthenticatedPortaalLangSlugRoute: typeof AuthenticatedPortaalLangSlugRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAanvragenRoute: AuthenticatedAanvragenRoute,
+  AuthenticatedDienstenRoute: AuthenticatedDienstenRoute,
+  AuthenticatedFoutmeldingenRoute: AuthenticatedFoutmeldingenRoute,
+  AuthenticatedKalenderRoute: AuthenticatedKalenderRoute,
+  AuthenticatedTeamRoute: AuthenticatedTeamRoute,
+  AuthenticatedVandaagRoute: AuthenticatedVandaagRoute,
+  AuthenticatedAdminBerichtenRoute: AuthenticatedAdminBerichtenRoute,
+  AuthenticatedAdminProfielRoute: AuthenticatedAdminProfielRoute,
+  AuthenticatedAdminScanRoute: AuthenticatedAdminScanRoute,
+  AuthenticatedAdminScannerRoute: AuthenticatedAdminScannerRoute,
+  AuthenticatedPortaalLangSlugRoute: AuthenticatedPortaalLangSlugRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
+interface LangRouteChildren {
+  LangSplatRoute: typeof LangSplatRoute
+  LangIndexRoute: typeof LangIndexRoute
+  LangUIdRoute: typeof LangUIdRoute
+}
+
+const LangRouteChildren: LangRouteChildren = {
+  LangSplatRoute: LangSplatRoute,
+  LangIndexRoute: LangIndexRoute,
+  LangUIdRoute: LangUIdRoute,
+}
+
+const LangRouteWithChildren = LangRoute._addFileChildren(LangRouteChildren)
+
+interface AuthRouteChildren {
+  AuthResetPasswordRoute: typeof AuthResetPasswordRoute
+  AuthIndexRoute: typeof AuthIndexRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthResetPasswordRoute: AuthResetPasswordRoute,
+  AuthIndexRoute: AuthIndexRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+
+interface VeldRouteChildren {
+  VeldAanvragenRoute: typeof VeldAanvragenRoute
+  VeldDienstenRoute: typeof VeldDienstenRoute
+  VeldMeerRoute: typeof VeldMeerRoute
+  VeldScannerRoute: typeof VeldScannerRoute
+  VeldTakenRoute: typeof VeldTakenRoute
+  VeldIndexRoute: typeof VeldIndexRoute
+}
+
+const VeldRouteChildren: VeldRouteChildren = {
+  VeldAanvragenRoute: VeldAanvragenRoute,
+  VeldDienstenRoute: VeldDienstenRoute,
+  VeldMeerRoute: VeldMeerRoute,
+  VeldScannerRoute: VeldScannerRoute,
+  VeldTakenRoute: VeldTakenRoute,
+  VeldIndexRoute: VeldIndexRoute,
+}
+
+const VeldRouteWithChildren = VeldRoute._addFileChildren(VeldRouteChildren)
+
+interface ApiChatRouteChildren {
+  ApiChatEmailRoute: typeof ApiChatEmailRoute
+}
+
+const ApiChatRouteChildren: ApiChatRouteChildren = {
+  ApiChatEmailRoute: ApiChatEmailRoute,
+}
+
+const ApiChatRouteWithChildren =
+  ApiChatRoute._addFileChildren(ApiChatRouteChildren)
+
+interface ApiAdminCoPilotRouteChildren {
+  ApiAdminCoPilotUndoRoute: typeof ApiAdminCoPilotUndoRoute
+}
+
+const ApiAdminCoPilotRouteChildren: ApiAdminCoPilotRouteChildren = {
+  ApiAdminCoPilotUndoRoute: ApiAdminCoPilotUndoRoute,
+}
+
+const ApiAdminCoPilotRouteWithChildren = ApiAdminCoPilotRoute._addFileChildren(
+  ApiAdminCoPilotRouteChildren,
+)
+
+interface ApiAuthRoutRouteChildren {
+  ApiAuthRoutLogoutRoute: typeof ApiAuthRoutLogoutRoute
+}
+
+const ApiAuthRoutRouteChildren: ApiAuthRoutRouteChildren = {
+  ApiAuthRoutLogoutRoute: ApiAuthRoutLogoutRoute,
+}
+
+const ApiAuthRoutRouteWithChildren = ApiAuthRoutRoute._addFileChildren(
+  ApiAuthRoutRouteChildren,
+)
+
+interface ApiV1BookingsRouteChildren {
+  ApiV1BookingsIdCheckinRoute: typeof ApiV1BookingsIdCheckinRoute
+}
+
+const ApiV1BookingsRouteChildren: ApiV1BookingsRouteChildren = {
+  ApiV1BookingsIdCheckinRoute: ApiV1BookingsIdCheckinRoute,
+}
+
+const ApiV1BookingsRouteWithChildren = ApiV1BookingsRoute._addFileChildren(
+  ApiV1BookingsRouteChildren,
+)
+
+interface ApiV1ProductsRouteChildren {
+  ApiV1ProductsIdRoute: typeof ApiV1ProductsIdRoute
+}
+
+const ApiV1ProductsRouteChildren: ApiV1ProductsRouteChildren = {
+  ApiV1ProductsIdRoute: ApiV1ProductsIdRoute,
+}
+
+const ApiV1ProductsRouteWithChildren = ApiV1ProductsRoute._addFileChildren(
+  ApiV1ProductsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  LangRoute: LangRouteWithChildren,
+  AccountRoute: AccountRoute,
+  AdminRoute: AdminRoute,
+  AdoptieRoute: AdoptieRoute,
+  AuthRoute: AuthRouteWithChildren,
+  BeveiligingRoute: BeveiligingRoute,
+  BevestigenRoute: BevestigenRoute,
+  ContactRoute: ContactRoute,
+  CookiesRoute: CookiesRoute,
+  EMailadresBevestigenRoute: EMailadresBevestigenRoute,
+  FairtechRoute: FairtechRoute,
+  FieldRoute: FieldRoute,
+  ImpressumRoute: ImpressumRoute,
+  InloglinkRoute: InloglinkRoute,
+  KlantenkaartRoute: KlantenkaartRoute,
+  LoginRoute: LoginRoute,
+  MijnHoefjesRoute: MijnHoefjesRoute,
+  PartnersRoute: PartnersRoute,
+  PersRoute: PersRoute,
+  PressRoute: PressRoute,
+  PrivacyRoute: PrivacyRoute,
+  RegisterRoute: RegisterRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SocialRoute: SocialRoute,
+  StatusRoute: StatusRoute,
+  StempelVariantenRoute: StempelVariantenRoute,
+  SteunRoute: SteunRoute,
+  VakantiestagesRoute: VakantiestagesRoute,
+  VeldRoute: VeldRouteWithChildren,
+  VerhuurRoute: VerhuurRoute,
+  VoorwaardenRoute: VoorwaardenRoute,
+  WachtwoordHerstellenRoute: WachtwoordHerstellenRoute,
+  WachtwoordVergetenRoute: WachtwoordVergetenRoute,
+  WieZijnWeRoute: WieZijnWeRoute,
+  AcademySlugRoute: AcademySlugRoute,
+  AcademyVerifyRoute: AcademyVerifyRoute,
+  ApiChatRoute: ApiChatRouteWithChildren,
+  ApiContactRoute: ApiContactRoute,
+  ApiCreatePaymentIntentRoute: ApiCreatePaymentIntentRoute,
+  ApiGenerateGoogleWalletPassRoute: ApiGenerateGoogleWalletPassRoute,
+  ApiRouteMapRoute: ApiRouteMapRoute,
+  ApiSpeakRoute: ApiSpeakRoute,
+  ApiStripeConfigRoute: ApiStripeConfigRoute,
+  ApiTranscribeRoute: ApiTranscribeRoute,
+  ApiTransitRoute: ApiTransitRoute,
+  ApiVilloRoute: ApiVilloRoute,
+  ApiWeatherRoute: ApiWeatherRoute,
+  BetrokkenheidOnderwerpRoute: BetrokkenheidOnderwerpRoute,
+  BezoekersDoelgroepRoute: BezoekersDoelgroepRoute,
+  BoekingBevestigingRoute: BoekingBevestigingRoute,
+  CertificaatIdRoute: CertificaatIdRoute,
+  InformatieOnderwerpRoute: InformatieOnderwerpRoute,
+  ProductSlugRoute: ProductSlugRoute,
+  QrAnimalIdRoute: QrAnimalIdRoute,
+  VerifieerCodeRoute: VerifieerCodeRoute,
+  VerifyCodeRoute: VerifyCodeRoute,
+  WebshopBedanktRoute: WebshopBedanktRoute,
+  WebshopWinkelmandRoute: WebshopWinkelmandRoute,
+  WordPartnerContactRoute: WordPartnerContactRoute,
+  AcademyIndexRoute: AcademyIndexRoute,
+  BoekingIndexRoute: BoekingIndexRoute,
+  VerifieerIndexRoute: VerifieerIndexRoute,
+  WebshopIndexRoute: WebshopIndexRoute,
+  WordPartnerIndexRoute: WordPartnerIndexRoute,
+  AcademieSlugCertificaatRoute: AcademieSlugCertificaatRoute,
+  AcademieCertificaatIdRoute: AcademieCertificaatIdRoute,
+  ApiAdminCoPilotRoute: ApiAdminCoPilotRouteWithChildren,
+  ApiAdminInitS3CorsRoute: ApiAdminInitS3CorsRoute,
+  ApiAdminPresignedUploadRoute: ApiAdminPresignedUploadRoute,
+  ApiAdminUploadS3Route: ApiAdminUploadS3Route,
+  ApiAuthBlueskyRoute: ApiAuthBlueskyRoute,
+  ApiAuthConfigCheckRoute: ApiAuthConfigCheckRoute,
+  ApiAuthGithubRoute: ApiAuthGithubRoute,
+  ApiAuthGoogleRoute: ApiAuthGoogleRoute,
+  ApiAuthMagicLinkRoute: ApiAuthMagicLinkRoute,
+  ApiAuthMastodonRoute: ApiAuthMastodonRoute,
+  ApiAuthProvidersRoute: ApiAuthProvidersRoute,
+  ApiAuthRoutRoute: ApiAuthRoutRouteWithChildren,
+  ApiCheckoutCreateSessionRoute: ApiCheckoutCreateSessionRoute,
+  ApiDevHealthRoute: ApiDevHealthRoute,
+  ApiDevRunMigrationsRoute: ApiDevRunMigrationsRoute,
+  ApiEmailSendTransactionalRoute: ApiEmailSendTransactionalRoute,
+  ApiEmailTestTemplatesRoute: ApiEmailTestTemplatesRoute,
+  ApiGoogleStatusRoute: ApiGoogleStatusRoute,
+  ApiGoogleSyncRoute: ApiGoogleSyncRoute,
+  ApiInfomaniakStatusRoute: ApiInfomaniakStatusRoute,
+  ApiInfomaniakSyncRoute: ApiInfomaniakSyncRoute,
+  ApiPaymentsCreateSessionRoute: ApiPaymentsCreateSessionRoute,
+  ApiPaymentsOrderSessionRoute: ApiPaymentsOrderSessionRoute,
+  ApiPublicHealthRoute: ApiPublicHealthRoute,
+  ApiPublicOpeningStatusRoute: ApiPublicOpeningStatusRoute,
+  ApiPublicVerifyCertificateRoute: ApiPublicVerifyCertificateRoute,
+  ApiSponsorshipCreateSessionRoute: ApiSponsorshipCreateSessionRoute,
+  ApiSponsorshipStatusRoute: ApiSponsorshipStatusRoute,
+  ApiStorageDeleteRoute: ApiStorageDeleteRoute,
+  ApiStorageUploadUrlRoute: ApiStorageUploadUrlRoute,
+  ApiStripeCreatePaymentIntentRoute: ApiStripeCreatePaymentIntentRoute,
+  ApiV1AnimalsRoute: ApiV1AnimalsRoute,
+  ApiV1BookingsRoute: ApiV1BookingsRouteWithChildren,
+  ApiV1ProductsRoute: ApiV1ProductsRouteWithChildren,
+  ApiWebhooksRoutRoute: ApiWebhooksRoutRoute,
+  ApiWebhooksStripeRoute: ApiWebhooksStripeRoute,
+  AuthCallbackRoutRoute: AuthCallbackRoutRoute,
+  ApiAuthCallbackBlueskyRoute: ApiAuthCallbackBlueskyRoute,
+  ApiAuthCallbackGithubRoute: ApiAuthCallbackGithubRoute,
+  ApiAuthCallbackGoogleRoute: ApiAuthCallbackGoogleRoute,
+  ApiAuthCallbackMastodonRoute: ApiAuthCallbackMastodonRoute,
+  ApiAuthLoginProviderRoute: ApiAuthLoginProviderRoute,
+  ApiMediaScalewayDeleteRoute: ApiMediaScalewayDeleteRoute,
+  ApiMediaScalewayListRoute: ApiMediaScalewayListRoute,
+  ApiMediaScalewaySimilarRoute: ApiMediaScalewaySimilarRoute,
+  ApiMediaScalewayUploadRoute: ApiMediaScalewayUploadRoute,
+  ApiPublicAtprotoClientMetadataDotjsonRoute:
+    ApiPublicAtprotoClientMetadataDotjsonRoute,
+  ApiPublicCalendarFeedRoute: ApiPublicCalendarFeedRoute,
+  ApiPublicMediaIdRoute: ApiPublicMediaIdRoute,
+  ApiPublicPickupPassRoute: ApiPublicPickupPassRoute,
+  ApiPublicPickupQrRoute: ApiPublicPickupQrRoute,
+  ApiPublicStripeWebhookRoute: ApiPublicStripeWebhookRoute,
+  ApiPublicTelegramWebhookRoute: ApiPublicTelegramWebhookRoute,
+  ApiPublicWebhooksStripeRoute: ApiPublicWebhooksStripeRoute,
+  ApiSponsorshipCertificateCertificateIdRoute:
+    ApiSponsorshipCertificateCertificateIdRoute,
+  ApiV1MaximAnnouncementsRoute: ApiV1MaximAnnouncementsRoute,
+  ApiWalletGooglePassRoute: ApiWalletGooglePassRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

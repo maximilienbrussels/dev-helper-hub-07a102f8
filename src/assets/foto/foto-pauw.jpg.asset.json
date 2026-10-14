@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "asset_id": "eef2f0ea-9243-4fb7-ac1b-dbb0ca69cc0a",
+  "project_id": "a6382fd3-5cca-4763-a231-86cf33e66cf2",
+  "url": "/imported-assets/foto-pauw.jpg",
+  "original_filename": "foto-pauw.jpg",
+  "size": 311338,
+  "content_type": "image/jpeg",
+  "created_at": "2026-09-03T22:16:40Z",
+  "storage": "scaleway-s3"
+}
