@@ -11,10 +11,14 @@ export const Route = createFileRoute("/_authenticated")({
     if (error || !data.user) throw redirect({ to: "/auth" });
     // Bron van waarheid: de Neon-tabel `portal_admins`.
     const access = await checkPortalAccess().catch(() => null);
-    if (access?.mfa) {
+    // Noodtoegang: superadmin zonder 2FA mag door (allowed + mfa "setup"); geen lus.
+    if (access?.mfa && !access.allowed) {
       throw redirect({ href: `/beveiliging?next=${encodeURIComponent(location.pathname)}` });
     }
     if (!access?.allowed) throw redirect({ to: "/auth" });
+    if (access.mfa === "setup") {
+      console.warn("Tweestapsverificatie nog niet ingesteld — stel ze in via /beveiliging.");
+    }
     return { user: data.user, portalRole: access.role };
   },
   component: PortalLayout,

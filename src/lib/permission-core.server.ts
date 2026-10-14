@@ -118,7 +118,9 @@ export async function resolveAccessRaw(context: PermissionContext): Promise<Acce
     /* controle gaat verder; ontbrekende tabellen geven gewoon geen rechten */
   }
   const email = await resolveUserEmail(context);
-  const emailVerified = await isEmailVerified(context.userId, email);
+  // Vaste superadmins zijn per definitie bekend: geen catch-22 met een lege
+  // email_verified_at na wachtwoord-aanmaak of directe import.
+  const emailVerified = isSuperAdminEmail(email) || (await isEmailVerified(context.userId, email));
   const isFixedOwner = emailVerified && isSuperAdminEmail(email);
 
   if (isFixedOwner && email) {
@@ -338,6 +340,15 @@ export async function resolveTeamAccess(
     enrolled = await hasAnyFactor(context.userId);
   } catch {
     enrolled = false;
+  }
+  // Noodtoegang: een vaste eigenaar zonder ingestelde tweede stap wordt niet
+  // buitengesloten (anders lus /beveiliging ↔ /auth). Hij ziet wel een waarschuwing.
+  if (!enrolled) {
+    const snap = await resolveAccessRaw(context).catch(() => null);
+    if (snap?.isFixedOwner) {
+      console.warn("[mfa] noodtoegang voor superadmin zonder 2FA:", snap.email);
+      return { ...raw, mfa: "setup" };
+    }
   }
   return { ...raw, allowed: false, permissions: [], fullAccess: false, mfa: enrolled ? "verify" : "setup" };
 }

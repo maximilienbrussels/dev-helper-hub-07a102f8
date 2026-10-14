@@ -28,6 +28,15 @@ export async function ensureSuperAdmin(email: string, userId: string | null): Pr
     console.warn("[superadmin] portal_admins bijwerken mislukt:", describe(error));
   }
 
+  try {
+    await sql`
+      update public.app_users set email_verified_at = now()
+      where lower(email) = ${mail} and email_verified_at is null
+    `;
+  } catch (error) {
+    console.warn("[superadmin] email_verified_at bijwerken mislukt:", describe(error));
+  }
+
   if (userId) {
     try {
       // Neon Auth en het publieke applicatieschema zijn afzonderlijk. Maak het

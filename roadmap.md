@@ -1,22 +1,10 @@
-# Roadmap
+# Roadmap (opdracht architectuur/beveiliging/vertaling)
 
-- [ ] Adminlogin: eerdere herstelmaatregelen controleren, resterende aanmeldblokkades herstellen en aangemelde toegang testen — bestaande Vercel-gegevens niet beschikbaar in deze preview
-- [ ] Arabisch: bestaande woordenboeken aansluiten, resterende publieke zinnen aanvullen en preview/RTL controleren
-- [ ] Publieke website in alle geplande talen voltooien; geen gedeeltelijke taal vrijgeven
-- [x] Eerste publieke inventaris en herhaalbare controle op Duitse woord- en zinsdekking (scripts/public-translations-audit.cjs; kandidaten zijn geen bewijs van volledigheid)
-- [x] Duitse FAQ, kampinformatie, kampinschrijving en agenda uitgebreid; nieuws, leermiddelen, transparantie en juridische pagina's aangesloten op aanvullende vertalingen
-- [x] Ontbrekende specifieke FR/EN-certificaatcompetenties voor geit, ezel, bij, minivarken, schaap en paard ingevuld
-- [ ] Duits: resterende statische inhoud, SEO, chat, delen, profiel, formulieren, juridische documenten en downloads volledig vertalen en zichtbaar nalopen
-- [ ] Academy: actuele kaarten, vragen, opties, feedback en eenheden controleren en vertalen — live inhoud niet bereikbaar zonder verbinding met de bestaande gegevens
-- [x] Thema-audit bezoekerspagina's licht/donker, desktop/gsm (perspagina wit vlak hersteld)
-- [ ] Thema-audit beheerdersportaal (wacht op aangemelde test als beheerder)
-- [x] Wereldbolletje naast NL / FR / EN op desktop en mobiel; onafgewerkte talen zichtbaar als "Binnenkort"
-- [x] Duits: basiswoordenboek (menu-teksten, voettekst, winkel, Academy-knoppen, certificaten, inloggen)
-- [x] Duits: hoofdmenu, profielmenu en voettekst
-- [ ] Duits: volledige statische én Academy-dekking bewijzen — pas daarna vrijgeven
-- [ ] Arabisch eerst, taal voor taal: volledige woordenboek- en paginavertaling, rechts-naar-linksweergave en afzonderlijke Academy/documentcontrole; niets vrijgeven vóór volledige dekking
-- [ ] Turks: zelfde aanpak
-- [ ] Spaans, Italiaans, Portugees
-- [ ] Pools, Roemeens, Tamazight (laten nalezen door moedertaalspreker)
-- [ ] Meertaligheid nalopen: overal ontbrekende vertalingen in NL/FR/EN
-- [x] Schrijffout Maxilien → Maximilien overal verbeterd
+- [x] P1.1 email-shell veilige fallback voor PUBLIC_SITE_URL
+- [x] P1.2 Node-listeners in error-capture
+- [x] P2.1 superadmin altijd geverifieerd + email_verified_at bijwerken
+- [x] P2.2 MFA-noodtoegang voor superadmin zonder 2FA-factor
+- [ ] P2.3 ROUT-knop op /auth
+- [ ] P2.4 ensurePortalSchema controleren op verse database (wacht op DATABASE_URL)
+- [~] P3 Arabisch: phrases/resources gekoppeld (ready blijft false); audit + RTL-check open; daarna tr, es, it, pt, pl, ro, zgh
+- [ ] P4 ROUT Badge API (wacht op ROUT_API_KEY + database)

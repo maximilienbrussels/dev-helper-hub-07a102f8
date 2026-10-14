@@ -15,6 +15,13 @@ if (typeof globalThis.addEventListener === "function") {
   );
 }
 
+// Node/serverless (Vercel): globalThis-listeners vangen daar niet alles op.
+const proc = (globalThis as { process?: { on?: (ev: string, cb: (e: unknown) => void) => void } }).process;
+if (proc && typeof proc.on === "function") {
+  proc.on("uncaughtException", (err) => record(err));
+  proc.on("unhandledRejection", (reason) => record(reason));
+}
+
 export function consumeLastCapturedError(): unknown {
   if (!lastCapturedError) return undefined;
   if (Date.now() - lastCapturedError.at > TTL_MS) {
