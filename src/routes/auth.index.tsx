@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PasswordInput } from "@/components/PasswordInput";
-import { BlueskyIcon, GitHubIcon, GoogleIcon, MastodonIcon } from "@/components/auth/ProviderIcons";
+import { BlueskyIcon, GitHubIcon, GoogleIcon, MastodonIcon, RoutIcon } from "@/components/auth/ProviderIcons";
 import { MastodonInstanceDialog } from "@/components/auth/MastodonInstanceDialog";
 import { BlueskyHandleDialog } from "@/components/auth/BlueskyHandleDialog";
 import { startOAuth } from "@/lib/oauth-status";
@@ -514,6 +514,7 @@ function AuthPage() {
                   { id: "github", label: "GitHub", Icon: GitHubIcon },
                   { id: "mastodon", label: "Mastodon", Icon: MastodonIcon },
                   { id: "bluesky", label: "Bluesky", Icon: BlueskyIcon },
+                  { id: "rout", label: "ROUT", Icon: RoutIcon },
                 ] as const
               ).map(({ id, label, Icon }) => (
                 <button
