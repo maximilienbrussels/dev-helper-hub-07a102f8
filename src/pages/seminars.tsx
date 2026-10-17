@@ -9,6 +9,7 @@ import { localized } from "@/lib/page-content";
 import { PageContactForm } from "@/components/PageContactForm";
 import { LocalLink } from "@/components/LocalLink";
 import { useT } from "@/lib/i18n";
+import { deepTx } from "@/lib/i18n-extra";
 import type { Lang } from "@/lib/i18n";
 import { SEMINAR_CATERING, SEMINAR_FORMATS, SEMINAR_NOTES } from "@/lib/seminars";
 import { pathFor } from "@/lib/routes-i18n";
@@ -81,14 +82,14 @@ const COPY: Record<
 
 export function SeminarsPage() {
   const { price } = usePricing();
-  const { t, lang } = useT();
-  const c = COPY[lang];
+  const { t, lang, tx } = useT();
+  const c = deepTx(tx, COPY[lang]);
   const { data: page } = useQuery({
     queryKey: ["page-content", "seminars"],
     queryFn: () => fetchPageContent({ data: { key: "seminars" } }),
   });
-  const heroTitle = page ? localized(page.hero.title, lang) : "";
-  const heroText = page ? localized(page.hero.text, lang) : "";
+  const heroTitle = page ? tx(localized(page.hero.title, lang)) : "";
+  const heroText = page ? tx(localized(page.hero.text, lang)) : "";
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -111,7 +112,7 @@ export function SeminarsPage() {
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">
           {SEMINAR_FORMATS.map((f) => {
-            const copy = f.copy[lang];
+            const copy = deepTx(tx, f.copy[lang]);
             const block = page?.blocks.find((b) => b.id === `default-${f.id}`);
             return (
               <section
@@ -160,7 +161,7 @@ export function SeminarsPage() {
           <section className="rounded-3xl border border-border/60 p-6">
             <h2 className="font-serif text-xl text-[color:var(--ink-forest)]">{c.catering}</h2>
             <ul className="mt-3 space-y-1.5 text-sm text-foreground/90">
-              {SEMINAR_CATERING[lang].map((i) => (
+              {deepTx(tx, SEMINAR_CATERING[lang]).map((i) => (
                 <li key={i}>· {i}</li>
               ))}
             </ul>
@@ -168,7 +169,7 @@ export function SeminarsPage() {
           <section className="rounded-3xl border border-border/60 p-6">
             <h2 className="font-serif text-xl text-[color:var(--ink-forest)]">{c.good}</h2>
             <ul className="mt-3 space-y-1.5 text-sm text-foreground/90">
-              {SEMINAR_NOTES[lang].map((i) => (
+              {deepTx(tx, SEMINAR_NOTES[lang]).map((i) => (
                 <li key={i}>· {i}</li>
               ))}
             </ul>
