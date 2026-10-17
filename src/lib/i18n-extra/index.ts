@@ -13,6 +13,7 @@ import arPublic from "./ar-public";
 import arCamps from "./ar-camps";
 import arResources from "./ar-resources";
 import arPhrases from "./ar-phrases";
+import arVisitors from "./ar-visitors";
 
 export type ExtraLang = "de" | "ar" | "tr" | "es" | "it" | "pt" | "pl" | "ro" | "zgh";
 
@@ -61,7 +62,7 @@ import dePhrases from "./de-phrases";
  */
 export const EXTRA_PHRASES: Partial<Record<ExtraLang, Record<string, string>>> = {
   de: { ...dePhrases, ...dePublic, ...deResources, ...deCamps },
-  ar: { ...arPublic, ...arCamps, ...arResources, ...arPhrases },
+  ar: { ...arPublic, ...arCamps, ...arResources, ...arPhrases, ...arVisitors },
 };
 
 export function translatePhrase(extra: ExtraLang | null | undefined, en: string): string {

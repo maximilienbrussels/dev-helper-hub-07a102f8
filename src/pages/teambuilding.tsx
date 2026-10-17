@@ -8,6 +8,7 @@ import { localized } from "@/lib/page-content";
 
 import { PageContactForm } from "@/components/PageContactForm";
 import { useT } from "@/lib/i18n";
+import { deepTx } from "@/lib/i18n-extra";
 import type { Lang } from "@/lib/i18n";
 import {
   TEAMBUILDING_CATERING,
@@ -92,14 +93,14 @@ const COPY: Record<
 
 export function TeamBuildingPage() {
   const { price } = usePricing();
-  const { t, lang } = useT();
-  const c = COPY[lang];
+  const { t, lang, tx } = useT();
+  const c = deepTx(tx, COPY[lang]);
   const { data: page } = useQuery({
     queryKey: ["page-content", "teambuilding"],
     queryFn: () => fetchPageContent({ data: { key: "teambuilding" } }),
   });
-  const heroTitle = page ? localized(page.hero.title, lang) : "";
-  const heroText = page ? localized(page.hero.text, lang) : "";
+  const heroTitle = page ? tx(localized(page.hero.title, lang)) : "";
+  const heroText = page ? tx(localized(page.hero.text, lang)) : "";
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -122,7 +123,7 @@ export function TeamBuildingPage() {
 
         <div className="mt-14 grid gap-6 lg:grid-cols-2">
           {TEAMBUILDING_FORMULAS.map((f) => {
-            const copy = f.copy[lang];
+            const copy = deepTx(tx, f.copy[lang]);
             const block = page?.blocks.find((b) => b.id === `default-${f.slug}`);
             return (
               <section
@@ -193,7 +194,7 @@ export function TeamBuildingPage() {
           <section className="rounded-3xl border border-border/60 p-6">
             <h2 className="font-serif text-xl text-[color:var(--ink-forest)]">{c.catering}</h2>
             <ul className="mt-3 space-y-1.5 text-sm text-foreground/90">
-              {TEAMBUILDING_CATERING[lang].map((i) => (
+              {deepTx(tx, TEAMBUILDING_CATERING[lang]).map((i) => (
                 <li key={i}>· {i}</li>
               ))}
             </ul>
@@ -201,7 +202,7 @@ export function TeamBuildingPage() {
           <section className="rounded-3xl border border-border/60 p-6">
             <h2 className="font-serif text-xl text-[color:var(--ink-forest)]">{c.good}</h2>
             <ul className="mt-3 space-y-1.5 text-sm text-foreground/90">
-              {TEAMBUILDING_NOTES[lang].map((i) => (
+              {deepTx(tx, TEAMBUILDING_NOTES[lang]).map((i) => (
                 <li key={i}>· {i}</li>
               ))}
             </ul>

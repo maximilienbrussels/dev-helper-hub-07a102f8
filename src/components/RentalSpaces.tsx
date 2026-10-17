@@ -10,6 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useT } from "@/lib/i18n";
+import { deepTx } from "@/lib/i18n-extra";
 import type { Lang } from "@/lib/i18n";
 import { sendContactMessage } from "@/lib/email.functions";
 import { useHoneypot } from "@/components/HoneypotField";
@@ -170,14 +171,14 @@ const fieldClass =
 /** Verhuuraanbod: losse ruimtes, privatisering en directe aanvraagflow. */
 export function RentalSpaces() {
   const { price } = usePricing();
-  const { lang } = useT();
-  const c = COPY[lang];
+  const { lang, tx } = useT();
+  const c = deepTx(tx, COPY[lang]);
   const [active, setActive] = useState<{ space: RentalSpace; duration: RentalDuration } | null>(
     null,
   );
   const spaces = RENTAL_SPACES.filter((s) => !s.featured);
   const vip = RENTAL_SPACES.find((s) => s.featured)!;
-  const vipCopy = vip.copy[lang];
+  const vipCopy = deepTx(tx, vip.copy[lang]);
 
   return (
     <section id="ruimtes" className="mt-16 md:mt-24">
@@ -194,7 +195,7 @@ export function RentalSpaces() {
       </h3>
       <div className="mt-4 grid gap-5 md:grid-cols-3">
         {spaces.map((s) => {
-          const copy = s.copy[lang];
+          const copy = deepTx(tx, s.copy[lang]);
           return (
             <article
               key={s.slug}
@@ -284,7 +285,7 @@ export function RentalSpaces() {
           </div>
         </div>
         <ul className="mt-6 grid gap-2 border-t border-border/60 pt-5 text-sm text-foreground/90 md:grid-cols-2">
-          {PRIVATISATION_EXTRAS[lang].map((e) => (
+          {deepTx(tx, PRIVATISATION_EXTRAS[lang]).map((e) => (
             <li key={e} className="flex gap-2">
               <Check
                 className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--color-terracotta)]"
@@ -302,7 +303,7 @@ export function RentalSpaces() {
             {c.included}
           </h3>
           <ul className="mt-4 space-y-2 text-sm text-foreground/90">
-            {RENTAL_INCLUDED[lang].map((i) => (
+            {deepTx(tx, RENTAL_INCLUDED[lang]).map((i) => (
               <li key={i} className="flex gap-2">
                 <Check
                   className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--color-terracotta)]"
@@ -318,7 +319,7 @@ export function RentalSpaces() {
             {c.rules}
           </h3>
           <ul className="mt-4 space-y-2 text-sm text-foreground/90">
-            {RENTAL_RULES[lang].map((r) => (
+            {deepTx(tx, RENTAL_RULES[lang]).map((r) => (
               <li key={r} className="flex gap-2">
                 <span
                   aria-hidden
@@ -343,8 +344,8 @@ function RentalRequestDialog({
   selection: { space: RentalSpace; duration: RentalDuration } | null;
   onClose: () => void;
 }) {
-  const { lang } = useT();
-  const c = COPY[lang];
+  const { lang, tx } = useT();
+  const c = deepTx(tx, COPY[lang]);
   const [duration, setDuration] = useState<RentalDuration>("half");
   const [date, setDate] = useState<Date | undefined>();
   const [slot, setSlot] = useState<string>(RENTAL_TIME_SLOTS[0]);
@@ -363,7 +364,7 @@ function RentalRequestDialog({
   const hp = useHoneypot();
 
   const space = selection?.space;
-  const copy = space?.copy[lang];
+  const copy = space ? deepTx(tx, space.copy[lang]) : undefined;
 
   // Synchroniseer de voorgeselecteerde formule wanneer een andere ruimte opent.
   if (selection && openedFor !== selection.space.slug) {

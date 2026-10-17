@@ -41,7 +41,7 @@ const UI = {
 } as const;
 
 export function AboutPage() {
-  const { t, lang } = useT();
+  const { t, lang, tx: translate } = useT();
   const [showAll, setShowAll] = useState(false);
   const [active, setActive] = useState<Person | null>(null);
   const loadAvatars = useServerFn(listTeamAvatars);
@@ -50,7 +50,7 @@ export function AboutPage() {
     queryFn: () => loadAvatars(),
     staleTime: 5 * 60_000,
   });
-  const tx = (o: Record<string, string>) => o[lang] ?? o.nl;
+  const tx = (o: Record<string, string>) => translate(o[lang] ?? o.nl);
 
   const PILLARS = [
     { title: t("about.pillar.welfare"), body: t("about.pillar.welfare.body") },

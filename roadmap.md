@@ -6,5 +6,5 @@
 - [x] P2.2 MFA-noodtoegang voor superadmin zonder 2FA-factor
 - [x] P2.3 ROUT-knop op /auth
 - [ ] P2.4 ensurePortalSchema controleren op verse database (wacht op DATABASE_URL)
-- [~] P3 Arabisch: phrases/resources gekoppeld (ready blijft false); audit gedaan (2281/2766 zinnen ontbreken) + RTL-check ok (dir=rtl werkt); vertalingen aanvullen; daarna tr, es, it, pt, pl, ro, zgh
+- [~] P3 Arabisch: phrases/resources gekoppeld (ready blijft false); 165 ontbrekende kandidaten aangevuld voor contact, geschiedenis, dierenpaspoorten, steun, verhuur en teambuilding; winkelbeeldtekst via tx gekoppeld; audit: 2116/2766 kandidaten ontbreken (geen releasegoedkeuring); resterend Arabisch + live Academy/documenten controleren; daarna tr, es, it, pt, pl, ro, zgh
 - [ ] P4 ROUT Badge API (wacht op ROUT_API_KEY + database)

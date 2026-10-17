@@ -6,6 +6,7 @@ import { NavHeader } from "@/components/NavHeader";
 import { LocalLink } from "@/components/LocalLink";
 import { InteractiveMap } from "@/components/InteractiveMap";
 import { useT } from "@/lib/i18n";
+import { deepTx } from "@/lib/i18n-extra";
 import { animalSlug, pathFor, speciesIn, type Lang } from "@/lib/routes-i18n";
 import { imageForSpecies } from "@/lib/animal-images";
 import { galleryFor, passportFor, speciesKey } from "@/lib/animal-passport";
@@ -148,8 +149,8 @@ function resolveSlug(slug: string, animals: AnimalDTO[], lang: Lang): Resolved {
 }
 
 export function AnimalPassportPage({ slug }: { slug: string }) {
-  const { lang } = useT();
-  const c = COPY[lang];
+  const { lang, tx } = useT();
+  const c = deepTx(tx, COPY[lang]);
   const { data: animals } = useSuspenseQuery(animalsQO);
   const { animal, zone } = useMemo(() => resolveSlug(slug, animals ?? [], lang), [slug, animals, lang]);
   const control = useMaximChatControl();
@@ -165,7 +166,7 @@ export function AnimalPassportPage({ slug }: { slug: string }) {
 
   const displayName = animal?.name ?? (zone ? zoneName(zone, lang) : slug);
   const species = animal?.species ?? zone?.species ?? "";
-  const passport = passportFor(species || zone?.nameNl || "", lang);
+  const passport = deepTx(tx, passportFor(species || zone?.nameNl || "", lang));
   const gallery = galleryFor(speciesKey(species || zone?.nameNl || ""));
   const hero = animal?.image_url || imageForSpecies(species) || gallery[0];
   const greeting = c.greet(displayName, zone);
@@ -216,7 +217,7 @@ export function AnimalPassportPage({ slug }: { slug: string }) {
     : animal
       ? [animal.name]
       : [];
-  const dietText = (zone && zoneDietRules(zone, lang)) || passport.feeding;
+  const dietText = tx((zone && zoneDietRules(zone, lang)) || passport.feeding);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
