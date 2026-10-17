@@ -12,3 +12,4 @@
 - Keep supplemental public languages on the English URL carrier and release each locale only after complete static and Academy coverage, because partial translations must remain visibly unavailable.
 - Translate public copy objects through deepTx and individual English content through tx; interpolate translated templates afterward so dynamic values retain their meaning.
 - Use scripts/public-translations-audit.cjs for repeatable candidate inventories, not release approval; rendered pages, dynamic Academy records and downloadable documents require separate checks.
+- Group supplemental visitor phrase translations in locale-specific visitor dictionaries and merge them into EXTRA_PHRASES, so public tx/deepTx callers share the same exact-English lookup.
