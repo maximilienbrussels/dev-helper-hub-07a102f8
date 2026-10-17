@@ -6,6 +6,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { NavHeader } from "@/components/NavHeader";
 import { LocalLink } from "@/components/LocalLink";
 import { useT } from "@/lib/i18n";
+import { deepTx } from "@/lib/i18n-extra";
 import type { Lang } from "@/lib/i18n";
 import { CONTACT_EMAIL } from "@/lib/contact-emails";
 import { useSiteContact } from "@/lib/use-site-config";
@@ -190,7 +191,7 @@ const COPY: Record<
 };
 
 export function ContactPage() {
-  const { t, lang } = useT();
+  const { t, lang, tx } = useT();
   // Adres, telefoon en e-mail komen uit het portaal; de constanten hierboven
   // blijven het vangnet zolang er niets is ingevuld.
   const site = useSiteContact();
@@ -199,7 +200,7 @@ export function ContactPage() {
   const contactEmail = site.email || EMAIL;
   const addressLine2 = site.address || ADDRESS_LINE2;
   const addressLine3 = [site.postalCode, site.city].filter(Boolean).join(" ") || ADDRESS_LINE3;
-  const c = COPY[lang];
+  const c = deepTx(tx, COPY[lang]);
   const { onderwerp } = useSearch({ strict: false }) as { onderwerp?: string };
   const topic = onderwerp?.trim() || "Contact";
   // Keuzelijst met onderwerpen: de beheerder bepaalt in het portaal welke
