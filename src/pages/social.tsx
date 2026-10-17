@@ -6,6 +6,7 @@ import { BlueskyIcon } from "@/components/social/BlueskyIcon";
 import { BSKY_PROFILE_URL, useBlueskyFeed } from "@/lib/bluesky";
 import { useT, type Lang } from "@/lib/i18n";
 import { handleImageError } from "@/lib/image-fallback";
+import { deepTx } from "@/lib/i18n-extra";
 
 const COPY: Record<Lang, { eyebrow: string; title: string; intro: string; follow: string }> = {
   nl: {
@@ -32,8 +33,8 @@ const COPY: Record<Lang, { eyebrow: string; title: string; intro: string; follow
 };
 
 export function SocialPage() {
-  const { lang } = useT();
-  const c = COPY[lang];
+  const { lang, tx } = useT();
+  const c = deepTx(tx, COPY[lang]);
   const { profile } = useBlueskyFeed(24);
 
   return (

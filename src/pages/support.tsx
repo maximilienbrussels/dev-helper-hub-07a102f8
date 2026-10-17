@@ -1,7 +1,8 @@
 import { PagePhotoBand } from "@/components/PagePhotoBand";
 import { NavHeader } from "@/components/NavHeader";
 import { MastodonShareButton } from "@/components/social/MastodonShareButton";
-import { useT } from "@/lib/i18n";
+import { formatT, useT } from "@/lib/i18n";
+import { deepTx } from "@/lib/i18n-extra";
 import type { Lang } from "@/lib/i18n";
 import { Copy, Smartphone, Loader2 } from "lucide-react";
 import { useState } from "react";
@@ -15,7 +16,7 @@ const COPY: Record<
   {
     formTitle: string;
     formBody: string;
-    thanks: (email: string) => string;
+    thanks: string;
     structuredRef: string;
     amountPlaceholder: string;
     nameLabel: string;
@@ -31,7 +32,7 @@ const COPY: Record<
     formTitle: "Bevestig je gift",
     formBody:
       "Laat je gegevens achter en we sturen je meteen een bevestiging met het bedrag, onze rekeninggegevens en een gestructureerde mededeling voor je overschrijving.",
-    thanks: (email) => `Bedankt! De bevestiging is onderweg naar ${email}.`,
+    thanks: "Bedankt! De bevestiging is onderweg naar {email}.",
     structuredRef: "Gestructureerde mededeling",
     amountPlaceholder: "Ander bedrag",
     nameLabel: "Naam",
@@ -46,7 +47,7 @@ const COPY: Record<
     formTitle: "Confirmez votre don",
     formBody:
       "Laissez vos coordonnées et nous vous envoyons aussitôt une confirmation avec le montant, nos coordonnées bancaires et une communication structurée pour votre virement.",
-    thanks: (email) => `Merci ! La confirmation est en route vers ${email}.`,
+    thanks: "Merci ! La confirmation est en route vers {email}.",
     structuredRef: "Communication structurée",
     amountPlaceholder: "Autre montant",
     nameLabel: "Nom",
@@ -61,7 +62,7 @@ const COPY: Record<
     formTitle: "Confirm your donation",
     formBody:
       "Leave your details and we'll immediately send you a confirmation with the amount, our account details and a structured reference for your transfer.",
-    thanks: (email) => `Thank you! The confirmation is on its way to ${email}.`,
+    thanks: "Thank you! The confirmation is on its way to {email}.",
     structuredRef: "Structured reference",
     amountPlaceholder: "Other amount",
     nameLabel: "Name",
@@ -80,8 +81,8 @@ const NAME = "ASBL Maximilien";
 const WERO_EMAIL = "dons@maximilien.brussels";
 
 export function SupportPage() {
-  const { t, lang } = useT();
-  const c0 = COPY[lang];
+  const { t, lang, tx } = useT();
+  const c0 = deepTx(tx, COPY[lang]);
   const [copied, setCopied] = useState<string | null>(null);
   const copy = (val: string, key: string) => {
     navigator.clipboard.writeText(val).then(() => {
@@ -234,8 +235,8 @@ export function SupportPage() {
 const AMOUNTS = [2500, 8000, 15000];
 
 function DonationForm() {
-  const { lang } = useT();
-  const c = COPY[lang];
+  const { lang, tx } = useT();
+  const c = deepTx(tx, COPY[lang]);
   const [naam, setNaam] = useState("");
   const [email, setEmail] = useState("");
   const [bedrag, setBedrag] = useState(2500);
@@ -279,7 +280,7 @@ function DonationForm() {
 
       {ref ? (
         <div className="mt-6 rounded-2xl border border-[color:var(--color-sage)] bg-[color:var(--surface-page)] p-5">
-          <p className="text-sm">{c.thanks(email)}</p>
+          <p className="text-sm">{formatT(c.thanks, { email })}</p>
           <p className="mt-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-muted-foreground">
             {c.structuredRef}
           </p>

@@ -4,6 +4,7 @@ import { NavHeader } from "@/components/NavHeader";
 import { PartnerLogo } from "@/components/PartnerLogo";
 import { PARTNERS, PARTNER_CATEGORIES } from "@/lib/partners";
 import { useT, type Lang } from "@/lib/i18n";
+import { deepTx } from "@/lib/i18n-extra";
 
 
 const COPY: Record<
@@ -37,8 +38,8 @@ const COPY: Record<
 };
 
 export function PartnersPage() {
-  const { t, lang } = useT();
-  const c = COPY[lang];
+  const { t, lang, tx } = useT();
+  const c = deepTx(tx, COPY[lang]);
   return (
     <div className="min-h-screen bg-background text-foreground">
       <NavHeader />
