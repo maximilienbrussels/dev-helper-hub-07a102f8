@@ -49,8 +49,8 @@ function formatEuro(cents: number): string {
 export function ShopPage() {
   const { data: products } = useSuspenseQuery(productsQO);
   const { data: hero } = useQuery(shopHeroQO);
-  const { t, lang } = useT();
-  const c = COPY[lang];
+  const { t, lang, tx } = useT();
+  const c = { heroAlt: tx(COPY[lang].heroAlt) };
   const [storyProduct, setStoryProduct] = useState<ProductDTO | null>(null);
   const [heroBroken, setHeroBroken] = useState(false);
   const heroImage = !heroBroken && hero?.url ? hero.url : heroShop;
@@ -94,7 +94,7 @@ export function ShopPage() {
                 handleImageError(e);
               }}
               src={heroImage}
-              alt={hero?.alt || c.heroAlt}
+              alt={hero?.alt ? tx(hero.alt) : c.heroAlt}
               width={1600}
               height={912}
               loading="eager"
