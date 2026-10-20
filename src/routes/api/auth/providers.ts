@@ -13,13 +13,19 @@ export const Route = createFileRoute("/api/auth/providers")({
   server: {
     handlers: {
       GET: async ({ request }) => {
-        const { authOrigin } = await import("@/lib/google-oauth.server");
+        const { authOrigin, siteOrigin } = await import("@/lib/google-oauth.server");
+        const { routCallbackUrl, ROUT_CALLBACK_PATH } = await import("@/lib/oauth-urls");
         const { hasDatabase } = await import("@/lib/neon.server");
         // Publieke info: exact de callback-URL die bij de aanbieder hoort.
         const origin = authOrigin(request);
 
         const env = (name: string) => Boolean(process.env[name]);
         const db = hasDatabase();
+        let routCallback = new URL(ROUT_CALLBACK_PATH, siteOrigin(request)).toString();
+        let routRedirectValid = true;
+        try {
+          routCallback = routCallbackUrl(siteOrigin(request), process.env["ROUT_REDIRECT_URI"]);
+        } catch { routRedirectValid = false; }
 
         const providers = [
           {
@@ -56,10 +62,14 @@ export const Route = createFileRoute("/api/auth/providers")({
           {
             // ROUT (OpenID Connect): vaste client_id, secret enkel op de server.
             id: "rout" as const,
-            configured: db && env("ROUT_CLIENT_SECRET"),
-            missing: ["ROUT_CLIENT_SECRET"].filter((n) => !env(n)),
+            configured: db && env("ROUT_CLIENT_SECRET") && routRedirectValid,
+            missing: [
+              ...["ROUT_CLIENT_SECRET"].filter((n) => !env(n)),
+              ...(!db ? ["DATABASE_URL"] : []),
+              ...(!routRedirectValid ? ["ROUT_REDIRECT_URI"] : []),
+            ],
             startPath: "/api/auth/login/rout",
-            callbackUrl: process.env["ROUT_REDIRECT_URI"] ?? `${origin}/auth/callback/rout`,
+            callbackUrl: routCallback,
           },
         ];
 

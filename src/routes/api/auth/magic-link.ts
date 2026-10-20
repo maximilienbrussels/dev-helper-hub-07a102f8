@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
+import { isInternalPath as isSafePath } from "@/lib/redirect";
 
 /**
  * POST /api/auth/magic-link
@@ -87,5 +88,3 @@ function json(body: unknown, status = 200) {
   });
 }
 
-/** Enkel paden binnen deze site (geen //andere-site of /\\andere-site). */
-const isSafePath = (x: string) => x.startsWith("/") && !x.startsWith("//") && !x.startsWith("/\\");
