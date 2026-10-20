@@ -7,6 +7,7 @@
  * "aanwezig ja/nee" en verwachte paden.
  */
 import { DEFAULT_LANG, LANGS, pathFor, type Lang } from "./routes-i18n";
+import { PUBLIC_AUTH_ORIGIN } from "./oauth-urls";
 
 export type OAuthProviderKey = "google" | "github";
 
@@ -27,7 +28,7 @@ export function canonicalOrigins(): string[] {
     .map((v) => v.trim().replace(/\/$/, ""))
     .filter(Boolean);
   const configured = (process.env["SITE_ORIGIN"] ?? "").trim().replace(/\/$/, "");
-  return [...new Set([...(configured ? [configured] : []), "https://maximilien.site", ...extra])];
+  return [...new Set([...(configured ? [configured] : []), PUBLIC_AUTH_ORIGIN, "https://maximilien.site", ...extra])];
 }
 
 export type ProviderStatus = {
@@ -115,8 +116,10 @@ export function langFromRequest(request: Request): Lang {
   for (const part of raw.split(";")) {
     const [key, ...rest] = part.trim().split("=");
     if (key === "ferme.lang") {
-      const value = decodeURIComponent(rest.join("=")).toLowerCase();
-      if (isLang(value)) return value;
+      try {
+        const value = decodeURIComponent(rest.join("=")).toLowerCase();
+        if (isLang(value)) return value;
+      } catch { /* invalid cookie must not break the error redirect */ }
     }
   }
   return DEFAULT_LANG;

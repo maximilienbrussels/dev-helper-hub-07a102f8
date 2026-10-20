@@ -6,11 +6,12 @@ import { createRemoteJWKSet, jwtVerify, type JWTPayload } from "jose";
 import { db, hasDatabase } from "./neon.server";
 import { ensureAuthSchema, type AppUser } from "./local-auth.server";
 import { readCookie, cookieHeader, siteOrigin } from "./google-oauth.server";
+import { routCallbackUrl } from "./oauth-urls";
+export { ROUT_CALLBACK_PATH } from "./oauth-urls";
 
 export const ROUT_DISCOVERY = "https://rout.be/.well-known/openid-configuration";
 export const ROUT_CLIENT_ID = "rout_JNB7g_wjSba7GYGSDJs2XQ";
 export const ROUT_SCOPES = "openid profile email linked_accounts";
-export const ROUT_CALLBACK_PATH = "/auth/callback/rout";
 export const ROUT_COOKIE = "maximilien_rout_oidc";
 
 type Discovery = {
@@ -39,9 +40,7 @@ export function routConfigured(): boolean {
 }
 
 export function routRedirectUri(request: Request): string {
-  const fixed = process.env["ROUT_REDIRECT_URI"];
-  if (fixed) return fixed;
-  return new URL(ROUT_CALLBACK_PATH, siteOrigin(request)).toString();
+  return routCallbackUrl(siteOrigin(request), process.env["ROUT_REDIRECT_URI"]);
 }
 
 const b64url = (bytes: Uint8Array) =>

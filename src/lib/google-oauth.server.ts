@@ -8,6 +8,7 @@
 import { decodeJwt } from "jose";
 import { db, hasDatabase } from "./neon.server";
 import { ensureAuthSchema, normalizeEmail, type AppUser } from "./local-auth.server";
+import { PUBLIC_AUTH_ORIGIN, requestSiteOrigin } from "./oauth-urls";
 
 export const GOOGLE_AUTH_ENDPOINT = "https://accounts.google.com/o/oauth2/v2/auth";
 export const GOOGLE_TOKEN_ENDPOINT = "https://oauth2.googleapis.com/token";
@@ -30,15 +31,11 @@ export function googleConfigured(): boolean {
 
 /** Basis-URL van de site, ook achter de preview-proxy correct. */
 export function siteOrigin(request: Request): string {
-  const url = new URL(request.url);
-  const forwardedHost = request.headers.get("x-forwarded-host");
-  if (url.hostname === "localhost" && forwardedHost) return `https://${forwardedHost}`;
-  const proto = request.headers.get("x-forwarded-proto") ?? url.protocol.replace(":", "");
-  return `${proto}://${url.host}`;
+  return requestSiteOrigin(request);
 }
 
 /** Standaard canoniek adres wanneer geen omgevingsvariabele gezet is. */
-export const DEFAULT_APP_URL = "https://maximilien.dlp.li";
+export const DEFAULT_APP_URL = PUBLIC_AUTH_ORIGIN;
 
 /** Ontwikkel- of voorvertoningshost? Daar blijven we op de eigen origin. */
 export function isEphemeralHost(host: string): boolean {

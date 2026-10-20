@@ -4,6 +4,7 @@
  */
 import { useEffect, useState } from "react";
 import type { OAuthProvider } from "@/components/auth/oauth-providers";
+import { safeRedirectPath } from "@/lib/redirect";
 
 export type ProviderState = {
   id: OAuthProvider;
@@ -65,7 +66,7 @@ export function startOAuth(
   options?: { link?: boolean },
 ) {
   const params = new URLSearchParams({
-    next: next.startsWith("/") ? next : "/account",
+    next: safeRedirectPath(next),
   });
   // Koppelmodus: hang de aanbieder aan het al aangemelde account.
   if (options?.link) params.set("link", "1");

@@ -14,6 +14,7 @@ import {
 } from "./google-oauth.server";
 import { logAuthConfig, loginErrorUrl } from "./auth-config";
 import { upsertSocialUser, type SocialProfile, type SocialProvider } from "./social-oauth.server";
+import { isInternalPath as isSafePath } from "./redirect";
 
 export function buildState(request: Request): string {
   const params = new URL(request.url).searchParams;
@@ -184,7 +185,7 @@ export async function issueSessionRedirect(
     userId: user.id,
   });
 
-  const landing = next || landingPathForRole(effectiveRole, origin);
+  const landing = next && isSafePath(next) ? next : landingPathForRole(effectiveRole, origin);
   const destination = handoff
     ? new URL(
         `/inloglink?token=${encodeURIComponent(handoff)}&next=${encodeURIComponent(landing)}`,
@@ -202,5 +203,3 @@ export async function issueSessionRedirect(
   return new Response(null, { status: 302, headers });
 }
 
-/** Enkel paden binnen deze site (geen //andere-site of /\\andere-site). */
-const isSafePath = (x: string) => x.startsWith("/") && !x.startsWith("//") && !x.startsWith("/\\");
