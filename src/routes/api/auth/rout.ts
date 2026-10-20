@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { isInternalPath } from "@/lib/redirect";
 
 /**
  * GET /api/auth/rout — start "Login met ROUT" (OIDC + PKCE S256).
@@ -14,7 +15,7 @@ export const Route = createFileRoute("/api/auth/rout")({
         const params = new URL(request.url).searchParams;
         const requested = params.get("next") ?? "";
         const next =
-          requested.startsWith("/") && !requested.startsWith("//") && !requested.startsWith("/\\")
+          isInternalPath(requested)
             ? requested
             : "";
         try {

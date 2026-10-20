@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { isInternalPath } from "@/lib/redirect";
 
 /** GET /auth/callback/rout — controleert state, wisselt de code in op de server en zet de sessie. */
 export const Route = createFileRoute("/auth_/callback/rout")({
@@ -12,12 +13,16 @@ export const Route = createFileRoute("/auth_/callback/rout")({
         const attempt = rout.readAttempt(request);
         const origin = siteOrigin(request);
         const secure = origin.startsWith("https://");
+        const state = params.get("state");
+        if (!attempt || !state || state !== attempt.state) {
+          return flow.oauthFailure(request, "rout-state");
+        }
 
         const error = params.get("error");
         if (error) {
           // Stil aanmelden mislukt: gewoon terug, de knop blijft beschikbaar.
           if (attempt?.silent && rout.mapRoutError(error) === "rout-login-nodig") {
-            const back = new URL(attempt.next || "/login", origin);
+            const back = new URL(isInternalPath(attempt.next) ? attempt.next : "/login", origin);
             back.searchParams.set("rout", "login_required");
             const headers = new Headers({ Location: back.toString(), "Cache-Control": "no-store" });
             headers.append("Set-Cookie", cookieHeader(rout.ROUT_COOKIE, "", { maxAge: 0, secure }));
@@ -27,11 +32,7 @@ export const Route = createFileRoute("/auth_/callback/rout")({
         }
 
         const code = params.get("code");
-        const state = params.get("state");
         if (!code) return flow.oauthFailure(request, "rout-zonder-code");
-        if (!attempt || !state || state !== attempt.state) {
-          return flow.oauthFailure(request, "rout-state");
-        }
 
         try {
           const claims = await rout.exchangeCode(request, code, attempt);

@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { isInternalPath as isSafePath } from "@/lib/redirect";
 
 /**
  * GET /api/auth/google
@@ -83,5 +84,3 @@ export const Route = createFileRoute("/api/auth/google")({
   },
 });
 
-/** Enkel paden binnen deze site (geen //andere-site of /\\andere-site). */
-const isSafePath = (x: string) => x.startsWith("/") && !x.startsWith("//") && !x.startsWith("/\\");

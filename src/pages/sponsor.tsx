@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { NavHeader } from "@/components/NavHeader";
-import { useT } from "@/lib/i18n";
+import { formatT, useT } from "@/lib/i18n";
+import { deepTx } from "@/lib/i18n-extra";
 import type { Lang } from "@/lib/i18n";
 import { ResidentPhoto } from "@/components/ResidentPhoto";
 import { useAlbumPhotos } from "@/lib/use-album-photos";
@@ -31,7 +32,7 @@ const COPY: Record<
     unavailable: string;
     processing: string;
     thanksTitle: string;
-    thanksBody: (animal: string) => string;
+    thanksBody: string;
     download: string;
     error: string;
     back: string;
@@ -49,7 +50,7 @@ const COPY: Record<
     unavailable: "Betalingen zijn tijdelijk niet beschikbaar. Probeer later opnieuw.",
     processing: "Je betaling wordt verwerkt…",
     thanksTitle: "Bedankt voor je steun! 💚",
-    thanksBody: (animal) => `Je bent nu officieel Peter/Meter van ${animal}.`,
+    thanksBody: "Je bent nu officieel Peter/Meter van {animal}.",
     download: "Download certificaat",
     error: "Er ging iets mis. Probeer later opnieuw.",
     back: "Kies opnieuw",
@@ -66,7 +67,7 @@ const COPY: Record<
     unavailable: "Les paiements sont temporairement indisponibles. Réessayez plus tard.",
     processing: "Votre paiement est en cours de traitement…",
     thanksTitle: "Merci pour votre soutien ! 💚",
-    thanksBody: (animal) => `Vous êtes désormais officiellement marraine/parrain de ${animal}.`,
+    thanksBody: "Vous êtes désormais officiellement marraine/parrain de {animal}.",
     download: "Télécharger le certificat",
     error: "Une erreur est survenue. Réessayez plus tard.",
     back: "Recommencer",
@@ -83,7 +84,7 @@ const COPY: Record<
     unavailable: "Payments are temporarily unavailable. Please try again later.",
     processing: "Your payment is being processed…",
     thanksTitle: "Thank you for your support! 💚",
-    thanksBody: (animal) => `You are now officially sponsoring ${animal}.`,
+    thanksBody: "You are now officially sponsoring {animal}.",
     download: "Download certificate",
     error: "Something went wrong. Please try again later.",
     back: "Start over",
@@ -100,9 +101,9 @@ type StatusResponse = {
 };
 
 export function SponsorPage() {
-  const { lang } = useT();
+  const { lang, tx } = useT();
 
-  const c = COPY[lang];
+  const c = deepTx(tx, COPY[lang]);
   const { data: animals } = useSuspenseQuery(animalsQO);
 
   const [sessionId, setSessionId] = useState<string | null>(null);
@@ -148,7 +149,7 @@ export function SponsorPage() {
             <>
               <h1 className="font-serif text-3xl text-foreground">{c.thanksTitle}</h1>
               <p className="mt-4 text-muted-foreground">
-                {c.thanksBody(statusData.animalName ?? "")}
+                {formatT(c.thanksBody, { animal: statusData.animalName ?? "" })}
               </p>
               {statusData.certificateId ? (
                 <a
@@ -180,6 +181,7 @@ function SponsorForm({
   c: (typeof COPY)[Lang];
 }) {
   const albumPhotos = useAlbumPhotos();
+  const { tx } = useT();
   const [animal, setAnimal] = useState<Animal | null>(null);
   const [tier, setTier] = useState<Tier | null>(null);
   const [name, setName] = useState("");
@@ -250,12 +252,12 @@ function SponsorForm({
                     <ResidentPhoto
                       animal={a}
                       albums={albumPhotos}
-                      speciesLabel={speciesIn(a.species, lang)}
+                      speciesLabel={tx(speciesIn(a.species, lang))}
                     />
                   </div>
                   <div className="p-3">
                     <p className="font-serif text-lg text-foreground">
-                      {a.name} de {speciesIn(a.species, lang)}
+                      {a.name} · {tx(speciesIn(a.species, lang))}
                     </p>
                   </div>
                 </button>
@@ -277,7 +279,7 @@ function SponsorForm({
                       : "border-border text-foreground"
                   }`}
                 >
-                  {t.label[lang]}
+                  {tx(t.label[lang])}
                 </button>
               ))}
             </div>

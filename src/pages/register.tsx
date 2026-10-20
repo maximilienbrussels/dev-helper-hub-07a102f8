@@ -4,7 +4,8 @@ import { z } from "zod";
 import { Loader2 } from "lucide-react";
 import { LocalLink } from "@/components/LocalLink";
 import { pathFor } from "@/lib/routes-i18n";
-import { useT, type Lang } from "@/lib/i18n";
+import { formatT, useT, type Lang } from "@/lib/i18n";
+import { deepTx } from "@/lib/i18n-extra";
 import { toast } from "sonner";
 import { friendlyAuthError } from "@/lib/auth-errors";
 import { peekRedirect, safeRedirectPath, stashRedirect } from "@/lib/redirect";
@@ -25,7 +26,10 @@ type RegCopy = {
   title: string;
   lede: string;
   confirmTitle: string;
-  confirmBody: (email: string) => string;
+  confirmBody: string;
+  passwordReady: string;
+  confirmationSent: string;
+  mailUnavailable: string;
   first: string;
   last: string;
   optional: string;
@@ -47,7 +51,10 @@ const REG_COPY: Record<Lang, RegCopy> = {
     title: "Maak je account aan",
     lede: "Spaar Hoefjes, volg je bestellingen en bewaar je academy-certificaten.",
     confirmTitle: "Bevestig je e-mailadres",
-    confirmBody: (e) => `We stuurden een bevestigingslink naar ${e}.`,
+    confirmBody: "We stuurden een bevestigingslink naar {email}.",
+    passwordReady: "Je account is aangemaakt. Je kan meteen inloggen met je wachtwoord.",
+    confirmationSent: "We stuurden je een bevestigingslink per e-mail.",
+    mailUnavailable: "Je account voor {email} staat klaar. De bevestigingsmail vertrok niet, maar je kan meteen inloggen met je wachtwoord.",
     first: "Voornaam",
     last: "Achternaam",
     optional: "(optioneel)",
@@ -67,7 +74,10 @@ const REG_COPY: Record<Lang, RegCopy> = {
     title: "Créez votre compte",
     lede: "Collectez des Sabots, suivez vos commandes et conservez vos certificats academy.",
     confirmTitle: "Confirmez votre adresse e-mail",
-    confirmBody: (e) => `Nous avons envoyé un lien de confirmation à ${e}.`,
+    confirmBody: "Nous avons envoyé un lien de confirmation à {email}.",
+    passwordReady: "Votre compte est créé. Vous pouvez vous connecter avec votre mot de passe.",
+    confirmationSent: "Nous vous avons envoyé un lien de confirmation par e-mail.",
+    mailUnavailable: "Votre compte pour {email} est prêt. L'e-mail de confirmation n'a pas été envoyé, mais vous pouvez vous connecter avec votre mot de passe.",
     first: "Prénom",
     last: "Nom",
     optional: "(facultatif)",
@@ -87,7 +97,10 @@ const REG_COPY: Record<Lang, RegCopy> = {
     title: "Create your account",
     lede: "Collect Hooves, track your orders and keep your academy certificates.",
     confirmTitle: "Confirm your email address",
-    confirmBody: (e) => `We sent a confirmation link to ${e}.`,
+    confirmBody: "We sent a confirmation link to {email}.",
+    passwordReady: "Your account has been created. You can sign in with your password now.",
+    confirmationSent: "We sent you a confirmation link by email.",
+    mailUnavailable: "Your account for {email} is ready. The confirmation email could not be sent, but you can sign in with your password now.",
     first: "First name",
     last: "Last name",
     optional: "(optional)",
@@ -111,8 +124,8 @@ export function RegisterPage() {
   const navigate = useNavigate();
   const search = useSearch({ strict: false }) as z.infer<typeof searchSchema>;
   const redirectTo = safeRedirectPath(peekRedirect(), "/account");
-  const { lang } = useT();
-  const rc = REG_COPY[lang];
+  const { lang, tx } = useT();
+  const rc = deepTx(tx, REG_COPY[lang]);
   const [voornaam, setVoornaam] = useState("");
   const [achternaam, setAchternaam] = useState("");
   const [email, setEmail] = useState("");
@@ -137,8 +150,8 @@ export function RegisterPage() {
       setSent(true);
       toast.success(
         zonderMail
-          ? "Je account is aangemaakt. Je kan meteen inloggen met je wachtwoord."
-          : "We stuurden je een bevestigingslink per e-mail.",
+          ? rc.passwordReady
+          : rc.confirmationSent,
       );
     } catch (err) {
       toast.error(friendlyAuthError(err instanceof Error ? err.message : rc.failed));
@@ -177,8 +190,8 @@ export function RegisterPage() {
               <h2 className="text-lg font-semibold">{rc.confirmTitle}</h2>
               <p className="mt-2 text-sm text-muted-foreground">
                 {magicFallback
-                  ? `Je account voor ${email} staat klaar. De bevestigingsmail vertrok niet, maar je kan meteen inloggen met je wachtwoord.`
-                  : rc.confirmBody(email)}
+                  ? formatT(rc.mailUnavailable, { email })
+                  : formatT(rc.confirmBody, { email })}
 
               </p>
             </div>

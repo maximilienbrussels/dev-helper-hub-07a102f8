@@ -1,6 +1,7 @@
 import { NavHeader } from "@/components/NavHeader";
 import { PageContactForm } from "@/components/PageContactForm";
 import { useT, type Lang } from "@/lib/i18n";
+import { deepTx } from "@/lib/i18n-extra";
 import { ExternalLink, Recycle, ShieldCheck, MapPin } from "lucide-react";
 
 export const MURENA_PARTNER_URL = "https://murena.com/partner/Maximilienbrussels/";
@@ -102,8 +103,8 @@ const COPY: Record<Lang, Copy> = {
 const ICONS = [Recycle, ShieldCheck, MapPin];
 
 export function FairTechPage() {
-  const { lang } = useT();
-  const c = COPY[lang];
+  const { lang, tx } = useT();
+  const c = deepTx(tx, COPY[lang]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">

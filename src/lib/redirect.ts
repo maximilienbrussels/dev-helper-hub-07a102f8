@@ -1,10 +1,18 @@
 const KEY = "scos:post-login-redirect";
 
+/** Validate with browser URL semantics, including backslash and control handling. */
+export function isInternalPath(value: string): boolean {
+  if (!value.startsWith("/") || value.startsWith("//") || /[\\\u0000-\u0020\u007f]/.test(value)) return false;
+  try {
+    return new URL(value, "https://maximilien.brussels").origin === "https://maximilien.brussels";
+  } catch { return false; }
+}
+
 /** Alleen interne, same-origin paden toestaan (geen open redirect). */
 export function safeRedirectPath(value: string | null | undefined, fallback = "/account"): string {
   if (!value) return fallback;
   // "//evil.com" en "http://evil.com" blokkeren
-  if (!value.startsWith("/") || value.startsWith("//")) return fallback;
+  if (!isInternalPath(value)) return fallback;
   if (value.startsWith("/login") || value.startsWith("/register")) return fallback;
   return value;
 }
