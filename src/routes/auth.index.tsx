@@ -230,6 +230,18 @@ function AuthPage() {
 
   useEffect(() => {
     setPasskeySupported(isPasskeySupported());
+    // Teruggestuurd door de portaalcontrole: zeg duidelijk waarom.
+    const url = new URL(window.location.href);
+    const denied = url.searchParams.get("geen_toegang");
+    if (denied) {
+      const who = denied !== "1" ? ` (${denied})` : "";
+      toast.error(
+        `Je bent aangemeld${who}, maar dit account heeft geen toegang tot het beheerportaal. Vraag een beheerder om je toe te voegen, of log uit en meld je aan met je werkadres.`,
+        { duration: 15000 },
+      );
+      url.searchParams.delete("geen_toegang");
+      window.history.replaceState(null, "", url.toString());
+    }
   }, []);
 
   useEffect(() => {
