@@ -344,9 +344,9 @@ export async function resolveTeamAccess(
   // Noodtoegang: een vaste eigenaar zonder ingestelde tweede stap wordt niet
   // buitengesloten (anders lus /beveiliging ↔ /auth). Hij ziet wel een waarschuwing.
   if (!enrolled) {
-    const snap = await resolveAccessRaw(context).catch(() => null);
-    if (snap?.isFixedOwner) {
-      console.warn("[mfa] noodtoegang voor superadmin zonder 2FA:", snap.email);
+    // Geen tweede volledige controle nodig: vaste eigenaars gelden als bevestigd.
+    if (raw.fullAccess && isSuperAdminEmail(raw.email)) {
+      console.warn("[mfa] noodtoegang voor superadmin zonder 2FA:", raw.email);
       return { ...raw, mfa: "setup" };
     }
   }
