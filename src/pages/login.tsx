@@ -275,23 +275,16 @@ export function LoginPage() {
     setPasskeySupported(isPasskeySupported());
   }, []);
 
-  // Stil aanmelden met ROUT (prompt=none), één keer per browsersessie.
-  // Bij login_required komen we terug met ?rout=login_required en blijft de knop staan.
+  // Geen automatische stille ROUT-login: ROUT negeert prompt=none en toont zijn
+  // eigen inlogpagina, wat bezoekers wegleidt en de state-cookie laat botsen.
+  // ROUT start alleen nog wanneer de bezoeker zelf op de knop klikt.
   useEffect(() => {
-    if (authLoading || isLoggedIn || search.error) return;
-    if (!configuredProviders.includes("rout")) return;
     const url = new URL(window.location.href);
     if (url.searchParams.get("rout") === "login_required") {
-      sessionStorage.setItem("rout_silent_tried", "1");
       url.searchParams.delete("rout");
       window.history.replaceState(null, "", url.toString());
-      return;
     }
-    if (sessionStorage.getItem("rout_silent_tried")) return;
-    sessionStorage.setItem("rout_silent_tried", "1");
-    const next = url.pathname + url.search;
-    window.location.assign(`/api/auth/rout?silent=1&next=${encodeURIComponent(next)}`);
-  }, [authLoading, isLoggedIn, configuredProviders, search.error]);
+  }, []);
 
   async function afterAuth() {
     await router.invalidate();
