@@ -15,7 +15,11 @@ export const Route = createFileRoute("/_authenticated")({
     if (access?.mfa && !access.allowed) {
       throw redirect({ href: `/beveiliging?next=${encodeURIComponent(location.pathname)}` });
     }
-    if (!access?.allowed) throw redirect({ to: "/auth" });
+    if (!access?.allowed) {
+      throw redirect({
+        href: `/auth?geen_toegang=${encodeURIComponent(data.user.email ?? "1")}`,
+      });
+    }
     if (access.mfa === "setup") {
       console.warn("Tweestapsverificatie nog niet ingesteld — stel ze in via /beveiliging.");
     }
