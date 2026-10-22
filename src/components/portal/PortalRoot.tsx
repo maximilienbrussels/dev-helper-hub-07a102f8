@@ -79,8 +79,11 @@ export const PAGE_PERMISSION: Record<PortalPage, Permission> = {
 export function PortalRoot({ page, lang }: { page: PortalPage; lang: Lang }) {
   const navigate = useNavigate();
   const [ready, setReady] = useState(false);
+  const [failed, setFailed] = useState<string | null>(null);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
+    setFailed(null);
     let cancelled = false;
     void (async () => {
       const { data, error } = await supabase.auth.getUser();
@@ -88,13 +91,25 @@ export function PortalRoot({ page, lang }: { page: PortalPage; lang: Lang }) {
         void navigate({ to: "/auth", replace: true });
         return;
       }
-      const access = await checkPortalAccess().catch(() => null);
-      if (access?.mfa) {
+      let access: Awaited<ReturnType<typeof checkPortalAccess>> | null = null;
+      try {
+        access = await checkPortalAccess();
+      } catch (err) {
+        // Storing of time-out: niet stil terugsturen, maar uitleggen en opnieuw laten proberen.
+        console.error("[portal] toegangscontrole mislukt", err);
+        if (!cancelled) {
+          setFailed(err instanceof Error && err.message ? err.message : "Onbekende fout");
+        }
+        return;
+      }
+      if (access?.mfa && !access.allowed) {
         window.location.assign(`/beveiliging?next=${encodeURIComponent(window.location.pathname)}`);
         return;
       }
       if (!access?.allowed) {
-        void navigate({ to: "/auth", replace: true });
+        window.location.replace(
+          `/auth?geen_toegang=${encodeURIComponent(data.user.email ?? "1")}`,
+        );
         return;
       }
       if (!cancelled) setReady(true);
@@ -102,7 +117,25 @@ export function PortalRoot({ page, lang }: { page: PortalPage; lang: Lang }) {
     return () => {
       cancelled = true;
     };
-  }, [navigate]);
+  }, [navigate, attempt]);
+
+  if (failed)
+    return (
+      <div className="mx-auto mt-10 max-w-md rounded-2xl border border-border bg-card p-6 text-center text-sm">
+        <p className="font-semibold">De toegangscontrole lukte niet</p>
+        <p className="mt-2 text-muted-foreground">
+          De server antwoordde niet op tijd of gaf een fout. Je bent nog aangemeld.
+        </p>
+        <p className="mt-2 break-words text-xs text-muted-foreground">{failed}</p>
+        <button
+          type="button"
+          onClick={() => setAttempt((n) => n + 1)}
+          className="mt-4 inline-flex min-h-10 items-center rounded-md bg-primary px-4 text-primary-foreground"
+        >
+          Opnieuw proberen
+        </button>
+      </div>
+    );
 
   if (!ready)
     return (

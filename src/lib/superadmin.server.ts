@@ -14,8 +14,16 @@
 import { db } from "./neon.server";
 import { PERMISSIONS } from "./rights.functions";
 
+/** Per serverinstantie: herstel hoogstens om de 10 minuten (anders tientallen queries per klik). */
+const recent = new Map<string, number>();
+const REFRESH_MS = 10 * 60 * 1000;
+
 export async function ensureSuperAdmin(email: string, userId: string | null): Promise<void> {
   const mail = email.trim().toLowerCase();
+  const key = `${mail}|${userId ?? ""}`;
+  const last = recent.get(key);
+  if (last && Date.now() - last < REFRESH_MS) return;
+  recent.set(key, Date.now());
   const sql = db();
 
   try {
@@ -77,15 +85,25 @@ export async function ensureSuperAdmin(email: string, userId: string | null): Pr
   }
 
   try {
-    for (const permission of PERMISSIONS) {
-      await sql`
-        insert into role_permissions (role, permission, allowed, updated_at)
-        values ('super_admin', ${permission}, true, now())
-        on conflict (role, permission) do update set allowed = true, updated_at = now()
-      `;
-    }
+    // Eén query voor alle rechten in plaats van één per recht.
+    await sql`
+      insert into role_permissions (role, permission, allowed, updated_at)
+      select 'super_admin'::public.app_role, p, true, now()
+        from unnest(${[...PERMISSIONS]}::text[]) as p
+      on conflict (role, permission) do update set allowed = true, updated_at = now()
+    `;
   } catch (error) {
-    console.warn("[superadmin] role_permissions bijwerken mislukt:", describe(error));
+    try {
+      for (const permission of PERMISSIONS) {
+        await sql`
+          insert into role_permissions (role, permission, allowed, updated_at)
+          values ('super_admin', ${permission}, true, now())
+          on conflict (role, permission) do update set allowed = true, updated_at = now()
+        `;
+      }
+    } catch (fallback) {
+      console.warn("[superadmin] role_permissions bijwerken mislukt:", describe(error), describe(fallback));
+    }
   }
 }
 
