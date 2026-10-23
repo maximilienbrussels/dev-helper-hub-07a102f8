@@ -28,11 +28,11 @@ export const Route = createFileRoute("/_authenticated")({
     return { user: data.user, portalRole: access.role };
   },
   component: PortalLayout,
-  errorComponent: ({ reset }) => (
+  errorComponent: () => (
     <main className="mx-auto max-w-md space-y-4 px-4 py-12 text-center">
       <h1 className="font-semibold">De toegangscontrole lukte niet</h1>
       <p className="text-sm text-muted-foreground">Je sessie is niet gewist. Probeer opnieuw zodra de verbinding hersteld is.</p>
-      <Button onClick={reset}>Opnieuw proberen</Button>
+      <Button onClick={() => window.location.reload()}>Opnieuw proberen</Button>
       <Button variant="outline" asChild><a href="/auth">Naar aanmelden</a></Button>
     </main>
   ),
