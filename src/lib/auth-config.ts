@@ -8,6 +8,7 @@
  */
 import { DEFAULT_LANG, LANGS, pathFor, type Lang } from "./routes-i18n";
 import { PUBLIC_AUTH_ORIGIN } from "./oauth-urls";
+import { detectAppMode } from "./app-mode";
 
 export type OAuthProviderKey = "google" | "github";
 
@@ -133,7 +134,8 @@ export function loginErrorUrl(
   provider?: OAuthProviderKey | string,
 ): string {
   const lang = langFromRequest(request);
-  const url = new URL(pathFor("login", lang), origin);
+  const mode = detectAppMode(new URL(origin).hostname);
+  const url = new URL(mode === "public" ? pathFor("login", lang) : "/auth", origin);
   url.searchParams.set("error", "oauth_failed");
   url.searchParams.set("reason", reason);
   if (provider) url.searchParams.set("provider", String(provider));

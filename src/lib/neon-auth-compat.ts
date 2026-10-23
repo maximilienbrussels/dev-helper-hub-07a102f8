@@ -74,9 +74,9 @@ function toUser(raw: AppUser | null | undefined): CompatUser | null {
 export function readSessionToken(): string | null {
   if (typeof window === "undefined") return null;
   try {
-    return window.localStorage.getItem(STORAGE_KEY);
+    return window.localStorage.getItem(STORAGE_KEY) ?? cachedToken;
   } catch {
-    return null;
+    return cachedToken;
   }
 }
 
@@ -126,9 +126,10 @@ async function loadSession(force = false): Promise<CompatSession> {
     cachedToken = token;
     cached = { user: toUser(user)!, access_token: token };
     return cached;
-  } catch {
-    // Server tijdelijk onbereikbaar: sessie behouden i.p.v. uitloggen.
-    return cached;
+  } catch (error) {
+    // Een storing is geen bewijs dat de gebruiker is uitgelogd.
+    if (cached && cachedToken === token) return cached;
+    throw error;
   }
 }
 

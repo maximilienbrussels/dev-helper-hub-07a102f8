@@ -14,3 +14,4 @@
 - Use scripts/public-translations-audit.cjs for repeatable candidate inventories, not release approval; rendered pages, dynamic Academy records and downloadable documents require separate checks.
 - Group supplemental visitor phrase translations in locale-specific visitor dictionaries and merge them into EXTRA_PHRASES, so public tx/deepTx callers share the same exact-English lookup.
 - Keep pure OAuth URL validation in oauth-urls and internal return-path validation in redirect; share those rules across providers so callback cookies stay same-origin and malformed redirects cannot escape the site.
+- Use the central portal access result for login navigation, coalesce concurrent auth events, and surface failed checks without redirecting as denied; transient outages must not create login loops.

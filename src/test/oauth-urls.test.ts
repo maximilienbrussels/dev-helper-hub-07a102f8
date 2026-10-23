@@ -1,7 +1,7 @@
 import { describe, expect, it, afterEach, vi } from "vitest";
 import { PUBLIC_AUTH_ORIGIN, requestSiteOrigin, routCallbackUrl } from "@/lib/oauth-urls";
 import { isInternalPath, safeRedirectPath } from "@/lib/redirect";
-import { canonicalOrigins, langFromRequest } from "@/lib/auth-config";
+import { canonicalOrigins, langFromRequest, loginErrorUrl } from "@/lib/auth-config";
 
 afterEach(() => vi.unstubAllEnvs());
 
@@ -38,6 +38,9 @@ describe("public domain and ROUT callback rules", () => {
 });
 
 describe("internal login return paths", () => {
+  it("keeps failed Google login on the admin login page", () => {
+    expect(new URL(loginErrorUrl("https://maximilien.site", new Request("https://maximilien.site/api/auth/google"), "google-niet-geconfigureerd", "google")).pathname).toBe("/auth");
+  });
   it.each(["//evil.example", "/\\evil.example", "/\t/evil.example", "/\n/evil.example", "https://evil.example", "/path\\other"])("rejects unsafe return path %j", (path) => {
     expect(isInternalPath(path)).toBe(false);
     expect(safeRedirectPath(path)).toBe("/account");
