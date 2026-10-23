@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
 import { ArrowRight, Fingerprint, KeyRound, Loader2, Mail } from "lucide-react";
@@ -31,6 +31,7 @@ import { getPublicUrl } from "@/lib/urls";
 import { resolveAppMode, postLoginPathFor } from "@/lib/app-mode";
 import { isPasskeySupported, passkeyErrorMessage } from "@/lib/auth/passkey";
 import { deliveryReasonMessage } from "@/lib/auth-errors";
+import { portalLoginDestination, singleFlight } from "@/lib/portal-login";
 
 type BrevoProbe = { url: string; status: number; ok: boolean; ms: number; body: string } | null;
 type BrevoDiagnosis = {
@@ -112,6 +113,7 @@ function AuthPage() {
   const [activationHint, setActivationHint] = useState<string | null>(null);
   const [resetSent, setResetSent] = useState(false);
   const [customerSession, setCustomerSession] = useState(false);
+  const [accessFailed, setAccessFailed] = useState(false);
   const [magicSent, setMagicSent] = useState(false);
   const [passkeySupported, setPasskeySupported] = useState(false);
   const [devCode, setDevCode] = useState<string | null>(null);
@@ -130,34 +132,26 @@ function AuthPage() {
   const runDiagnose = useServerFn(diagnoseBrevo);
   const checkAccess = useServerFn(checkPortalAccess);
 
-  async function routeAuthenticatedUser(): Promise<boolean> {
+  const routeAuthenticatedUser = useMemo(() => singleFlight(async (): Promise<boolean> => {
     const { data } = await supabase.auth.getUser();
     if (!data.user) return false;
 
-    let staff = false;
     try {
       const access = await checkAccess();
-      if (access?.mfa) {
-        await navigate({
-          href: `/beveiliging?next=${encodeURIComponent(postLoginPath)}`,
-          replace: true,
-        });
+      setAccessFailed(false);
+      const destination = portalLoginDestination(access, postLoginPath);
+      if (destination) {
+        await navigate({ href: destination, replace: true });
         return true;
       }
-      staff = Boolean(access?.allowed);
     } catch {
-      const { data: rpc } = await supabase.rpc("is_staff", { _user_id: data.user.id });
-      staff = Boolean(rpc);
-    }
-
-    if (staff) {
-      await navigate({ to: postLoginPath, replace: true });
-      return true;
+      setAccessFailed(true);
+      return false;
     }
 
     setCustomerSession(true);
     return false;
-  }
+  }), [checkAccess, navigate, postLoginPath]);
 
   /** Diepe Brevo-diagnose (enkel hoofdbeheerder): toont de exacte faalreden. */
   async function diagnose(sendTest: boolean) {
@@ -232,6 +226,16 @@ function AuthPage() {
     setPasskeySupported(isPasskeySupported());
     // Teruggestuurd door de portaalcontrole: zeg duidelijk waarom.
     const url = new URL(window.location.href);
+    if (url.searchParams.get("error") === "oauth_failed") {
+      const reason = url.searchParams.get("reason") ?? "";
+      const provider = url.searchParams.get("provider") ?? "de gekozen aanbieder";
+      toast.error(reason.includes("niet-geconfigureerd")
+        ? `Inloggen met ${provider} is op dit adres nog niet ingesteld. Vraag een beheerder om de inlogkoppeling te controleren.`
+        : `Inloggen met ${provider} lukte niet. Probeer opnieuw of gebruik je e-mailadres.`,
+        { duration: 15000 });
+      for (const key of ["error", "reason", "provider"]) url.searchParams.delete(key);
+      window.history.replaceState(null, "", url.toString());
+    }
     const denied = url.searchParams.get("geen_toegang");
     if (denied) {
       const who = denied !== "1" ? ` (${denied})` : "";
@@ -249,7 +253,8 @@ function AuthPage() {
 
     async function route() {
       if (!active) return;
-      await routeAuthenticatedUser();
+      try { await routeAuthenticatedUser(); }
+      catch { if (active) setAccessFailed(true); }
     }
 
     void route();
@@ -261,7 +266,7 @@ function AuthPage() {
       active = false;
       sub.subscription.unsubscribe();
     };
-  }, [navigate, checkAccess]);
+  }, [routeAuthenticatedUser]);
 
   async function signIn(e: React.FormEvent) {
     e.preventDefault();
@@ -411,6 +416,12 @@ function AuthPage() {
           </p>
         </div>
 
+        {accessFailed ? (
+          <div role="alert" className="mb-4 space-y-3 text-center text-sm">
+            <p>De toegangscontrole lukte niet. Je bent niet uitgelogd; probeer opnieuw.</p>
+            <Button variant="outline" onClick={() => void routeAuthenticatedUser().catch(() => setAccessFailed(true))}>Opnieuw proberen</Button>
+          </div>
+        ) : null}
         {customerSession ? (
           <div className="rounded-lg border border-border bg-card p-5 text-center text-sm">
             <p className="font-semibold">Je bent ingelogd als klant</p>
