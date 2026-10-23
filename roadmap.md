@@ -9,3 +9,4 @@
 - [~] P3 Alle talen volledig afwerken: nl/fr/en controleren; de/ar/tr/es/it/pt/pl/ro/zgh aanvullen, publieke pagina’s en Academy/documenten apart controleren; elke taal blijft ready=false tot volledige controle. Arabisch: 2116/2766 inventariskandidaten ontbreken bij aanvang.
 - [ ] P4 ROUT Badge API (wacht op ROUT_API_KEY + database)
 - [~] P5 https://maximilien.brussels/ als publiek domein controleren: domeinstatus, redirect-URL’s en ROUT-login/callbacks; fouten oplossen en tests uitvoeren.
+- [~] P6 Beheerlogin: terugval bij toegangscontrole oplossen, e-mailinvoer en Google-start controleren; echte login op Vercel verifiëren zodra een testsessie beschikbaar is.
