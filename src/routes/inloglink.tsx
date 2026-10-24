@@ -33,6 +33,10 @@ export const Route = createFileRoute("/inloglink")({
   component: LoginLinkPage,
 });
 
+type LinkResult = { token: string; user: Parameters<typeof applySession>[1]; next: string };
+/** Eén verzilvering per token, ook als het effect twee keer draait. */
+const redemptions = new Map<string, Promise<LinkResult>>();
+
 function LoginLinkPage() {
   const { token, next } = Route.useSearch();
   const resolve = useServerFn(resolveLoginLink);
@@ -46,11 +50,12 @@ function LoginLinkPage() {
     }
     void (async () => {
       try {
-        const res = (await resolve({ data: { token, next } })) as {
-          token: string;
-          user: Parameters<typeof applySession>[1];
-          next: string;
-        };
+        let pending = redemptions.get(token);
+        if (!pending) {
+          pending = resolve({ data: { token, next } }) as Promise<LinkResult>;
+          redemptions.set(token, pending);
+        }
+        const res = await pending;
         if (!active) return;
         applySession(res.token, res.user);
         window.location.replace(res.next || "/account");
