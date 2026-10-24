@@ -18,16 +18,27 @@ export const Route = createFileRoute("/api/public/calendar/feed")({
         const sql = db();
 
         const settings = (await sql`
-          select profile_id::text as profile_id, include_assigned, include_schools, include_all
-          from calendar_feed_tokens where token = ${token}
+          select t.profile_id::text as profile_id, p.email, t.include_assigned, t.include_schools, t.include_all
+          from calendar_feed_tokens t
+          join profiles p on p.id = t.profile_id
+          where t.token = ${token} and coalesce(p.active, false) = true
         `) as Array<{
           profile_id: string;
+          email: string | null;
           include_assigned: boolean;
           include_schools: boolean;
           include_all: boolean;
         }>;
         const cfg = settings[0];
         if (!cfg) return new Response("Onbekend token", { status: 404 });
+
+        // Oud-medewerkers: de link werkt enkel zolang het profiel nog agendarechten heeft.
+        const { hasPermission } = await import("@/lib/permission-core.server");
+        const stillAllowed = await hasPermission(
+          { userId: cfg.profile_id, claims: { sub: cfg.profile_id, email: cfg.email ?? undefined } } as never,
+          "view_calendar",
+        ).catch(() => false);
+        if (!stillAllowed) return new Response("Onbekend token", { status: 404 });
 
         const rows = (await sql`
           select b.id::text as id, b.client_name, b.type, b.location_id,

@@ -346,7 +346,7 @@ export async function resolveTeamAccess(
   if (!enrolled) {
     // Geen tweede volledige controle nodig: vaste eigenaars gelden als bevestigd.
     if (raw.fullAccess && isSuperAdminEmail(raw.email)) {
-      console.warn("[mfa] noodtoegang voor superadmin zonder 2FA:", raw.email);
+      console.warn("[mfa] noodtoegang voor superadmin zonder 2FA");
       return { ...raw, mfa: "setup" };
     }
   }

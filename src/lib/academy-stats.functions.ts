@@ -30,9 +30,13 @@ export const startPoging = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const sql = db();
     try {
+      // Alleen voor bestaande academies, met een vragenaantal dat de test kan hebben.
       const rows = (await sql`
         insert into academy_pogingen (academy_id, doelgroep, taal, vragen_totaal)
-        values (${data.academy_id}::uuid, ${data.doelgroep}, ${data.taal}, ${data.vragen_totaal})
+        select a.id, ${data.doelgroep}, ${data.taal},
+               least(${data.vragen_totaal}, greatest(coalesce(a.vragen_per_test, 0), 50))
+          from academies a
+         where a.id = ${data.academy_id}::uuid
         returning id
       `) as Array<{ id: string }>;
       return { poging_id: rows[0]?.id ?? null };
@@ -59,14 +63,22 @@ export const logAntwoord = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const sql = db();
     try {
-      await sql`
-        update academy_pogingen
-           set beantwoord = beantwoord + 1,
-               juist = juist + ${data.juist ? 1 : 0},
-               laatste_module = greatest(laatste_module, ${data.module}),
+      // Alleen een lopende poging, binnen het vragenaantal, en een vraag van
+      // dezelfde academy telt mee; anders worden er geen statistieken bijgewerkt.
+      const updated = (await sql`
+        update academy_pogingen p
+           set beantwoord = p.beantwoord + 1,
+               juist = p.juist + ${data.juist ? 1 : 0},
+               laatste_module = greatest(p.laatste_module, ${data.module}),
                laatste_activiteit = now()
-         where id = ${data.poging_id}::uuid and status = 'bezig'
-      `;
+         where p.id = ${data.poging_id}::uuid and p.status = 'bezig'
+           and p.beantwoord < greatest(p.vragen_totaal, 1)
+           and p.doelgroep = ${data.doelgroep} and p.taal = ${data.taal}
+           and exists (select 1 from academy_vragen v
+                        where v.id = ${data.vraag_id}::uuid and v.academy_id = p.academy_id)
+        returning p.id
+      `) as unknown[];
+      if (updated.length === 0) return { ok: true };
       await sql`
         insert into academy_vraag_stats (vraag_id, taal, doelgroep, gesteld, juist)
         values (${data.vraag_id}::uuid, ${data.taal}, ${data.doelgroep}, 1, ${data.juist ? 1 : 0})

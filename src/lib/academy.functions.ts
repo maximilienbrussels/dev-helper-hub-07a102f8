@@ -292,7 +292,7 @@ export const submitExamen = createServerFn({ method: "POST" })
     const academy = (
       (await sql`
       select id, diersoort_naam, slug, slaag_grens, vragen_per_test,
-             slaag_grens_kids, slaag_grens_16plus
+             slaag_grens_kids, slaag_grens_16plus, vragen_per_test_kids, vragen_per_test_16plus
         from academies
        where id = ${data.academy_id}
        limit 1
@@ -304,6 +304,8 @@ export const submitExamen = createServerFn({ method: "POST" })
         vragen_per_test: number;
         slaag_grens_kids: number | null;
         slaag_grens_16plus: number | null;
+        vragen_per_test_kids: number | null;
+        vragen_per_test_16plus: number | null;
       }>
     )[0];
     if (!academy) throw new Error("Academy bestaat niet");
@@ -343,6 +345,15 @@ export const submitExamen = createServerFn({ method: "POST" })
       if (oordeel.juist) correct++;
     }
     if (totaal === 0) throw new Error("Geen geldige antwoorden");
+
+    // Een examen telt pas als het volledige aantal vragen beantwoord is;
+    // anders kan één goed antwoord een certificaat opleveren.
+    const gewenst =
+      (data.doelgroep === "kids" ? academy.vragen_per_test_kids : academy.vragen_per_test_16plus) ??
+      academy.vragen_per_test;
+    // Een uitgereikte test bevat altijd minstens min(gewenst, minimale pool) vragen.
+    const vereist = Math.max(1, Math.min(gewenst, data.doelgroep === "kids" ? 8 : 15));
+    if (totaal < vereist) throw new Error("Beantwoord eerst alle vragen van het examen.");
 
     const grensSpoor =
       (data.doelgroep === "kids" ? academy.slaag_grens_kids : academy.slaag_grens_16plus) ??
