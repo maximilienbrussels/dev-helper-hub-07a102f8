@@ -8,10 +8,10 @@ import { Loader2, Square, Volume2 } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
 import { speakText, stopSpeaking } from "@/lib/speak";
 
-const COPY: Record<Lang, { play: string; stop: string; fail: string }> = {
-  nl: { play: "Lees voor", stop: "Stop met voorlezen", fail: "Voorlezen lukte even niet." },
-  fr: { play: "Lire à voix haute", stop: "Arrêter la lecture", fail: "La lecture a échoué." },
-  en: { play: "Read aloud", stop: "Stop reading", fail: "Reading aloud failed." },
+const COPY: Record<Lang, { play: string; stop: string; fail: string; login: string }> = {
+  nl: { play: "Lees voor", stop: "Stop met voorlezen", fail: "Voorlezen lukte even niet.", login: "Log in om te laten voorlezen." },
+  fr: { play: "Lire à voix haute", stop: "Arrêter la lecture", fail: "La lecture a échoué.", login: "Connectez-vous pour la lecture à voix haute." },
+  en: { play: "Read aloud", stop: "Stop reading", fail: "Reading aloud failed.", login: "Sign in to use read aloud." },
 };
 
 export function SpeakButton({
@@ -24,7 +24,7 @@ export function SpeakButton({
   autoPlay?: boolean;
 }) {
   const c = COPY[lang] ?? COPY.nl;
-  const [state, setState] = useState<"idle" | "playing" | "failed">("idle");
+  const [state, setState] = useState<"idle" | "playing" | "failed" | "login">("idle");
   const startedRef = useRef(false);
 
   async function play() {
@@ -32,8 +32,8 @@ export function SpeakButton({
     try {
       await speakText(text);
       setState("idle");
-    } catch {
-      setState("failed");
+    } catch (err) {
+      setState(err instanceof Error && err.message === "speak-login" ? "login" : "failed");
     }
   }
 

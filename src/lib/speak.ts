@@ -72,11 +72,18 @@ export async function speakText(text: string): Promise<void> {
     sources.push(source);
   };
 
+  const { readSessionToken } = await import("@/lib/neon-auth-compat");
+  const token = readSessionToken();
+  if (!token) {
+    cleanup();
+    throw new Error("speak-login");
+  }
+
   let res: Response;
   try {
     res = await fetch("/api/speak", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
       body: JSON.stringify({ text }),
       signal: controller.signal,
     });
@@ -88,7 +95,7 @@ export async function speakText(text: string): Promise<void> {
 
   if (!res.ok || !res.body) {
     cleanup();
-    throw new Error(`speak-failed-${res.status}`);
+    throw new Error(res.status === 401 ? "speak-login" : `speak-failed-${res.status}`);
   }
 
   const reader = res.body.pipeThrough(new TextDecoderStream()).getReader();
