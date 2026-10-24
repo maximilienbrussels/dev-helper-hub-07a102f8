@@ -64,10 +64,10 @@ export function SpeakButton({
           <Square className="h-3 w-3" />
           {c.stop}
         </>
-      ) : state === "failed" ? (
+      ) : state === "failed" || state === "login" ? (
         <>
           <Volume2 className="h-3 w-3" />
-          {c.fail}
+          {state === "login" ? c.login : c.fail}
         </>
       ) : (
         <>
