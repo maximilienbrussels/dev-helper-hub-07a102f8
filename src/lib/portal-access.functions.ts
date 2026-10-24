@@ -10,6 +10,8 @@ export type PortalAccess = {
   fullAccess: boolean;
   /** Tweede stap nodig: eerst instellen ("setup") of bevestigen ("verify"). */
   mfa: "setup" | "verify" | null;
+  /** Waarom er (nog) geen toegang is, voor een duidelijke melding. */
+  reason: "ok" | "mfa_setup" | "mfa_verify" | "unverified" | "not_member";
 };
 
 /**
@@ -23,11 +25,23 @@ export type PortalAccess = {
 export const checkPortalAccess = createServerFn({ method: "GET" })
   .middleware([requireAuth])
   .handler(async ({ context }): Promise<PortalAccess> => {
-    const { resolveTeamAccess } = await import("@/lib/permission-core.server");
-    const access = await resolveTeamAccess({
-      userId: context.userId,
-      claims: context.claims,
-    });
+    // Databank onbereikbaar = storing, nooit "geen rechten".
+    const { db, hasDatabase } = await import("@/lib/neon.server");
+    if (!hasDatabase()) throw new Error("De toegangscontrole is tijdelijk niet beschikbaar.");
+    try {
+      await db()`select 1`;
+    } catch {
+      throw new Error("De toegangscontrole is tijdelijk niet beschikbaar.");
+    }
+    const { resolveTeamAccess, resolveAccessRaw } = await import("@/lib/permission-core.server");
+    const ctx = { userId: context.userId, claims: context.claims };
+    const access = await resolveTeamAccess(ctx);
+    let reason: PortalAccess["reason"] = "ok";
+    if (access.mfa) reason = access.mfa === "verify" ? "mfa_verify" : "mfa_setup";
+    else if (!access.allowed) {
+      const raw = await resolveAccessRaw(ctx);
+      reason = raw.email && !raw.emailVerified ? "unverified" : "not_member";
+    }
     return {
       allowed: access.allowed,
       email: access.email,
@@ -35,5 +49,6 @@ export const checkPortalAccess = createServerFn({ method: "GET" })
       permissions: access.permissions,
       fullAccess: access.fullAccess,
       mfa: access.mfa,
+      reason,
     };
   });

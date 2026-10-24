@@ -270,8 +270,10 @@ export async function mintToken(input: {
   const expires = new Date(Date.now() + input.ttlSeconds * 1000).toISOString();
   try {
     if (input.kind === "code") {
-      // Slechts één geldige code per adres.
-      await db()`delete from public.app_auth_tokens where lower(email) = ${email} and kind = 'code'`;
+      // Verlopen codes opruimen; nog geldige codes blijven werken, zodat een
+      // tweede aanvraag de code uit de eerste mail niet ongeldig maakt.
+      await db()`delete from public.app_auth_tokens
+                  where lower(email) = ${email} and kind = 'code' and expires_at < now()`;
     }
     await db()`
       insert into public.app_auth_tokens (token, kind, email, user_id, redirect_to, expires_at)
@@ -303,18 +305,17 @@ export async function consumeToken(
     console.error(`[auth-token] kind=${kind} reden=db-onbereikbaar (500)`);
     return null;
   }
+  // Atomisch verbruiken: van twee gelijktijdige aanvragen krijgt er maar één de rij.
   const rows = (await db()`
-    select token, kind, email, user_id, redirect_to, expires_at, used_at
-      from public.app_auth_tokens
+    delete from public.app_auth_tokens
      where token = ${token} and kind = ${kind}
-     limit 1`) as TokenRow[];
+    returning token, kind, email, user_id, redirect_to, expires_at, used_at`) as TokenRow[];
   const row = rows[0];
   if (!row) {
     console.warn(`[auth-token] kind=${kind} reden=niet-gevonden (404)`);
     return null;
   }
   const expired = new Date(row.expires_at).getTime() < Date.now();
-  await db()`delete from public.app_auth_tokens where token = ${row.token}`;
   if (expired || row.used_at) {
     console.warn(
       `[auth-token] kind=${kind} reden=${row.used_at ? "al-gebruikt" : "verlopen"} (401)`,

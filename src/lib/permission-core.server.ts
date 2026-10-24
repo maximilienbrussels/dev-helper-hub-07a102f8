@@ -293,7 +293,7 @@ export async function isTeamEmail(email: string): Promise<boolean> {
   const db = await sql();
   try {
     const rows = (await db`
-      select 1 as found from portal_admins where lower(email) = ${mail} limit 1
+      select 1 as found from portal_admins where lower(email) = ${mail} and active limit 1
     `) as unknown[];
     if (rows.length > 0) return true;
   } catch {
@@ -341,14 +341,7 @@ export async function resolveTeamAccess(
   } catch {
     enrolled = false;
   }
-  // Noodtoegang: een vaste eigenaar zonder ingestelde tweede stap wordt niet
-  // buitengesloten (anders lus /beveiliging ↔ /auth). Hij ziet wel een waarschuwing.
-  if (!enrolled) {
-    // Geen tweede volledige controle nodig: vaste eigenaars gelden als bevestigd.
-    if (raw.fullAccess && isSuperAdminEmail(raw.email)) {
-      console.warn("[mfa] noodtoegang voor superadmin zonder 2FA");
-      return { ...raw, mfa: "setup" };
-    }
-  }
+  // Ook vaste eigenaars gaan eerst langs /beveiliging (die pagina gebruikt de
+  // ruwe toegang, dus geen lus). Zo zijn scherm en server het altijd eens.
   return { ...raw, allowed: false, permissions: [], fullAccess: false, mfa: enrolled ? "verify" : "setup" };
 }
