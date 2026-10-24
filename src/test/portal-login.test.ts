@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 import { portalLoginDestination, singleFlight } from "@/lib/portal-login";
 import type { PortalAccess } from "@/lib/portal-access.functions";
 
-const access: PortalAccess = { allowed: true, email: null, role: "admin", permissions: [], fullAccess: true, mfa: null };
+const access: PortalAccess = { allowed: true, email: null, role: "admin", permissions: [], fullAccess: true, mfa: null, reason: "ok" };
 
 describe("portal login consistency", () => {
   it("does not redirect allowed emergency access into MFA setup", () => {
