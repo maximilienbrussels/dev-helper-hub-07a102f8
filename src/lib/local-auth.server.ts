@@ -143,9 +143,11 @@ export async function createUser(input: {
   const email = normalizeEmail(input.email);
   const existing = await rowByEmail(email);
   if (existing) {
-    // Bestaand account zonder wachtwoord (aangemaakt via inloglink): het
-    // opgegeven wachtwoord instellen zodat de klant voortaan kan inloggen.
-    if (input.password && !existing.password_hash) {
+    // Bestaand account zonder wachtwoord: alleen een wachtwoord instellen
+    // wanneer de aanroeper het e-mailadres al bewezen heeft (code/link).
+    // Anders kan iedereen via registratie een vooraf aangemaakt account
+    // (bv. een vaste eigenaar) overnemen; die gebruikt "wachtwoord vergeten".
+    if (input.password && !existing.password_hash && input.emailVerified) {
       const hash = await hashPassword(input.password);
       await db()`update public.app_users
                     set password_hash = ${hash}, name = coalesce(${input.name ?? null}, name),

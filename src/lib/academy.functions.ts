@@ -344,10 +344,18 @@ export const submitExamen = createServerFn({ method: "POST" })
     }
     if (totaal === 0) throw new Error("Geen geldige antwoorden");
 
+    // Een examen telt pas als het volledige aantal vragen beantwoord is;
+    // anders kan één goed antwoord een certificaat opleveren.
+    const beschikbaar = (
+      (await sql`select count(*)::int as n from academy_vragen where academy_id = ${academy.id}`) as Array<{ n: number }>
+    )[0]?.n ?? 0;
+    const vereist = Math.max(1, Math.min(academy.vragen_per_test || beschikbaar, beschikbaar));
+    if (totaal < vereist) throw new Error("Beantwoord eerst alle vragen van het examen.");
+
     const grensSpoor =
       (data.doelgroep === "kids" ? academy.slaag_grens_kids : academy.slaag_grens_16plus) ??
       academy.slaag_grens;
-    const slaagGrens = Math.max(1, Math.min(grensSpoor, totaal));
+    const slaagGrens = Math.max(1, Math.min(grensSpoor, vereist));
     const score = `${correct}/${totaal}`;
     const geslaagd = correct >= slaagGrens;
 
