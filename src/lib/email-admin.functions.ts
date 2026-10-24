@@ -458,6 +458,15 @@ export const sendTemplateHtmlTest = createServerFn({ method: "POST" })
   )
   .handler(async ({ data, context }): Promise<{ sent: boolean; error?: string }> => {
     await assertAdmin(context);
+    // Testmails alleen naar het eigen adres of een teamadres, nooit naar derden.
+    const own = String((context as { claims?: { email?: string } }).claims?.email ?? "").toLowerCase();
+    const target = data.to.toLowerCase();
+    if (target !== own) {
+      const { isTeamEmail } = await import("./permission-core.server");
+      if (!(await isTeamEmail(target).catch(() => false))) {
+        return { sent: false, error: "Testmails kunnen enkel naar je eigen adres of een teamadres." };
+      }
+    }
     const { sendDual } = await import("./email-service.server");
     const res = await sendDual({
       to: [data.to],

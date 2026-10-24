@@ -39,8 +39,11 @@ export type DevStatus = {
   migrations: string[];
 };
 
-export const getDevStatus = createServerFn({ method: "GET" }).handler(async (): Promise<DevStatus> => {
+export const getDevStatus = createServerFn({ method: "GET" })
+  .middleware([requireAuth])
+  .handler(async ({ context }): Promise<DevStatus> => {
   await guardPreview();
+  await requirePermission(context, "manage_settings");
   const { devSecretStatus } = await import("./dev-secrets.server");
   const { migrationFiles } = await import("./dev-migrations.server");
   const { db, hasDatabase } = await import("./neon.server");
