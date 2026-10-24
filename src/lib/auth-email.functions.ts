@@ -4,12 +4,13 @@ import { emailInput } from "@/lib/validators";
 import { requireAuth } from "@/lib/auth-middleware";
 import { normalizeMailLang } from "./email-copy";
 import { isSuperAdminEmail } from "./superadmin";
+import { isInternalPath } from "./redirect";
 
 const langInput = (d: unknown) => {
   const base = emailInput(d);
   const lang = normalizeMailLang((d as { lang?: unknown } | null)?.lang);
   const nextRaw = (d as { next?: unknown } | null)?.next;
-  const next = typeof nextRaw === "string" && nextRaw.startsWith("/") ? nextRaw : "/account";
+  const next = typeof nextRaw === "string" && isInternalPath(nextRaw) ? nextRaw : "/account";
   return { ...base, lang, next };
 };
 
@@ -46,7 +47,7 @@ export const requestMagicLink = createServerFn({ method: "POST" })
   .validator((d: unknown) => {
     const base = langInput(d);
     const next = (d as { next?: unknown } | null)?.next;
-    return { ...base, next: typeof next === "string" && next.startsWith("/") ? next : "/account" };
+    return { ...base, next: typeof next === "string" && isInternalPath(next) ? next : "/account" };
   })
   .handler(async ({ data }) => {
     await (await import("./email-guard.server")).guardRate("magiclink", data.email);
@@ -82,7 +83,7 @@ export const verifyLoginCode = createServerFn({ method: "POST" })
     const { user } = await auth.createUser({ email: data.email, emailVerified: true });
     await auth.markEmailVerified(user.id);
     const fresh = (await auth.findUserById(user.id)) ?? user;
-    const next = data.next && data.next.startsWith("/") ? data.next : "/account";
+    const next = data.next && isInternalPath(data.next) ? data.next : "/account";
     return { ok: true as const, token: await auth.signSession(fresh), user: fresh, next };
   });
 
@@ -104,8 +105,8 @@ export const resolveLoginLink = createServerFn({ method: "POST" })
     if (!session) {
       throw new Error("Deze inloglink is verlopen of al gebruikt. Vraag een nieuwe aan.");
     }
-    const fallback = data.next && data.next.startsWith("/") ? data.next : "/account";
-    const next = session.redirectTo?.startsWith("/") ? session.redirectTo : fallback;
+    const fallback = data.next && isInternalPath(data.next) ? data.next : "/account";
+    const next = (session.redirectTo && isInternalPath(session.redirectTo)) ? session.redirectTo : fallback;
     return { token: session.token, user: session.user, next };
   });
 
