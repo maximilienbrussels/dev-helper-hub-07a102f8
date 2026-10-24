@@ -37,6 +37,12 @@ export const getOrderDetail = createServerFn({ method: "POST" })
       .maybeSingle();
     if (order.error) throw new Error(order.error.message);
     if (!order.data) throw new Error("Bestelling niet gevonden.");
+    // Klanten zien enkel hun eigen bestelling; medewerkers met bestelrechten alles.
+    {
+      const own = String((context.claims as { email?: string } | null)?.email ?? "").toLowerCase();
+      const isOwner = own !== "" && String(order.data.customer_email ?? "").toLowerCase() === own;
+      if (!isOwner) await requirePermission(context, "manage_orders");
+    }
 
     const history = await context.supabase
       .from("order_status_history")

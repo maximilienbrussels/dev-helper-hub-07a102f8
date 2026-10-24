@@ -6,6 +6,7 @@ import { normalizeMailLang } from "./email-copy";
 
 /** Bevestigingsmail voor een gift, met gestructureerde betaalreferentie. */
 export const sendDonationConfirmation = createServerFn({ method: "POST" })
+  .middleware([requireAuth])
   .validator((d: unknown) =>
     z
       .object({
@@ -17,7 +18,11 @@ export const sendDonationConfirmation = createServerFn({ method: "POST" })
       })
       .parse(d),
   )
-  .handler(async ({ data }) => {
+  .handler(async ({ data: input, context }) => {
+    // Alleen aangemelde gevers, en de mail gaat enkel naar hun eigen adres.
+    const own = String((context.claims as { email?: string } | null)?.email ?? "").trim();
+    if (!own) throw new Error("Log in om een bevestiging te ontvangen.");
+    const data = { ...input, email: own };
     await (await import("./email-guard.server")).guardRate("donation", data.email);
     const { sendMail, donationEmail } = await import("./email.server");
     const { structuredCommunication } = await import("./payment-reference");
