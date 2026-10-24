@@ -358,7 +358,7 @@ export const submitExamen = createServerFn({ method: "POST" })
     const grensSpoor =
       (data.doelgroep === "kids" ? academy.slaag_grens_kids : academy.slaag_grens_16plus) ??
       academy.slaag_grens;
-    const slaagGrens = Math.max(1, Math.min(grensSpoor, vereist));
+    const slaagGrens = Math.max(1, Math.min(grensSpoor, totaal));
     const score = `${correct}/${totaal}`;
     const geslaagd = correct >= slaagGrens;
 
