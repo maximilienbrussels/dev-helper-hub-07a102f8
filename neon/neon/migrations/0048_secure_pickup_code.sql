@@ -12,9 +12,9 @@ declare
   free boolean;
 begin
   loop
-    bytes := gen_random_bytes(8);
+    bytes := gen_random_bytes(6);
     code := '';
-    for i in 0..7 loop
+    for i in 0..5 loop
       code := code || substr(alphabet, 1 + (get_byte(bytes, i) % 32), 1);
     end loop;
     select not exists (select 1 from public.orders where pickup_code = code) into free;
