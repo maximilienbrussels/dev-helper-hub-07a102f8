@@ -9,6 +9,10 @@ export const Route = createFileRoute("/api/speak")({
   server: {
     handlers: {
       POST: async ({ request }) => {
+        // Betaalde spraakdienst: enkel voor aangemelde gebruikers.
+        const { requireRouteAuth } = await import("@/lib/route-auth.server");
+        const gate = await requireRouteAuth(request);
+        if ("response" in gate) return gate.response;
         const { checkRateLimit, clientIdentifier } = await import("@/lib/rate-limit.server");
         const ip = clientIdentifier(request.headers);
         if (!(await checkRateLimit("speak", ip, 60, 3600))) {

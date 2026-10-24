@@ -115,6 +115,14 @@ export const saveCalendarFeedFilters = createServerFn({ method: "POST" })
   .handler(async ({ data, context }): Promise<FeedSettings> => {
     try {
       await requirePermission(context, "view_calendar");
+      // De volledige agenda (alle reservaties) is enkel voor beheerders.
+      if (data.includeAll) {
+        const { isFullAccessUser } = await import("@/lib/permission-core.server");
+        const ctx = context as { userId: string; claims?: { email?: string } | null };
+        if (!(await isFullAccessUser({ userId: ctx.userId, claims: ctx.claims } as never))) {
+          throw new Error("Alleen beheerders kunnen de volledige agenda in hun link opnemen.");
+        }
+      }
       const db = await sql();
       const profileId = await currentProfileId(context, db);
       const rows = (await db`
