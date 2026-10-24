@@ -39,6 +39,14 @@ export const Route = createFileRoute("/api/public/calendar/feed")({
           "view_calendar",
         ).catch(() => false);
         if (!stillAllowed) return new Response("Onbekend token", { status: 404 });
+        // Volledige agenda enkel voor beheerders, ook voor eerder bewaarde links.
+        if (cfg.include_all) {
+          const { isFullAccessUser } = await import("@/lib/permission-core.server");
+          const admin = await isFullAccessUser(
+            { userId: cfg.profile_id, claims: { sub: cfg.profile_id, email: cfg.email ?? undefined } } as never,
+          ).catch(() => false);
+          if (!admin) cfg.include_all = false;
+        }
 
         const rows = (await sql`
           select b.id::text as id, b.client_name, b.type, b.location_id,
