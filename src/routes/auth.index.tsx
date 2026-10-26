@@ -423,19 +423,17 @@ function AuthPage() {
           </div>
         ) : null}
         {customerSession ? (
-          <div className="rounded-lg border border-border bg-card p-5 text-center text-sm">
-            <p className="font-semibold">Je bent ingelogd als klant</p>
+          <div role="status" className="mb-4 rounded-lg border border-border bg-card p-4 text-center text-sm">
+            <p className="font-semibold">Je huidige account heeft geen toegang tot het {postLoginPath === "/veld" ? "veldportaal" : "beheerportaal"}</p>
             <p className="mt-1 text-muted-foreground">
-              Log eerst uit om toegang te krijgen tot het {postLoginPath === "/veld" ? "veldportaal" : "beheerportaal"}.
+              Meld je hieronder aan met je beheerdersaccount, of log eerst uit.
             </p>
-            <Button className="mt-4 w-full" onClick={() => void signOutCustomer()}>
+            <Button variant="outline" className="mt-3 w-full" onClick={() => void signOutCustomer()}>
               Uitloggen
             </Button>
-            <Button variant="outline" className="mt-2 w-full" asChild>
-              <Link to="/account">Naar mijn account</Link>
-            </Button>
           </div>
-        ) : magicSent ? (
+        ) : null}
+        {magicSent ? (
           <div className="rounded-lg border border-border bg-card p-5 text-center text-sm">
             <p className="font-semibold">Check je mailbox</p>
             <p className="mt-1 text-muted-foreground">
