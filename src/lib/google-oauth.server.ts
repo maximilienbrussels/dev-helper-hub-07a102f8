@@ -1,4 +1,12 @@
 import { isSuperAdminEmail } from "./superadmin";
+import {
+  getEnvAppMode,
+  isAdminHostname,
+  isAdminPath,
+  isFieldHostname,
+  isFieldPath,
+  type AppMode,
+} from "./app-mode";
 /**
  * Google OAuth (server-only).
  *
@@ -308,17 +316,41 @@ export async function resolveRole(email: string, fallbackRole: string): Promise<
 
 /**
  * Startpad na aanmelden. Op de veld-app (maximilien.app) landt iedereen in de
- * veldschermen; op het desktopbeheer krijgen medewerkers hun werklijst.
+ * veldschermen; op het beheerportaal (maximilien.site / admin-bundel) altijd in
+ * het portaal — /account bestaat daar niet en zou terug naar /auth sturen.
  */
 export function landingPathForRole(role: string, origin?: string | null): string {
   const isTeam = role === "admin" || role === "owner" || role === "super_admin" || role === "staff" || role === "team";
+  const mode = landingModeFor(origin);
+  if (mode === "field") return "/veld";
+  if (mode === "admin") return "/nl/vandaag";
+  return isTeam ? "/vandaag" : "/account";
+}
+
+function landingModeFor(origin?: string | null): AppMode | null {
   if (origin) {
     try {
-      const host = new URL(origin).hostname.toLowerCase().replace(/:\d+$/, "");
-      if (host === "maximilien.app" || host.endsWith(".maximilien.app")) return "/veld";
+      const host = new URL(origin).hostname;
+      if (isFieldHostname(host)) return "field";
+      if (isAdminHostname(host)) return "admin";
     } catch {
-      /* geen geldige oorsprong: val terug op het pad hieronder */
+      /* geen geldige oorsprong */
     }
   }
-  return isTeam ? "/vandaag" : "/account";
+  const env = getEnvAppMode();
+  return env === "public" ? null : env;
+}
+
+/**
+ * Bestemming na een OAuth-callback: een gevraagd `next`-pad blijft behouden
+ * zolang het op deze omgeving kan renderen; anders het portaalstartpad.
+ */
+export function oauthLandingPath(next: string | null | undefined, role: string, origin?: string | null): string {
+  const fallback = landingPathForRole(role, origin);
+  if (!next) return fallback;
+  const mode = landingModeFor(origin);
+  const pathname = next.split(/[?#]/)[0] || "/";
+  if (mode === "admin" && !isAdminPath(pathname)) return fallback;
+  if (mode === "field" && !isFieldPath(pathname)) return fallback;
+  return next;
 }

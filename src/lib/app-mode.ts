@@ -154,8 +154,16 @@ export function isSharedAuthPath(pathname: string): boolean {
  * Paden die in admin-modus mogen renderen. Alles daarbuiten (publieke
  * marketingroutes zoals /nl, /fr, /webshop …) wordt naar /auth gestuurd.
  */
+/**
+ * Tweede beveiligingsstap (MFA/passkey). Hoort bij elke aangemelde omgeving:
+ * het portaal stuurt beheerders hierheen na het aanmelden. Ontbreekt dit pad,
+ * dan stuurt de domeinscheiding je terug naar /auth en ontstaat een loginlus.
+ */
+const SECURITY_PATH_PREFIXES = ["/beveiliging"];
+
 const ADMIN_PATH_PREFIXES = [
   ...AUTH_PATH_PREFIXES,
+  ...SECURITY_PATH_PREFIXES,
   "/portaal",
   "/vandaag",
   "/aanvragen",
@@ -166,7 +174,7 @@ const ADMIN_PATH_PREFIXES = [
 ];
 
 /** Paden van de veld-app (maximilien.app). */
-const FIELD_PATH_PREFIXES = [...AUTH_PATH_PREFIXES, "/veld"];
+const FIELD_PATH_PREFIXES = [...AUTH_PATH_PREFIXES, ...SECURITY_PATH_PREFIXES, "/veld"];
 
 function isFile(path: string): boolean {
   // Bestanden (sitemap.xml, manifest.json, …) laten we met rust.
