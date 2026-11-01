@@ -7,6 +7,8 @@
  */
 export const SUPERADMIN_EMAILS = [
   "desk@delplanche.cloud",
+  "desk@delplanche.com",
+  "jona@delplanche.com",
   "hallo@maximilien.site",
   "contact@maximilien.brussels",
 ] as const;

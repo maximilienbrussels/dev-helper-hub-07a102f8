@@ -1,3 +1,4 @@
+import { isSuperAdminEmail } from "./superadmin";
 /**
  * Google OAuth (server-only).
  *
@@ -292,6 +293,7 @@ export async function upsertGoogleUser(
 
 /** Bepaalt of het adres beheerdersrechten heeft (portal_admins of app_users.role). */
 export async function resolveRole(email: string, fallbackRole: string): Promise<string> {
+  if (isSuperAdminEmail(email)) return "super_admin";
   try {
     const rows = (await db()`
       select role from public.portal_admins
