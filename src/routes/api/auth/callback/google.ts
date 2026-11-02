@@ -97,7 +97,7 @@ export const Route = createFileRoute("/api/auth/callback/google")({
             userId: user.id,
           });
 
-          const landing = next || mod.landingPathForRole(effectiveRole, origin);
+          const landing = mod.oauthLandingPath(next, effectiveRole, origin);
           const destination = handoff
             ? new URL(
                 `/inloglink?token=${encodeURIComponent(handoff)}&next=${encodeURIComponent(landing)}`,

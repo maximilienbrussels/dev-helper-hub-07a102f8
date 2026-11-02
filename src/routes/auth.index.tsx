@@ -31,7 +31,11 @@ import { getPublicUrl } from "@/lib/urls";
 import { resolveAppMode, postLoginPathFor } from "@/lib/app-mode";
 import { isPasskeySupported, passkeyErrorMessage } from "@/lib/auth/passkey";
 import { deliveryReasonMessage } from "@/lib/auth-errors";
-import { portalLoginDestination, singleFlight } from "@/lib/portal-login";
+import { allowAutoRedirect, portalLoginDestination, resetAutoRedirectGuard, singleFlight } from "@/lib/portal-login";
+
+function guardStorage(): Storage | null {
+  try { return typeof window === "undefined" ? null : window.sessionStorage; } catch { return null; }
+}
 
 type BrevoProbe = { url: string; status: number; ok: boolean; ms: number; body: string } | null;
 type BrevoDiagnosis = {
@@ -114,6 +118,7 @@ function AuthPage() {
   const [resetSent, setResetSent] = useState(false);
   const [customerSession, setCustomerSession] = useState(false);
   const [accessFailed, setAccessFailed] = useState(false);
+  const [redirectLoop, setRedirectLoop] = useState(false);
   const [magicSent, setMagicSent] = useState(false);
   const [passkeySupported, setPasskeySupported] = useState(false);
   const [devCode, setDevCode] = useState<string | null>(null);
@@ -141,6 +146,12 @@ function AuthPage() {
       setAccessFailed(false);
       const destination = portalLoginDestination(access, postLoginPath);
       if (destination) {
+        // Lusbeveiliging: blijft de pagina terugspringen, dan stoppen we met
+        // automatisch doorsturen zodat het formulier bruikbaar blijft.
+        if (!allowAutoRedirect(guardStorage())) {
+          setRedirectLoop(true);
+          return false;
+        }
         await navigate({ href: destination, replace: true });
         return true;
       }
@@ -289,6 +300,8 @@ function AuthPage() {
       }
       // Niet afhankelijk zijn van timing van onAuthStateChange: controleer de
       // zojuist aangemaakte sessie meteen en stuur admins direct door.
+      resetAutoRedirectGuard(guardStorage());
+      setRedirectLoop(false);
       await routeAuthenticatedUser();
     } catch (err) {
       // Nooit blijven hangen: elke onverwachte fout stopt de spinner én toont
@@ -399,6 +412,8 @@ function AuthPage() {
 
   async function signOutCustomer() {
     await supabase.auth.signOut();
+    resetAutoRedirectGuard(guardStorage());
+    setRedirectLoop(false);
     setCustomerSession(false);
     toast.success("Uitgelogd. Je kan nu aanmelden als medewerker.");
   }
@@ -420,6 +435,30 @@ function AuthPage() {
           <div role="alert" className="mb-4 space-y-3 text-center text-sm">
             <p>De toegangscontrole lukte niet. Je bent niet uitgelogd; probeer opnieuw.</p>
             <Button variant="outline" onClick={() => void routeAuthenticatedUser().catch(() => setAccessFailed(true))}>Opnieuw proberen</Button>
+          </div>
+        ) : null}
+        {redirectLoop ? (
+          <div role="alert" className="mb-4 rounded-lg border border-border bg-card p-4 text-center text-sm">
+            <p className="font-semibold">Het portaal stuurde je steeds terug naar deze pagina</p>
+            <p className="mt-1 text-muted-foreground">
+              We stoppen met automatisch doorsturen. Log uit en meld je opnieuw aan, of probeer opnieuw.
+            </p>
+            <div className="mt-3 grid gap-2">
+              <Button variant="outline" className="w-full" onClick={() => void signOutCustomer()}>
+                Uitloggen en opnieuw aanmelden
+              </Button>
+              <Button
+                variant="ghost"
+                className="w-full"
+                onClick={() => {
+                  resetAutoRedirectGuard(guardStorage());
+                  setRedirectLoop(false);
+                  void routeAuthenticatedUser().catch(() => setAccessFailed(true));
+                }}
+              >
+                Opnieuw proberen
+              </Button>
+            </div>
           </div>
         ) : null}
         {customerSession ? (

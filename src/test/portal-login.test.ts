@@ -24,3 +24,34 @@ describe("portal login consistency", () => {
     expect(run).toHaveBeenCalledTimes(2);
   });
 });
+import { allowAutoRedirect, LOGIN_REDIRECT_WINDOW_MS, resetAutoRedirectGuard } from "@/lib/portal-login";
+
+function memoryStorage() {
+  const map = new Map<string, string>();
+  return {
+    getItem: (k: string) => map.get(k) ?? null,
+    setItem: (k: string, v: string) => void map.set(k, v),
+    removeItem: (k: string) => void map.delete(k),
+  };
+}
+
+describe("login redirect loop guard", () => {
+  it("stops the 4th automatic redirect within the window", () => {
+    const s = memoryStorage();
+    expect(allowAutoRedirect(s, 1000)).toBe(true);
+    expect(allowAutoRedirect(s, 2000)).toBe(true);
+    expect(allowAutoRedirect(s, 3000)).toBe(true);
+    expect(allowAutoRedirect(s, 4000)).toBe(false);
+  });
+  it("allows redirects again after the window passes", () => {
+    const s = memoryStorage();
+    for (const t of [0, 1, 2]) allowAutoRedirect(s, t);
+    expect(allowAutoRedirect(s, LOGIN_REDIRECT_WINDOW_MS + 10)).toBe(true);
+  });
+  it("allows redirects again after an explicit reset", () => {
+    const s = memoryStorage();
+    for (const t of [0, 1, 2]) allowAutoRedirect(s, t);
+    resetAutoRedirectGuard(s);
+    expect(allowAutoRedirect(s, 3)).toBe(true);
+  });
+});
