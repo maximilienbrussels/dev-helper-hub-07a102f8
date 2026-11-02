@@ -7,7 +7,7 @@ import {
   OAUTH_STATE_COOKIE,
   SESSION_COOKIE,
   cookieHeader,
-  landingPathForRole,
+  oauthLandingPath,
   readCookie,
   resolveRole,
   siteOrigin,
@@ -185,7 +185,7 @@ export async function issueSessionRedirect(
     userId: user.id,
   });
 
-  const landing = next && isSafePath(next) ? next : landingPathForRole(effectiveRole, origin);
+  const landing = oauthLandingPath(next && isSafePath(next) ? next : null, effectiveRole, origin);
   const destination = handoff
     ? new URL(
         `/inloglink?token=${encodeURIComponent(handoff)}&next=${encodeURIComponent(landing)}`,
