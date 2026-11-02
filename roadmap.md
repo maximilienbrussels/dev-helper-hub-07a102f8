@@ -11,4 +11,5 @@
 - [~] P5 https://maximilien.brussels/ als publiek domein controleren: domeinstatus, redirect-URL’s en ROUT-login/callbacks; fouten oplossen en tests uitvoeren.
 - [x] P6.1 Beheerlogincontroles gelijkgetrokken; dubbele controles gebundeld; storingen wissen de sessie niet en tonen een herprobeeroptie (21 tests geslaagd).
 - [x] P6.2 E-mailinvoer en Google-foutmelding lokaal gecontroleerd; live maximilien.site meldt database, Google en ROUT geconfigureerd.
+- [x] P6.4 Beheerlogin-lus opgelost: /beveiliging toegelaten op beheer/veld, OAuth-callbacks landen altijd op een toegelaten portaalpad, en /auth stopt na 3 automatische doorsturingen in 20 s (44 tests geslaagd).
 - [ ] P6.3 Echte beheerlogin op Vercel verifiëren (wacht op uitrollen van wijzigingen en een aangemelde testsessie).
