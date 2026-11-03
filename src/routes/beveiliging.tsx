@@ -17,6 +17,7 @@ import {
   confirmTotpSetup,
   getMfaStatus,
   regenerateRecoveryCodes,
+  requestMfaSupport,
   removeMfaMethod,
   sendSmsCode,
   startTelegramVerification,
@@ -117,7 +118,15 @@ function SecurityPage() {
           <Button variant="outline" onClick={() => void navigator.clipboard?.writeText(recovery.join("\n"))}>
             Kopiëren
           </Button>
-          <Button onClick={() => window.location.assign(target)}>Ik heb ze bewaard — verder</Button>
+          <Button
+            onClick={() => {
+              setRecovery(null);
+              setMethod(null);
+              void load();
+            }}
+          >
+            Ik heb ze bewaard — verder
+          </Button>
         </div>
       </Shell>
     );
@@ -129,15 +138,25 @@ function SecurityPage() {
   if (enrolled && !status.verified) {
     return (
       <Shell title="Bevestig dat jij het bent">
-        <p className="text-sm text-muted-foreground">Kies je tweede stap om verder te gaan.</p>
+        <p className="text-sm text-muted-foreground">
+          Je hebt al een tweede stap ingesteld ({methodList(status)}). Bevestig daarmee om verder te gaan.
+        </p>
         <VerifyStep status={status} email={email} onDone={done} />
+        <LostAccess />
       </Shell>
     );
   }
 
+  const methodCount = [status.methods.passkey, status.methods.totp, status.methods.phone].filter(Boolean).length;
+
   if (enrolled && status.verified && !method) {
     return (
       <Shell title="Je account is beveiligd">
+        {methodCount < 2 && (
+          <p role="status" className="rounded-xl border border-border bg-muted/40 p-3 text-sm">
+            Voeg liefst nog een extra methode toe als reserve. Zo blijf je binnen als je je telefoon verliest.
+          </p>
+        )}
         <ul className="space-y-1 text-sm">
           <li>{status.methods.passkey ? "✅" : "▫️"} Passkey</li>
           <li>{status.methods.totp ? "✅" : "▫️"} Authenticator-app</li>
@@ -173,8 +192,17 @@ function SecurityPage() {
           ? "Als medewerker van Maximilien is een tweede stap verplicht. Naast je wachtwoord bevestig je voortaan met één van deze methodes."
           : "Voeg een tweede stap toe, zodat enkel jij kan aanmelden — ook als iemand je wachtwoord kent."}
       </p>
+      {status.required && (
+        <p role="status" className="rounded-xl border border-border bg-muted/40 p-3 text-sm">
+          Je hebt nog geen tweede stap ingesteld. Begin met je telefoonnummer; daarna kan je nog een extra methode toevoegen als reserve.
+        </p>
+      )}
       {!method && (
         <div className="grid gap-3">
+          <Button size="lg" onClick={() => setMethod("phone")}>
+            <Smartphone className="mr-2 size-4" /> Telefoonnummer instellen
+          </Button>
+          <p className="text-xs text-muted-foreground">Of kies een andere methode:</p>
           <Choice icon={<Fingerprint />} title="Passkey (aanbevolen)" text="Face ID, vingerafdruk of toestelpincode." onClick={() => setMethod("passkey")} />
           <Choice icon={<KeyRound />} title="Authenticator-app" text="Google Authenticator, Microsoft Authenticator, 1Password…" onClick={() => setMethod("totp")} />
           <Choice icon={<Smartphone />} title="Telefoon" text="Code per sms (België) of bevestigen via Telegram (buitenland)." onClick={() => setMethod("phone")} />
@@ -189,6 +217,70 @@ function SecurityPage() {
         </button>
       )}
     </Shell>
+  );
+}
+
+function methodList(status: MfaStatus): string {
+  const names = [
+    status.methods.passkey && "passkey",
+    status.methods.totp && "authenticator-app",
+    status.methods.phone && (status.phoneMethod === "telegram" ? "Telegram" : "sms"),
+  ].filter(Boolean);
+  return names.join(", ") || "onbekend";
+}
+
+function LostAccess() {
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  async function send(e: React.FormEvent) {
+    e.preventDefault();
+    setBusy(true);
+    try {
+      await requestMfaSupport({ data: { message: message.trim() || undefined } });
+      setSent(true);
+    } catch (err) {
+      toast.error(errMsg(err));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  if (sent) {
+    return (
+      <p role="status" className="rounded-xl border border-border bg-muted/40 p-3 text-sm">
+        Je hulpvraag is verstuurd naar het technisch team. Zij nemen contact met je op om je identiteit te controleren en je tweede stap te resetten.
+      </p>
+    );
+  }
+  if (!open) {
+    return (
+      <button type="button" className="text-sm text-muted-foreground underline" onClick={() => setOpen(true)}>
+        Ik heb geen toegang meer tot mijn tweede stap
+      </button>
+    );
+  }
+  return (
+    <form onSubmit={send} className="space-y-2 rounded-xl border border-border p-3">
+      <label className="block text-sm font-medium" htmlFor="lost-access-message">
+        Wat is er gebeurd? (optioneel)
+      </label>
+      <textarea
+        id="lost-access-message"
+        className="min-h-20 w-full rounded-md border border-input bg-background p-2 text-sm"
+        maxLength={1000}
+        placeholder="Bv. nieuwe telefoon, nummer gewijzigd…"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+      />
+      <p className="text-xs text-muted-foreground">We sturen je vraag naar het technisch team. Je account en ingestelde methodes worden automatisch meegestuurd.</p>
+      <Button type="submit" variant="outline" disabled={busy}>
+        {busy ? <Loader2 className="mr-2 size-4 animate-spin" /> : null}
+        Hulp vragen
+      </Button>
+    </form>
   );
 }
 
