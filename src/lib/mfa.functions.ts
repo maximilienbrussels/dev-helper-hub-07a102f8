@@ -326,7 +326,7 @@ const escapeHtml = (s: string) =>
  */
 export const requestMfaSupport = createServerFn({ method: "POST" })
   .middleware([requireAuth])
-  .inputValidator((d: unknown) => z.object({ message: z.string().trim().max(1000).optional() }).parse(d))
+  .validator((d: unknown) => z.object({ message: z.string().trim().max(1000).optional() }).parse(d))
   .handler(async ({ context, data }) => {
     const ctx = context as unknown as Ctx;
     await rate("mfa-support", ctx.userId, 3, 3600);
