@@ -312,3 +312,45 @@ export const regenerateRecoveryCodes = createServerFn({ method: "POST" })
     });
     return { recoveryCodes: codes };
   });
+
+/* ------------------------- toegang kwijt: hulpvraag ------------------------- */
+
+export const MFA_SUPPORT_ADDRESS = "admin@maximilien.brussels";
+
+const escapeHtml = (s: string) =>
+  s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
+
+/**
+ * Medewerker kan zijn tweede stap niet meer gebruiken: stuurt één hulpvraag
+ * naar het technisch team. Ontvanger en afzenderadres komen van de server.
+ */
+export const requestMfaSupport = createServerFn({ method: "POST" })
+  .middleware([requireAuth])
+  .validator((d: unknown) => z.object({ message: z.string().trim().max(1000).optional() }).parse(d))
+  .handler(async ({ context, data }) => {
+    const ctx = context as unknown as Ctx;
+    await rate("mfa-support", ctx.userId, 3, 3600);
+    const auth = await import("./local-auth.server");
+    const user = await auth.findUserById(ctx.userId);
+    if (!user) throw new Error("Je account werd niet gevonden.");
+    const mfa = await import("./mfa.server");
+    const methods = await mfa.methodsFor(ctx.userId).catch(() => null);
+    const list = methods
+      ? [methods.passkey && "passkey", methods.totp && "authenticator-app", methods.phone && "telefoon"].filter(Boolean).join(", ") || "geen"
+      : "onbekend";
+    const note = data.message ? escapeHtml(data.message) : "(geen bericht)";
+    const { sendMail } = await import("./email.server");
+    await sendMail({
+      to: MFA_SUPPORT_ADDRESS,
+      replyTo: user.email,
+      subject: `Toegang kwijt tot tweestapsverificatie: ${user.email}`,
+      kind: "mfa-support",
+      transactional: true,
+      html: `<p>Een medewerker kan zijn tweede aanmeldstap niet meer gebruiken.</p>
+<ul><li>Account: ${escapeHtml(user.email)}</li><li>Ingestelde methodes: ${escapeHtml(list)}</li></ul>
+<p>Bericht:</p><p>${note}</p>
+<p>Controleer eerst persoonlijk of telefonisch de identiteit van deze persoon voordat je de methodes reset.</p>`,
+      text: `Toegang kwijt tot tweestapsverificatie\nAccount: ${user.email}\nIngestelde methodes: ${list}\nBericht: ${data.message || "(geen bericht)"}\nControleer eerst de identiteit voordat je reset.`,
+    });
+    return { ok: true as const };
+  });
