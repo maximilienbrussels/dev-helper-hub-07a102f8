@@ -15,6 +15,7 @@ import arResources from "./ar-resources";
 import arPhrases from "./ar-phrases";
 import arVisitors from "./ar-visitors";
 import arVisitors2 from "./ar-visitors-2";
+import arVisitors3 from "./ar-visitors-3";
 
 export type ExtraLang = "de" | "ar" | "tr" | "es" | "it" | "pt" | "pl" | "ro" | "zgh";
 
