@@ -1,10 +1,10 @@
 {
   "locale": "de",
   "warning": "Candidate inventory includes metadata and dictionary values. Presence does not prove wiring or completeness. Dynamic strings, raw JSX, downloads and live Academy content need separate review.",
-  "totalEnglishCandidates": 2766,
-  "germanPhraseCandidatesMissing": 2283,
+  "totalEnglishCandidates": 2773,
+  "germanPhraseCandidatesMissing": 2290,
   "germanPublicKeysMissing": [],
-  "phraseCandidatesMissing": 2283,
+  "phraseCandidatesMissing": 2290,
   "publicKeysMissing": [],
   "candidates": [
     {
@@ -333,7 +333,7 @@
       "text": "Sending…",
       "sources": [
         "src/components/AppErrorFallback.tsx:82",
-        "src/components/RentalSpaces.tsx:158",
+        "src/components/RentalSpaces.tsx:159",
         "src/components/chat/EmailAnswerButton.tsx:32",
         "src/lib/maxim-context.ts:374"
       ],
@@ -452,7 +452,7 @@
       "text": "Start time",
       "sources": [
         "src/components/BirthdayPackages.tsx:187",
-        "src/components/RentalSpaces.tsx:147"
+        "src/components/RentalSpaces.tsx:148"
       ],
       "germanPhrasePresent": false
     },
@@ -475,7 +475,7 @@
       "text": "Contact person",
       "sources": [
         "src/components/BirthdayPackages.tsx:191",
-        "src/components/RentalSpaces.tsx:151",
+        "src/components/RentalSpaces.tsx:152",
         "src/components/SchoolAnimations.tsx:179",
         "src/lib/team-email-templates.ts:591",
         "src/routes/word-partner.contact.tsx:104"
@@ -486,7 +486,7 @@
       "text": "E-mail",
       "sources": [
         "src/components/BirthdayPackages.tsx:192",
-        "src/components/RentalSpaces.tsx:152",
+        "src/components/RentalSpaces.tsx:153",
         "src/components/SchoolAnimations.tsx:180"
       ],
       "germanPhrasePresent": false
@@ -496,7 +496,7 @@
       "sources": [
         "src/components/BirthdayPackages.tsx:193",
         "src/components/FarmCamps.tsx:181",
-        "src/components/RentalSpaces.tsx:153",
+        "src/components/RentalSpaces.tsx:154",
         "src/components/SchoolAnimations.tsx:181",
         "src/lib/portal-i18n.ts:634"
       ],
@@ -521,7 +521,7 @@
       "text": "Indicative price",
       "sources": [
         "src/components/BirthdayPackages.tsx:196",
-        "src/components/RentalSpaces.tsx:155",
+        "src/components/RentalSpaces.tsx:156",
         "src/components/SchoolAnimations.tsx:183",
         "src/lib/team-email-templates.ts:362"
       ],
@@ -531,7 +531,7 @@
       "text": "Subject to availability — we confirm by e-mail.",
       "sources": [
         "src/components/BirthdayPackages.tsx:197",
-        "src/components/RentalSpaces.tsx:156",
+        "src/components/RentalSpaces.tsx:157",
         "src/components/SchoolAnimations.tsx:184"
       ],
       "germanPhrasePresent": false
@@ -560,7 +560,7 @@
       "text": "Send request",
       "sources": [
         "src/components/BirthdayPackages.tsx:200",
-        "src/components/RentalSpaces.tsx:157",
+        "src/components/RentalSpaces.tsx:158",
         "src/components/SchoolAnimations.tsx:187",
         "src/routes/word-partner.contact.tsx:108"
       ],
@@ -571,7 +571,7 @@
       "sources": [
         "src/components/BirthdayPackages.tsx:201",
         "src/components/FarmCamps.tsx:186",
-        "src/components/RentalSpaces.tsx:159",
+        "src/components/RentalSpaces.tsx:160",
         "src/components/SchoolAnimations.tsx:188"
       ],
       "germanPhrasePresent": true
@@ -594,7 +594,7 @@
       "text": "Pick a date in the calendar.",
       "sources": [
         "src/components/BirthdayPackages.tsx:205",
-        "src/components/RentalSpaces.tsx:162",
+        "src/components/RentalSpaces.tsx:163",
         "src/components/SchoolAnimations.tsx:191"
       ],
       "germanPhrasePresent": false
@@ -649,8 +649,8 @@
         "src/lib/portal-i18n.ts:102",
         "src/lib/portal-i18n.ts:123",
         "src/pages/account.tsx:349",
-        "src/pages/sponsor.tsx:80",
-        "src/pages/support.tsx:67"
+        "src/pages/sponsor.tsx:81",
+        "src/pages/support.tsx:68"
       ],
       "germanPhrasePresent": false
     },
@@ -889,7 +889,7 @@
       "text": "Live from the farm",
       "sources": [
         "src/components/FarmFeed.tsx:26",
-        "src/pages/social.tsx:27"
+        "src/pages/social.tsx:28"
       ],
       "germanPhrasePresent": false
     },
@@ -1044,7 +1044,7 @@
         "src/lib/farm-camps.ts:313",
         "src/lib/portal-routes.ts:207",
         "src/pages/academy-quiz.tsx:89",
-        "src/pages/animal-passport.tsx:122"
+        "src/pages/animal-passport.tsx:123"
       ],
       "germanPhrasePresent": false
     },
@@ -1114,7 +1114,7 @@
       "text": "Zone",
       "sources": [
         "src/components/InteractiveMap.tsx:54",
-        "src/pages/animal-passport.tsx:98"
+        "src/pages/animal-passport.tsx:99"
       ],
       "germanPhrasePresent": false
     },
@@ -1265,7 +1265,7 @@
       "text": "Sending failed. Feel free to e-mail us at contact@maximilien.brussels.",
       "sources": [
         "src/components/PageContactForm.tsx:13",
-        "src/components/RentalSpaces.tsx:161",
+        "src/components/RentalSpaces.tsx:162",
         "src/components/SchoolAnimations.tsx:190"
       ],
       "germanPhrasePresent": true
@@ -1301,129 +1301,129 @@
     {
       "text": "Venue hire",
       "sources": [
-        "src/components/RentalSpaces.tsx:133"
+        "src/components/RentalSpaces.tsx:134"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Our spaces & formulas",
       "sources": [
-        "src/components/RentalSpaces.tsx:134"
+        "src/components/RentalSpaces.tsx:135"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Rent a single space for your workshop or meeting, or hire the whole farm privately for a large event.",
       "sources": [
-        "src/components/RentalSpaces.tsx:135"
+        "src/components/RentalSpaces.tsx:136"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Rent our spaces",
       "sources": [
-        "src/components/RentalSpaces.tsx:136"
+        "src/components/RentalSpaces.tsx:137"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Half day",
       "sources": [
-        "src/components/RentalSpaces.tsx:137",
-        "src/pages/teambuilding.tsx:80"
+        "src/components/RentalSpaces.tsx:138",
+        "src/pages/teambuilding.tsx:81"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Full day",
       "sources": [
-        "src/components/RentalSpaces.tsx:138",
+        "src/components/RentalSpaces.tsx:139",
         "src/lib/school-animations.ts:448",
-        "src/pages/teambuilding.tsx:81"
+        "src/pages/teambuilding.tsx:82"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Up to",
       "sources": [
-        "src/components/RentalSpaces.tsx:139"
+        "src/components/RentalSpaces.tsx:140"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Send a request",
       "sources": [
-        "src/components/RentalSpaces.tsx:141"
+        "src/components/RentalSpaces.tsx:142"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Included with every rental",
       "sources": [
-        "src/components/RentalSpaces.tsx:142"
+        "src/components/RentalSpaces.tsx:143"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Extra with a full private hire",
       "sources": [
-        "src/components/RentalSpaces.tsx:143"
+        "src/components/RentalSpaces.tsx:144"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Practical arrangements",
       "sources": [
-        "src/components/RentalSpaces.tsx:144"
+        "src/components/RentalSpaces.tsx:145"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Formula",
       "sources": [
-        "src/components/RentalSpaces.tsx:145"
+        "src/components/RentalSpaces.tsx:146"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Preferred date",
       "sources": [
-        "src/components/RentalSpaces.tsx:146"
+        "src/components/RentalSpaces.tsx:147"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Number of people",
       "sources": [
-        "src/components/RentalSpaces.tsx:148"
+        "src/components/RentalSpaces.tsx:149"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Type of event",
       "sources": [
-        "src/components/RentalSpaces.tsx:149"
+        "src/components/RentalSpaces.tsx:150"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Organisation or company",
       "sources": [
-        "src/components/RentalSpaces.tsx:150"
+        "src/components/RentalSpaces.tsx:151"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Tell us briefly about your event",
       "sources": [
-        "src/components/RentalSpaces.tsx:154"
+        "src/components/RentalSpaces.tsx:155"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "We will get back to you shortly to confirm your date.",
       "sources": [
-        "src/components/RentalSpaces.tsx:160",
+        "src/components/RentalSpaces.tsx:161",
         "src/components/SchoolAnimations.tsx:189"
       ],
       "germanPhrasePresent": false
@@ -1431,7 +1431,7 @@
     {
       "text": "Photo of the farm chalet",
       "sources": [
-        "src/components/RentalSpaces.tsx:163"
+        "src/components/RentalSpaces.tsx:164"
       ],
       "germanPhrasePresent": false
     },
@@ -1606,7 +1606,7 @@
       "text": "Our media",
       "sources": [
         "src/components/SiteFooter.tsx:61",
-        "src/pages/social.tsx:26"
+        "src/pages/social.tsx:27"
       ],
       "germanPhrasePresent": true
     },
@@ -1657,7 +1657,7 @@
       "text": "Fair & Open Tech",
       "sources": [
         "src/components/SiteFooter.tsx:158",
-        "src/pages/fairtech.tsx:75"
+        "src/pages/fairtech.tsx:76"
       ],
       "germanPhrasePresent": true
     },
@@ -2073,7 +2073,7 @@
       "text": "Open in Google Maps",
       "sources": [
         "src/components/chat/ChatRouteMap.tsx:49",
-        "src/pages/contact.tsx:154"
+        "src/pages/contact.tsx:155"
       ],
       "germanPhrasePresent": false
     },
@@ -2116,7 +2116,7 @@
       "text": "Public transport",
       "sources": [
         "src/components/chat/ChatRouteMap.tsx:61",
-        "src/pages/contact.tsx:166"
+        "src/pages/contact.tsx:167"
       ],
       "germanPhrasePresent": false
     },
@@ -2272,6 +2272,13 @@
     },
     {
       "text": "Reading aloud failed.",
+      "sources": [
+        "src/components/chat/SpeakButton.tsx:14"
+      ],
+      "germanPhrasePresent": false
+    },
+    {
+      "text": "Sign in to use read aloud.",
       "sources": [
         "src/components/chat/SpeakButton.tsx:14"
       ],
@@ -5006,7 +5013,7 @@
       "text": "Confirm your email address",
       "sources": [
         "src/lib/email-copy.ts:229",
-        "src/pages/register.tsx:89"
+        "src/pages/register.tsx:99"
       ],
       "germanPhrasePresent": false
     },
@@ -5988,7 +5995,7 @@
         "src/lib/hub-content.ts:155",
         "src/lib/hub-content.ts:551",
         "src/pages/animations.tsx:99",
-        "src/pages/seminars.tsx:70"
+        "src/pages/seminars.tsx:71"
       ],
       "germanPhrasePresent": true
     },
@@ -6185,7 +6192,7 @@
       "sources": [
         "src/lib/hub-content.ts:260",
         "src/lib/hub-content.ts:785",
-        "src/pages/contact.tsx:179",
+        "src/pages/contact.tsx:180",
         "src/pages/visit.tsx:118"
       ],
       "germanPhrasePresent": true
@@ -6836,7 +6843,7 @@
         "src/lib/hub-content.ts:777",
         "src/lib/opening-schema.ts:37",
         "src/lib/transactional-templates.ts:214",
-        "src/pages/contact.tsx:183",
+        "src/pages/contact.tsx:184",
         "src/pages/visit.tsx:105"
       ],
       "germanPhrasePresent": true
@@ -6859,7 +6866,7 @@
       "text": "Location & contact",
       "sources": [
         "src/lib/hub-content.ts:793",
-        "src/pages/contact.tsx:151"
+        "src/pages/contact.tsx:152"
       ],
       "germanPhrasePresent": true
     },
@@ -8319,7 +8326,7 @@
       "text": "Address",
       "sources": [
         "src/lib/legal-content.ts:64",
-        "src/pages/contact.tsx:153",
+        "src/pages/contact.tsx:154",
         "src/pages/visit.tsx:106"
       ],
       "germanPhrasePresent": true
@@ -9120,8 +9127,8 @@
       "text": "Become a sponsor",
       "sources": [
         "src/lib/maxim-context.ts:105",
-        "src/pages/sponsor.tsx:75",
-        "src/pages/support.tsx:71"
+        "src/pages/sponsor.tsx:76",
+        "src/pages/support.tsx:72"
       ],
       "germanPhrasePresent": false
     },
@@ -10193,7 +10200,7 @@
       "text": "per person",
       "sources": [
         "src/lib/page-content.ts:84",
-        "src/pages/teambuilding.tsx:79"
+        "src/pages/teambuilding.tsx:80"
       ],
       "germanPhrasePresent": false
     },
@@ -10238,7 +10245,7 @@
       "text": "Team building at the farm or in the countryside",
       "sources": [
         "src/lib/page-content.ts:170",
-        "src/pages/teambuilding.tsx:76"
+        "src/pages/teambuilding.tsx:77"
       ],
       "germanPhrasePresent": false
     },
@@ -10253,7 +10260,7 @@
       "text": "Seminars & meetings at the farm",
       "sources": [
         "src/lib/page-content.ts:197",
-        "src/pages/seminars.tsx:67"
+        "src/pages/seminars.tsx:68"
       ],
       "germanPhrasePresent": false
     },
@@ -13328,7 +13335,7 @@
       "text": "sponsor",
       "sources": [
         "src/lib/routes-i18n.ts:136",
-        "src/pages/animal-passport.tsx:395"
+        "src/pages/animal-passport.tsx:396"
       ],
       "germanPhrasePresent": false
     },
@@ -16400,7 +16407,7 @@
       "text": "What you do",
       "sources": [
         "src/lib/volunteer-content.ts:130",
-        "src/pages/teambuilding.tsx:83"
+        "src/pages/teambuilding.tsx:84"
       ],
       "germanPhrasePresent": true
     },
@@ -16823,7 +16830,7 @@
       "text": "First name",
       "sources": [
         "src/pages/account.tsx:350",
-        "src/pages/register.tsx:91"
+        "src/pages/register.tsx:104"
       ],
       "germanPhrasePresent": false
     },
@@ -16831,7 +16838,7 @@
       "text": "Last name",
       "sources": [
         "src/pages/account.tsx:351",
-        "src/pages/register.tsx:92"
+        "src/pages/register.tsx:105"
       ],
       "germanPhrasePresent": false
     },
@@ -16853,8 +16860,8 @@
       "text": "Email address",
       "sources": [
         "src/pages/account.tsx:354",
-        "src/pages/register.tsx:95",
-        "src/pages/sponsor.tsx:81",
+        "src/pages/register.tsx:108",
+        "src/pages/sponsor.tsx:82",
         "src/routes/word-partner.contact.tsx:105"
       ],
       "germanPhrasePresent": false
@@ -17233,7 +17240,7 @@
     {
       "text": "Back to all animals",
       "sources": [
-        "src/pages/animal-passport.tsx:90",
+        "src/pages/animal-passport.tsx:91",
         "src/pages/animals.tsx:57"
       ],
       "germanPhrasePresent": true
@@ -17241,134 +17248,134 @@
     {
       "text": "On the farm today",
       "sources": [
-        "src/pages/animal-passport.tsx:91"
+        "src/pages/animal-passport.tsx:92"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "🔊 Listen to the sound",
       "sources": [
-        "src/pages/animal-passport.tsx:93"
+        "src/pages/animal-passport.tsx:94"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "The passport",
       "sources": [
-        "src/pages/animal-passport.tsx:94"
+        "src/pages/animal-passport.tsx:95"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Species & breed",
       "sources": [
-        "src/pages/animal-passport.tsx:95"
+        "src/pages/animal-passport.tsx:96"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Names / residents",
       "sources": [
-        "src/pages/animal-passport.tsx:96"
+        "src/pages/animal-passport.tsx:97"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Location on the map",
       "sources": [
-        "src/pages/animal-passport.tsx:97"
+        "src/pages/animal-passport.tsx:98"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Character",
       "sources": [
-        "src/pages/animal-passport.tsx:99"
+        "src/pages/animal-passport.tsx:100"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Feeding rules",
       "sources": [
-        "src/pages/animal-passport.tsx:100"
+        "src/pages/animal-passport.tsx:101"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Important for every visitor",
       "sources": [
-        "src/pages/animal-passport.tsx:101"
+        "src/pages/animal-passport.tsx:102"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Fun facts & games",
       "sources": [
-        "src/pages/animal-passport.tsx:106"
+        "src/pages/animal-passport.tsx:107"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "For children and school groups",
       "sources": [
-        "src/pages/animal-passport.tsx:107"
+        "src/pages/animal-passport.tsx:108"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Photos",
       "sources": [
-        "src/pages/animal-passport.tsx:108"
+        "src/pages/animal-passport.tsx:109"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "A fixed monthly amount helps pay for feed, care and the vet. You receive an official certificate.",
       "sources": [
-        "src/pages/animal-passport.tsx:110"
+        "src/pages/animal-passport.tsx:111"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Discover sponsorship",
       "sources": [
-        "src/pages/animal-passport.tsx:111",
-        "src/pages/support.tsx:73"
+        "src/pages/animal-passport.tsx:112",
+        "src/pages/support.tsx:74"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "📍 You're standing at the meadow!",
       "sources": [
-        "src/pages/animal-passport.tsx:112"
+        "src/pages/animal-passport.tsx:113"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "📸 Take a photo & send it to Maxim",
       "sources": [
-        "src/pages/animal-passport.tsx:113"
+        "src/pages/animal-passport.tsx:114"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Welcome to the farm!",
       "sources": [
-        "src/pages/animal-passport.tsx:116"
+        "src/pages/animal-passport.tsx:117"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "We couldn't find this animal.",
       "sources": [
-        "src/pages/animal-passport.tsx:117"
+        "src/pages/animal-passport.tsx:118"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Where to find me?",
       "sources": [
-        "src/pages/animal-passport.tsx:118"
+        "src/pages/animal-passport.tsx:119"
       ],
       "germanPhrasePresent": false
     },
@@ -17552,147 +17559,147 @@
     {
       "text": "Address, route and how to get there",
       "sources": [
-        "src/pages/contact.tsx:152"
+        "src/pages/contact.tsx:153"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Open in Apple Maps",
       "sources": [
-        "src/pages/contact.tsx:155"
+        "src/pages/contact.tsx:156"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Copy address",
       "sources": [
-        "src/pages/contact.tsx:156"
+        "src/pages/contact.tsx:157"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Address copied",
       "sources": [
-        "src/pages/contact.tsx:157"
+        "src/pages/contact.tsx:158"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Route & getting here",
       "sources": [
-        "src/pages/contact.tsx:158"
+        "src/pages/contact.tsx:159"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "The farm sits in the middle of Maximilien Park, within walking distance of Brussels-North station.",
       "sources": [
-        "src/pages/contact.tsx:160"
+        "src/pages/contact.tsx:161"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "On foot",
       "sources": [
-        "src/pages/contact.tsx:162"
+        "src/pages/contact.tsx:163"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "From Brussels-North station, it's about a 5-minute walk through Maximilien Park.",
       "sources": [
-        "src/pages/contact.tsx:163"
+        "src/pages/contact.tsx:164"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Train: Brussels-North. Metro: Yser/IJzer or Rogier. Tram: 3, 4, 51. Bus: 47, 58, 88.",
       "sources": [
-        "src/pages/contact.tsx:167"
+        "src/pages/contact.tsx:168"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Lines given as an indication — always check the current STIB/MIVB schedule.",
       "sources": [
-        "src/pages/contact.tsx:168"
+        "src/pages/contact.tsx:169"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "By bike",
       "sources": [
-        "src/pages/contact.tsx:171"
+        "src/pages/contact.tsx:172"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "A Villo! bike-share station right by the entrance, and bike racks at the farm itself.",
       "sources": [
-        "src/pages/contact.tsx:172"
+        "src/pages/contact.tsx:173"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "By car",
       "sources": [
-        "src/pages/contact.tsx:175"
+        "src/pages/contact.tsx:176"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Paid on-street parking nearby and a few car parks close by. Public transport is usually easier — we recommend it.",
       "sources": [
-        "src/pages/contact.tsx:176"
+        "src/pages/contact.tsx:177"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Flat terrain on the main route, an adapted toilet and an adapted parking spot near the park.",
       "sources": [
-        "src/pages/contact.tsx:180"
+        "src/pages/contact.tsx:181"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "More about accessibility",
       "sources": [
-        "src/pages/contact.tsx:181"
+        "src/pages/contact.tsx:182"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Tuesday to Saturday, 10:00 – 16:30",
       "sources": [
-        "src/pages/contact.tsx:184"
+        "src/pages/contact.tsx:185"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "See the full schedule",
       "sources": [
-        "src/pages/contact.tsx:185"
+        "src/pages/contact.tsx:186"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Map",
       "sources": [
-        "src/pages/contact.tsx:186"
+        "src/pages/contact.tsx:187"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Open larger map",
       "sources": [
-        "src/pages/contact.tsx:187"
+        "src/pages/contact.tsx:188"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "What is your question about?",
       "sources": [
-        "src/pages/contact.tsx:188"
+        "src/pages/contact.tsx:189"
       ],
       "germanPhrasePresent": false
     },
@@ -18022,91 +18029,91 @@
     {
       "text": "Fair & Open Tech @ Maximilien",
       "sources": [
-        "src/pages/fairtech.tsx:76"
+        "src/pages/fairtech.tsx:77"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "The urban farm is also a Brussels hub for sustainable hardware (Fairphone) and privacy-first open-source software (/e/OS). Come and see, test and repair.",
       "sources": [
-        "src/pages/fairtech.tsx:77"
+        "src/pages/fairtech.tsx:78"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Discover Fairphone & /e/OS",
       "sources": [
-        "src/pages/fairtech.tsx:78"
+        "src/pages/fairtech.tsx:79"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Order via our partner page",
       "sources": [
-        "src/pages/fairtech.tsx:79"
+        "src/pages/fairtech.tsx:80"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "What we stand for",
       "sources": [
-        "src/pages/fairtech.tsx:80"
+        "src/pages/fairtech.tsx:81"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Circular & repairable",
       "sources": [
-        "src/pages/fairtech.tsx:83"
+        "src/pages/fairtech.tsx:84"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Modular Fairphone 6 hardware: replace parts yourself, keep devices longer, avoid e-waste.",
       "sources": [
-        "src/pages/fairtech.tsx:84"
+        "src/pages/fairtech.tsx:85"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Privacy & decentralised",
       "sources": [
-        "src/pages/fairtech.tsx:87"
+        "src/pages/fairtech.tsx:88"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Local impact",
       "sources": [
-        "src/pages/fairtech.tsx:91"
+        "src/pages/fairtech.tsx:92"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Physical demo station at the farm, Quai des Péniches 2 / Schipperijkaai 2, 1000 Brussels.",
       "sources": [
-        "src/pages/fairtech.tsx:92"
+        "src/pages/fairtech.tsx:93"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Interested or have a Fair Tech question?",
       "sources": [
-        "src/pages/fairtech.tsx:95"
+        "src/pages/fairtech.tsx:96"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "For visitors, local schools and partner NPOs who want to test a device or join a Repair Café.",
       "sources": [
-        "src/pages/fairtech.tsx:97"
+        "src/pages/fairtech.tsx:98"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "This partner link supports the farm, at no extra cost to you.",
       "sources": [
-        "src/pages/fairtech.tsx:98"
+        "src/pages/fairtech.tsx:99"
       ],
       "germanPhrasePresent": false
     },
@@ -18128,7 +18135,7 @@
       "text": "← Back",
       "sources": [
         "src/pages/login.tsx:144",
-        "src/pages/register.tsx:85"
+        "src/pages/register.tsx:95"
       ],
       "germanPhrasePresent": false
     },
@@ -18136,7 +18143,7 @@
       "text": "Customer portal",
       "sources": [
         "src/pages/login.tsx:145",
-        "src/pages/register.tsx:86"
+        "src/pages/register.tsx:96"
       ],
       "germanPhrasePresent": false
     },
@@ -18186,7 +18193,7 @@
       "text": "E-mail address",
       "sources": [
         "src/pages/login.tsx:152",
-        "src/pages/support.tsx:68"
+        "src/pages/support.tsx:69"
       ],
       "germanPhrasePresent": false
     },
@@ -18229,7 +18236,7 @@
       "text": "Password",
       "sources": [
         "src/pages/login.tsx:159",
-        "src/pages/register.tsx:97"
+        "src/pages/register.tsx:110"
       ],
       "germanPhrasePresent": false
     },
@@ -18376,35 +18383,35 @@
     {
       "text": "Partners",
       "sources": [
-        "src/pages/partners.tsx:30"
+        "src/pages/partners.tsx:31"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Our partners & networks",
       "sources": [
-        "src/pages/partners.tsx:31"
+        "src/pages/partners.tsx:32"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "From subsidies and federations to digital infrastructure: these organisations make the daily operation of the city farm possible.",
       "sources": [
-        "src/pages/partners.tsx:33"
+        "src/pages/partners.tsx:34"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Would your organisation also like to support the farm?",
       "sources": [
-        "src/pages/partners.tsx:34"
+        "src/pages/partners.tsx:35"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Become a partner",
       "sources": [
-        "src/pages/partners.tsx:35",
+        "src/pages/partners.tsx:36",
         "src/routes/word-partner.index.tsx:99"
       ],
       "germanPhrasePresent": false
@@ -18948,143 +18955,171 @@
     {
       "text": "Create your account",
       "sources": [
-        "src/pages/register.tsx:87"
+        "src/pages/register.tsx:97"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Collect Hooves, track your orders and keep your academy certificates.",
       "sources": [
-        "src/pages/register.tsx:88"
-      ],
-      "germanPhrasePresent": false
-    },
-    {
-      "text": "(optional)",
-      "sources": [
-        "src/pages/register.tsx:93"
-      ],
-      "germanPhrasePresent": false
-    },
-    {
-      "text": "Needed when you request a certificate — you can add it later.",
-      "sources": [
-        "src/pages/register.tsx:94"
-      ],
-      "germanPhrasePresent": false
-    },
-    {
-      "text": "you@example.be",
-      "sources": [
-        "src/pages/register.tsx:96"
-      ],
-      "germanPhrasePresent": false
-    },
-    {
-      "text": "Create account",
-      "sources": [
         "src/pages/register.tsx:98"
       ],
       "germanPhrasePresent": false
     },
     {
-      "text": "Continue with Google",
-      "sources": [
-        "src/pages/register.tsx:99"
-      ],
-      "germanPhrasePresent": false
-    },
-    {
-      "text": "Already have an account?",
+      "text": "We sent a confirmation link to {email}.",
       "sources": [
         "src/pages/register.tsx:100"
       ],
       "germanPhrasePresent": false
     },
     {
-      "text": "Log in here",
+      "text": "Your account has been created. You can sign in with your password now.",
       "sources": [
         "src/pages/register.tsx:101"
       ],
       "germanPhrasePresent": false
     },
     {
-      "text": "Registration failed.",
+      "text": "We sent you a confirmation link by email.",
       "sources": [
         "src/pages/register.tsx:102"
       ],
       "germanPhrasePresent": false
     },
     {
+      "text": "Your account for {email} is ready. The confirmation email could not be sent, but you can sign in with your password now.",
+      "sources": [
+        "src/pages/register.tsx:103"
+      ],
+      "germanPhrasePresent": false
+    },
+    {
+      "text": "(optional)",
+      "sources": [
+        "src/pages/register.tsx:106"
+      ],
+      "germanPhrasePresent": false
+    },
+    {
+      "text": "Needed when you request a certificate — you can add it later.",
+      "sources": [
+        "src/pages/register.tsx:107"
+      ],
+      "germanPhrasePresent": false
+    },
+    {
+      "text": "you@example.be",
+      "sources": [
+        "src/pages/register.tsx:109"
+      ],
+      "germanPhrasePresent": false
+    },
+    {
+      "text": "Create account",
+      "sources": [
+        "src/pages/register.tsx:111"
+      ],
+      "germanPhrasePresent": false
+    },
+    {
+      "text": "Continue with Google",
+      "sources": [
+        "src/pages/register.tsx:112"
+      ],
+      "germanPhrasePresent": false
+    },
+    {
+      "text": "Already have an account?",
+      "sources": [
+        "src/pages/register.tsx:113"
+      ],
+      "germanPhrasePresent": false
+    },
+    {
+      "text": "Log in here",
+      "sources": [
+        "src/pages/register.tsx:114"
+      ],
+      "germanPhrasePresent": false
+    },
+    {
+      "text": "Registration failed.",
+      "sources": [
+        "src/pages/register.tsx:115"
+      ],
+      "germanPhrasePresent": false
+    },
+    {
       "text": "Companies & organisations",
       "sources": [
-        "src/pages/seminars.tsx:66",
-        "src/pages/teambuilding.tsx:75"
+        "src/pages/seminars.tsx:67",
+        "src/pages/teambuilding.tsx:76"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Meet between the kitchen garden and the meadow, five minutes from Brussels-Central. From a half day for eight to a seminar for eighty.",
       "sources": [
-        "src/pages/seminars.tsx:68"
+        "src/pages/seminars.tsx:69"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Space from",
       "sources": [
-        "src/pages/seminars.tsx:69"
+        "src/pages/seminars.tsx:70"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Capacity",
       "sources": [
-        "src/pages/seminars.tsx:71"
+        "src/pages/seminars.tsx:72"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Included",
       "sources": [
-        "src/pages/seminars.tsx:72",
-        "src/pages/teambuilding.tsx:84"
+        "src/pages/seminars.tsx:73",
+        "src/pages/teambuilding.tsx:85"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Catering",
       "sources": [
-        "src/pages/seminars.tsx:73"
+        "src/pages/seminars.tsx:74"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Good to know",
       "sources": [
-        "src/pages/seminars.tsx:74",
-        "src/pages/teambuilding.tsx:86"
+        "src/pages/seminars.tsx:75",
+        "src/pages/teambuilding.tsx:87"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "All spaces and rates",
       "sources": [
-        "src/pages/seminars.tsx:75"
+        "src/pages/seminars.tsx:76"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Request a date",
       "sources": [
-        "src/pages/seminars.tsx:76"
+        "src/pages/seminars.tsx:77"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Tell us your preferred date, part of the day, number of participants and catering wishes. We will confirm availability and send a quote.",
       "sources": [
-        "src/pages/seminars.tsx:78"
+        "src/pages/seminars.tsx:79"
       ],
       "germanPhrasePresent": false
     },
@@ -19098,161 +19133,175 @@
     {
       "text": "Short updates, photos from the yard and videos of our animals and workshops — straight from our Bluesky channel.",
       "sources": [
-        "src/pages/social.tsx:29"
+        "src/pages/social.tsx:30"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Follow us on Bluesky",
       "sources": [
-        "src/pages/social.tsx:30"
+        "src/pages/social.tsx:31"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "€5 / month",
       "sources": [
-        "src/pages/sponsor.tsx:15"
+        "src/pages/sponsor.tsx:16"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "€10 / month",
       "sources": [
-        "src/pages/sponsor.tsx:16"
+        "src/pages/sponsor.tsx:17"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "€50 / year",
       "sources": [
-        "src/pages/sponsor.tsx:17"
+        "src/pages/sponsor.tsx:18"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Symbolically adopt a farm animal and support their daily care, food and wellbeing.",
       "sources": [
-        "src/pages/sponsor.tsx:76"
+        "src/pages/sponsor.tsx:77"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "1. Pick an animal",
       "sources": [
-        "src/pages/sponsor.tsx:77"
+        "src/pages/sponsor.tsx:78"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "2. Pick a tier",
       "sources": [
-        "src/pages/sponsor.tsx:78"
+        "src/pages/sponsor.tsx:79"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "3. Your details",
       "sources": [
-        "src/pages/sponsor.tsx:79"
+        "src/pages/sponsor.tsx:80"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "💚 Become a sponsor",
       "sources": [
-        "src/pages/sponsor.tsx:82"
+        "src/pages/sponsor.tsx:83"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Payments are temporarily unavailable. Please try again later.",
       "sources": [
-        "src/pages/sponsor.tsx:83"
+        "src/pages/sponsor.tsx:84"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Your payment is being processed…",
       "sources": [
-        "src/pages/sponsor.tsx:84"
+        "src/pages/sponsor.tsx:85"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Thank you for your support! 💚",
       "sources": [
-        "src/pages/sponsor.tsx:85"
+        "src/pages/sponsor.tsx:86"
       ],
       "germanPhrasePresent": false
     },
     {
-      "text": "Download certificate",
+      "text": "You are now officially sponsoring {animal}.",
       "sources": [
         "src/pages/sponsor.tsx:87"
       ],
       "germanPhrasePresent": false
     },
     {
-      "text": "Something went wrong. Please try again later.",
+      "text": "Download certificate",
       "sources": [
         "src/pages/sponsor.tsx:88"
       ],
       "germanPhrasePresent": false
     },
     {
-      "text": "Start over",
+      "text": "Something went wrong. Please try again later.",
       "sources": [
         "src/pages/sponsor.tsx:89"
       ],
       "germanPhrasePresent": false
     },
     {
+      "text": "Start over",
+      "sources": [
+        "src/pages/sponsor.tsx:90"
+      ],
+      "germanPhrasePresent": false
+    },
+    {
       "text": "Confirm your donation",
       "sources": [
-        "src/pages/support.tsx:61"
+        "src/pages/support.tsx:62"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Leave your details and we'll immediately send you a confirmation with the amount, our account details and a structured reference for your transfer.",
       "sources": [
-        "src/pages/support.tsx:63"
+        "src/pages/support.tsx:64"
       ],
       "germanPhrasePresent": false
     },
     {
-      "text": "Structured reference",
+      "text": "Thank you! The confirmation is on its way to {email}.",
       "sources": [
         "src/pages/support.tsx:65"
       ],
       "germanPhrasePresent": false
     },
     {
-      "text": "Other amount",
+      "text": "Structured reference",
       "sources": [
         "src/pages/support.tsx:66"
       ],
       "germanPhrasePresent": false
     },
     {
-      "text": "Send me the confirmation",
+      "text": "Other amount",
       "sources": [
-        "src/pages/support.tsx:69"
+        "src/pages/support.tsx:67"
       ],
       "germanPhrasePresent": false
     },
     {
-      "text": "Sending failed. Please try again later.",
+      "text": "Send me the confirmation",
       "sources": [
         "src/pages/support.tsx:70"
       ],
       "germanPhrasePresent": false
     },
     {
+      "text": "Sending failed. Please try again later.",
+      "sources": [
+        "src/pages/support.tsx:71"
+      ],
+      "germanPhrasePresent": false
+    },
+    {
       "text": "Symbolically adopt a farm animal and support their daily care.",
       "sources": [
-        "src/pages/support.tsx:72",
+        "src/pages/support.tsx:73",
         "src/routes/$lang.$.tsx:244"
       ],
       "germanPhrasePresent": false
@@ -19260,35 +19309,35 @@
     {
       "text": "Two settings, one approach: working together with animals, soil and fire. Half or full day, in English, French or Dutch.",
       "sources": [
-        "src/pages/teambuilding.tsx:77"
+        "src/pages/teambuilding.tsx:78"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "from",
       "sources": [
-        "src/pages/teambuilding.tsx:78"
+        "src/pages/teambuilding.tsx:79"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Food and drink",
       "sources": [
-        "src/pages/teambuilding.tsx:85"
+        "src/pages/teambuilding.tsx:86"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Request a team building day",
       "sources": [
-        "src/pages/teambuilding.tsx:87"
+        "src/pages/teambuilding.tsx:88"
       ],
       "germanPhrasePresent": false
     },
     {
       "text": "Tell us your preferred date, group size, half or full day, which formula (farm or countryside) and any catering wishes. We will send you a quote.",
       "sources": [
-        "src/pages/teambuilding.tsx:89"
+        "src/pages/teambuilding.tsx:90"
       ],
       "germanPhrasePresent": false
     },
