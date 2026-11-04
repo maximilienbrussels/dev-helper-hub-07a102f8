@@ -64,7 +64,7 @@ import dePhrases from "./de-phrases";
  */
 export const EXTRA_PHRASES: Partial<Record<ExtraLang, Record<string, string>>> = {
   de: { ...dePhrases, ...dePublic, ...deResources, ...deCamps },
-  ar: { ...arPublic, ...arCamps, ...arResources, ...arPhrases, ...arVisitors, ...arVisitors2 },
+  ar: { ...arPublic, ...arCamps, ...arResources, ...arPhrases, ...arVisitors, ...arVisitors2, ...arVisitors3 },
 };
 
 export function translatePhrase(extra: ExtraLang | null | undefined, en: string): string {
