@@ -89,7 +89,6 @@ const arVisitors4: Record<string, string> = {
   "The bee colony": "مستعمرة النحل",
   "Queen, workers, drones and the hive's annual cycle.": "الملكة والشغالات والذكور ودورة الخلية السنوية.",
   "Pollination & forage": "التلقيح والرعي",
-  "نباتات الرعي والرحيق وحبوب اللقاح والتنوع الحيوي الحضري.": "نباتات الرعي والرحيق وحبوب اللقاح والتنوع الحيوي الحضري.",
   "Safe beekeeping": "تربية نحل آمنة",
   "Hive inspection, protective clothing and swarm prevention.": "فحص الخلية والملابس الواقية ومنع التطريد.",
   "Feeding & rooting": "التغذية والنبش",
