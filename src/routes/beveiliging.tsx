@@ -48,13 +48,25 @@ export const Route = createFileRoute("/beveiliging")({
       { name: "robots", content: "noindex" },
     ],
   }),
-  component: SecurityPage,
+  component: SecurityRoot,
 });
 
 const safeNext = (n?: string) => (n && n.startsWith("/") && !n.startsWith("//") ? n : "/account");
 const errMsg = (e: unknown) => (e instanceof Error && e.message ? e.message : "Er ging iets mis.");
 
 type Method = "passkey" | "totp" | "phone";
+
+function SecurityRoot() {
+  const [email, setEmail] = useState("");
+  useEffect(() => {
+    void supabase.auth.getUser().then(({ data }) => setEmail(data.user?.email ?? ""));
+  }, []);
+  return (
+    <AccountEmail.Provider value={email}>
+      <SecurityPage />
+    </AccountEmail.Provider>
+  );
+}
 
 function SecurityPage() {
   const { next } = Route.useSearch();
