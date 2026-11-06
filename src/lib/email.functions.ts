@@ -103,7 +103,9 @@ export const sendSystemTestEmail = createServerFn({ method: "POST" })
     const { claims } = context;
     await requirePermission(context, "manage_rights");
 
-    const to = data?.to?.trim() || (claims.email as string | undefined) || "";
+    // Enkel naar het eigen beheerdersadres: geen vrij gekozen ontvangers.
+    void data;
+    const to = ((claims.email as string | undefined) || "").trim();
     if (!to) throw new Error("Geen e-mailadres gekoppeld aan dit beheerdersaccount");
 
     const { sendMail, systemTestEmail, senderIdentity } = await import("./email.server");

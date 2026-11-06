@@ -88,6 +88,42 @@ export function clientMetadataDocument(origin: string): Record<string, unknown> 
 
 /* ------------------------------------------------------------- discovery */
 
+/**
+ * Enkel vertrouwde Bluesky-infrastructuur mag door de server gecontacteerd
+ * worden (geen door de bezoeker gekozen hosts). Uitbreidbaar via
+ * BLUESKY_ALLOWED_HOSTS (kommagescheiden hostnamen of ".suffix").
+ */
+const DEFAULT_BLUESKY_HOSTS = ["bsky.social", ".bsky.network", "bsky.app", ".bsky.app"];
+
+function allowedBlueskyHosts(): string[] {
+  const extra = (process.env["BLUESKY_ALLOWED_HOSTS"] || "")
+    .split(",")
+    .map((h) => h.trim().toLowerCase())
+    .filter(Boolean);
+  return [...DEFAULT_BLUESKY_HOSTS, ...extra];
+}
+
+export function isAllowedBlueskyUrl(raw: string | null | undefined): boolean {
+  if (!raw) return false;
+  try {
+    const url = new URL(raw);
+    if (url.protocol !== "https:" || url.port || url.username || url.password) return false;
+    const host = url.hostname.toLowerCase();
+    return allowedBlueskyHosts().some((rule) =>
+      rule.startsWith(".") ? host.endsWith(rule) && host.length > rule.length : host === rule,
+    );
+  } catch {
+    return false;
+  }
+}
+
+function assertAllowedBlueskyUrl(raw: string | null | undefined): string {
+  if (!raw || !isAllowedBlueskyUrl(raw)) {
+    throw new Error("Deze Bluesky-server wordt niet ondersteund.");
+  }
+  return raw;
+}
+
 async function fetchJson<T>(url: string): Promise<T> {
   const res = await fetch(url, { headers: { accept: "application/json" } });
   if (!res.ok) throw new Error(`${url} gaf status ${res.status}`);
@@ -107,17 +143,16 @@ export async function resolveDid(identifier: string): Promise<string> {
 /** DID → PDS-adres, via het DID-document (did:plc of did:web). */
 export async function resolvePds(did: string): Promise<string> {
   let doc: { service?: { id?: string; type?: string; serviceEndpoint?: string }[] };
-  if (did.startsWith("did:web:")) {
-    const host = decodeURIComponent(did.slice("did:web:".length)).replace(/:/g, "/");
-    doc = await fetchJson(`https://${host}/.well-known/did.json`);
-  } else {
-    doc = await fetchJson(`https://plc.directory/${encodeURIComponent(did)}`);
+  // did:web zou de server naar een willekeurige host laten surfen: niet toegelaten.
+  if (!/^did:plc:[a-z2-7]{24}$/.test(did)) {
+    throw new Error("Dit Bluesky-account wordt niet ondersteund.");
   }
+  doc = await fetchJson(`https://plc.directory/${encodeURIComponent(did)}`);
   const service = (doc.service ?? []).find(
     (s) => s.type === "AtprotoPersonalDataServer" || s.id?.endsWith("#atproto_pds"),
   );
   if (!service?.serviceEndpoint) throw new Error("Geen PDS gevonden voor dit account.");
-  return new URL(service.serviceEndpoint).origin;
+  return new URL(assertAllowedBlueskyUrl(service.serviceEndpoint)).origin;
 }
 
 type AuthServerMeta = {
@@ -129,15 +164,21 @@ type AuthServerMeta = {
 
 /** PDS → authorisatieserver → metadata (endpoints). */
 export async function resolveAuthServer(pds: string): Promise<AuthServerMeta> {
+  assertAllowedBlueskyUrl(pds);
   const resource = await fetchJson<{ authorization_servers?: string[] }>(
     `${pds}/.well-known/oauth-protected-resource`,
   );
-  const issuer = resource.authorization_servers?.[0] ?? pds;
+  const issuer = assertAllowedBlueskyUrl(resource.authorization_servers?.[0] ?? pds);
   const meta = await fetchJson<AuthServerMeta>(
     `${issuer.replace(/\/$/, "")}/.well-known/oauth-authorization-server`,
   );
   if (!meta.authorization_endpoint || !meta.token_endpoint) {
     throw new Error("Deze Bluesky-server publiceert geen OAuth-endpoints.");
+  }
+  assertAllowedBlueskyUrl(meta.authorization_endpoint);
+  assertAllowedBlueskyUrl(meta.token_endpoint);
+  if (meta.pushed_authorization_request_endpoint) {
+    assertAllowedBlueskyUrl(meta.pushed_authorization_request_endpoint);
   }
   return meta;
 }
@@ -243,7 +284,12 @@ export function decodeFlow(raw: string | null): BlueskyFlow | null {
   if (!raw) return null;
   try {
     const normalized = decodeURIComponent(raw).replace(/-/g, "+").replace(/_/g, "/");
-    return JSON.parse(atob(normalized)) as BlueskyFlow;
+    const flow = JSON.parse(atob(normalized)) as BlueskyFlow;
+    // Het cookie komt van de browser: endpoints opnieuw tegen de allowlist toetsen.
+    if (!flow || !isAllowedBlueskyUrl(flow.tokenEndpoint) || !isAllowedBlueskyUrl(flow.issuer)) {
+      return null;
+    }
+    return flow;
   } catch {
     return null;
   }

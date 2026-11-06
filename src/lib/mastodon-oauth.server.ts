@@ -14,6 +14,34 @@ export const MASTODON_APP_NAME = "Maximilien";
 export const MASTODON_SCOPE = "read:accounts";
 export const MASTODON_INSTANCE_COOKIE = "maximilien_oauth_instance";
 
+/**
+ * Enkel vooraf goedgekeurde Mastodon-servers: de server registreert apps en
+ * stuurt client-gegevens dus nooit naar een door de bezoeker gekozen host.
+ * Uitbreidbaar via MASTODON_ALLOWED_INSTANCES (kommagescheiden hostnamen).
+ */
+const DEFAULT_MASTODON_INSTANCES = [
+  "mastodon.social",
+  "mastodon.online",
+  "mstdn.social",
+  "mastodon.world",
+  "fosstodon.org",
+  "mastodon.nl",
+  "social.vivaldi.net",
+  "mas.to",
+];
+
+export function allowedMastodonInstances(): string[] {
+  const fromEnv = (process.env["MASTODON_INSTANCE_URL"] || "")
+    .replace(/^https?:\/\//i, "")
+    .replace(/\/.*$/, "")
+    .toLowerCase();
+  const extra = (process.env["MASTODON_ALLOWED_INSTANCES"] || "")
+    .split(",")
+    .map((h) => h.trim().toLowerCase())
+    .filter(Boolean);
+  return [...new Set([...DEFAULT_MASTODON_INSTANCES, ...extra, ...(fromEnv ? [fromEnv] : [])])];
+}
+
 /** Maakt van `@user@fosstodon.org`, `fosstodon.org` of een URL één origin. */
 export function normalizeInstance(input: string | null | undefined): string {
   const fallback = (process.env["MASTODON_INSTANCE_URL"] || "https://mastodon.social").trim();
@@ -35,6 +63,7 @@ export function normalizeInstance(input: string | null | undefined): string {
     ) {
       return "https://mastodon.social";
     }
+    if (!allowedMastodonInstances().includes(host)) return "https://mastodon.social";
     return `https://${host}`;
   } catch {
     return "https://mastodon.social";
