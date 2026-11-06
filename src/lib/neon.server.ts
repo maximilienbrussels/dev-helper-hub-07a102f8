@@ -4,6 +4,11 @@ import { neon, types, type NeonQueryFunction } from "@neondatabase/serverless";
 // string, and a JS Date rendered in JSX crashes React (error #31).
 types.setTypeParser(1082, (v: string) => v);
 types.setTypeParser(1182, (v: string) => types.arrayParser(v, (x: string) => x));
+// timestamp (1114) / timestamptz (1184) and their arrays stay strings too.
+types.setTypeParser(1114, (v: string) => v);
+types.setTypeParser(1184, (v: string) => v);
+types.setTypeParser(1115, (v: string) => types.arrayParser(v, (x: string) => x));
+types.setTypeParser(1185, (v: string) => types.arrayParser(v, (x: string) => x));
 
 /**
  * Server-only Neon Postgres client (HTTP driver — werkt in de edge runtime).

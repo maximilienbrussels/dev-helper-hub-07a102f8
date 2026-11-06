@@ -33,6 +33,18 @@ export function shortCodeOf(reference: string | null): string | null {
   return parts.length ? (parts[parts.length - 1] as string).toUpperCase() : null;
 }
 
+/** Afhaalmoment als leesbare tekst; nooit een Date-object richting de UI. */
+export function formatPickupSlot(slot: unknown): string | null {
+  if (slot === null || slot === undefined || slot === "") return null;
+  const d = slot instanceof Date ? slot : new Date(String(slot));
+  if (Number.isNaN(d.getTime())) return String(slot);
+  return d.toLocaleString("nl-BE", {
+    timeZone: "Europe/Brussels",
+    dateStyle: "full",
+    timeStyle: "short",
+  });
+}
+
 function normalizeCode(input: string): string {
   return input.trim().replace(/\s+/g, "").toUpperCase();
 }
@@ -69,7 +81,7 @@ function toSummary(row: OrderRow, items: { title: string; quantity: number }[]):
     pickupCode: row.pickup_code,
     customerName: row.customer_name,
     customerEmail: row.customer_email,
-    pickupSlot: row.pickup_slot,
+    pickupSlot: formatPickupSlot(row.pickup_slot),
     totalCents: Number(row.total_price_cents ?? 0),
     payOnPickup: row.payment_status === "pending_pickup",
     byo: isByoOption(row.packaging_option),
