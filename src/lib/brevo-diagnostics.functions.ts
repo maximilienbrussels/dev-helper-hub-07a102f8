@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+import { requireAuth } from "@/lib/auth-middleware";
 
 /**
  * Diepe Brevo-diagnose voor de vaste super-admin.
@@ -9,6 +10,7 @@ import { z } from "zod";
  * Sleutelwaarden verlaten de server nooit: enkel lengte en prefix.
  */
 export const diagnoseBrevo = createServerFn({ method: "POST" })
+  .middleware([requireAuth])
   .validator((d: unknown) =>
     z
       .object({
@@ -17,9 +19,12 @@ export const diagnoseBrevo = createServerFn({ method: "POST" })
       })
       .parse(d),
   )
-  .handler(async ({ data }) => {
+  .handler(async ({ data, context }) => {
     const { isSuperAdminEmail } = await import("./superadmin");
-    if (!isSuperAdminEmail(data.email)) {
+    const claims = (context as unknown as { claims: Record<string, unknown> }).claims ?? {};
+    const sessionEmail = typeof claims["email"] === "string" ? (claims["email"] as string).toLowerCase() : "";
+    // Trust only the authenticated session identity, never the request body.
+    if (!sessionEmail || !isSuperAdminEmail(sessionEmail) || sessionEmail !== data.email) {
       throw new Error("Diagnose is enkel beschikbaar voor de hoofdbeheerder.");
     }
 
