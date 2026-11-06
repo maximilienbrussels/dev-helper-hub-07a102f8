@@ -198,7 +198,7 @@ export function PickupsPage() {
                           {row.customerEmail ?? row.reference ?? ""}
                         </span>
                       </td>
-                      <td className="text-muted-foreground">{row.pickupSlot ?? "—"}</td>
+                      <td className="text-muted-foreground">{row.pickupSlot ? String(row.pickupSlot) : "—"}</td>
                       <td>
                         {euro(row.totalCents)}
                         {row.payOnPickup ? (
@@ -238,7 +238,7 @@ export function PickupsPage() {
                     </span>
                   </div>
                   <div className="mt-2 border-t border-border/60 pt-2">
-                    <CardRow label="Afhaalmoment">{row.pickupSlot ?? "—"}</CardRow>
+                    <CardRow label="Afhaalmoment">{row.pickupSlot ? String(row.pickupSlot) : "—"}</CardRow>
                     <CardRow label="Bedrag">
                       {euro(row.totalCents)}
                       {row.payOnPickup ? " · te betalen" : ""}
