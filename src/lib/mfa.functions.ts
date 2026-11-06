@@ -181,6 +181,15 @@ export const sendSmsCode = createServerFn({ method: "POST" })
       channel = row.phone_method === "whatsapp" ? "whatsapp" : "sms";
     }
     await rate("mfa-sms", ctx.userId, 5, 3600);
+    if (data.purpose === "setup") {
+      // Bound setup sends to unverified numbers: per user per day and per recipient.
+      await rate("mfa-sms-setup-day", ctx.userId, 6, 86400);
+      await rate("mfa-sms-setup-phone", phone, 3, 86400);
+      const row = await mfa.getMfaRow(ctx.userId);
+      if (row?.phone_verified_at && row.phone && row.phone !== phone && ctx.claims["mfa"] !== true) {
+        throw new Error("Bevestig eerst je identiteit met je huidige tweede stap.");
+      }
+    }
     const code = core.randomSixDigits();
     await mfa.createCode({
       userId: ctx.userId,

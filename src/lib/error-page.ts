@@ -8,12 +8,9 @@ function escapeHtml(value: string): string {
 }
 
 export function renderErrorPage(error?: unknown): string {
-  const details =
-    error instanceof Error
-      ? `${error.toString()}\n\n${error.stack ?? ""}`
-      : error == null
-        ? "Geen onderliggende uitzondering beschikbaar. Raadpleeg de serverlogs."
-        : String(error);
+  // Never expose exception messages or stacks to HTTP callers; details stay in server logs.
+  void error;
+  const details = "Er ging iets mis op de server. Probeer het later opnieuw.";
 
   return `<!doctype html>
 <html lang="nl">
