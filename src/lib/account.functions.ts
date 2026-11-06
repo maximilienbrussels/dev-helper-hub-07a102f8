@@ -8,8 +8,17 @@ import { optionalText } from "@/lib/validators";
 export const listMyOrders = createServerFn({ method: "GET" })
   .middleware([requireAuth])
   .handler(async ({ context }) => {
-    const email = (context.claims as { email?: string } | null)?.email;
+    const claims = context.claims as { email?: string; email_verified?: boolean } | null;
+    const email = claims?.email;
     if (!email) return [];
+    // Bestellingen enkel tonen wanneer het e-mailadres bewezen is (databank = bron).
+    const { db, hasDatabase } = await import("@/lib/neon.server");
+    if (!hasDatabase()) return [];
+    const verified = (await db()`
+      select 1 from public.app_users
+       where lower(email) = lower(${email}) and email_verified_at is not null
+       limit 1`) as unknown[];
+    if (!verified.length) return [];
     const { dbAdmin } = await import("@/lib/db-admin.server");
     const { data, error } = await dbAdmin
       .from("orders")
