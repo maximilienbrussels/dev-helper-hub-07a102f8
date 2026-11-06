@@ -119,6 +119,22 @@ function SecurityPage() {
             Kopiëren
           </Button>
           <Button
+            variant="outline"
+            onClick={() => {
+              const blob = new Blob([recoveryCodesText(email, recovery, new Date())], { type: "text/plain;charset=utf-8" });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement("a");
+              a.href = url;
+              a.download = "maximilien-herstelcodes.txt";
+              document.body.appendChild(a);
+              a.click();
+              a.remove();
+              setTimeout(() => URL.revokeObjectURL(url), 30_000);
+            }}
+          >
+            Downloaden
+          </Button>
+          <Button
             onClick={() => {
               setRecovery(null);
               setMethod(null);
