@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
+import { recoveryCodesText } from "@/lib/mfa-labels";
 import { z } from "zod";
 import { QRCodeSVG } from "qrcode.react";
 import { toast } from "sonner";
@@ -366,6 +367,30 @@ function ManageMethods({
   );
 }
 
+const AccountEmail = createContext("");
+
+function AccountBar() {
+  const email = useContext(AccountEmail);
+  if (!email) return null;
+  return (
+    <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-border bg-muted/40 px-3 py-2 text-sm">
+      <span>
+        Aangemeld als: <strong>{email}</strong>
+      </span>
+      <button
+        type="button"
+        className="text-primary underline-offset-4 hover:underline"
+        onClick={async () => {
+          await supabase.auth.signOut();
+          window.location.assign("/auth");
+        }}
+      >
+        Niet jouw account? Uitloggen
+      </button>
+    </div>
+  );
+}
+
 function Shell({ title, children }: { title?: string; children: React.ReactNode }) {
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-lg flex-col justify-center gap-5 px-5 py-10">
@@ -374,6 +399,7 @@ function Shell({ title, children }: { title?: string; children: React.ReactNode 
         <ShieldCheck className="size-5 text-primary" aria-hidden />
       </div>
       {title && <h1 className="font-display text-2xl">{title}</h1>}
+      <AccountBar />
       {children}
     </main>
   );
