@@ -18,12 +18,20 @@ const schema = z.object({
   uiMode: z.enum(["embedded", "hosted"]).default("embedded"),
 });
 
-/** Vrije gift: het bedrag komt van de bezoeker, binnen veilige grenzen. */
+/**
+ * Online gift: enkel vaste bedragen die de server bepaalt. De bezoeker kiest
+ * een bedrag uit deze lijst; vrije bedragen gaan via overschrijving.
+ */
+const DONATION_AMOUNTS_CENT = [500, 1000, 2500, 5000, 8000, 10000, 15000, 25000] as const;
+
 const donationSchema = z.object({
   product: z.literal("gift"),
   naam: z.string().min(2).max(120),
   email: z.string().email().max(160),
-  amountCent: z.number().int().min(100).max(500000),
+  amountCent: z
+    .number()
+    .int()
+    .refine((v) => (DONATION_AMOUNTS_CENT as readonly number[]).includes(v), "invalid_amount"),
   lang: z.enum(["nl", "fr", "en"]).default("nl"),
   uiMode: z.enum(["embedded", "hosted"]).default("embedded"),
 });
