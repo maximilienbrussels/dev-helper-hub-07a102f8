@@ -77,11 +77,24 @@ export const startTotpSetup = createServerFn({ method: "POST" })
   .handler(async ({ context }) => {
     const ctx = context as unknown as Ctx;
     await assertMayEnroll(ctx);
-    const { randomBase32Secret, otpauthUri } = await import("./mfa-core");
+    const { randomBase32Secret } = await import("./mfa-core");
+    const { totpUri } = await import("./mfa-labels");
     const mfa = await import("./mfa.server");
     const secret = randomBase32Secret();
     await mfa.upsertMfa(ctx.userId, { totp_pending_enc: await mfa.encrypt(secret) });
-    return { secret, uri: otpauthUri(secret, String(ctx.claims["email"] ?? "account")) };
+    // Database is the source of truth for the account name shown in the app.
+    let email = String(ctx.claims["email"] ?? "");
+    try {
+      const { db, hasDatabase } = await import("./neon.server");
+      if (hasDatabase()) {
+        const rows = (await db()`select email from public.app_users where id = ${ctx.userId} limit 1`) as { email: string | null }[];
+        if (rows[0]?.email) email = rows[0].email;
+      }
+    } catch {
+      /* fall back to token email */
+    }
+    const staff = await isStaff(ctx).catch(() => false);
+    return { secret, uri: totpUri(secret, email, staff), email };
   });
 
 function newRecoveryCodes(): string[] {

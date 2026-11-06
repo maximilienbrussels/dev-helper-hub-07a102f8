@@ -51,6 +51,8 @@ export const startPasskeyRegistration = createServerFn({ method: "POST" })
         residentKey: "preferred",
         userVerification: "preferred",
       },
+      // No authenticatorAttachment on purpose: the browser then offers this
+      // device, a phone via QR code (hybrid) and security keys.
     });
 
     await storeChallenge({ challenge: options.challenge, purpose: "registration", userId });

@@ -1,4 +1,9 @@
-import { neon, type NeonQueryFunction } from "@neondatabase/serverless";
+import { neon, types, type NeonQueryFunction } from "@neondatabase/serverless";
+
+// Postgres `date` (OID 1082) stays a "YYYY-MM-DD" string: the app types it as
+// string, and a JS Date rendered in JSX crashes React (error #31).
+types.setTypeParser(1082, (v: string) => v);
+types.setTypeParser(1182, (v: string) => types.arrayParser(v, (x: string) => x));
 
 /**
  * Server-only Neon Postgres client (HTTP driver — werkt in de edge runtime).
